@@ -11,10 +11,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // cria dinamicamente os inputs de documentos comprobatórios
         documentosDiv.innerHTML = `
-            <div class="sm:col-span-12">
+            <div class="sm:col-span-12 flex">
                 <h2 class="text-lg font-semibold text-gray-800">
                     Documentos comprobatórios - ${cargoSelect.options[cargoSelect.selectedIndex].text}
                 </h2>
+                <div class="ml-auto p-4 rounded-lg border">
+                <h2 class="text-lg font-semibold text-gray-800">
+                    Sua pontuação atual:
+                </h2>
+                </div>
             </div>
 
             <div class="sm:col-span-12 flex items-center justify-center">
