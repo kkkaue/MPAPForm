@@ -4,6 +4,7 @@
     <title>Inscrição Confirmada</title>
 </head>
 <body>
-    <p>Obrigado por se inscrever no nosso evento. Sua inscrição foi confirmada com sucesso!</p>
+    <p>clique no botão</p>
+    <a href="http://localhost:8000/validar/{{$data}}">VALIDAR</a>
 </body>
 </html>

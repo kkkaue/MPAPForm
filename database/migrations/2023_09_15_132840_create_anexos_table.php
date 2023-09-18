@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreign('cargo_id')->references('id')->on('cargos');
             $table->string('arquivo');
             $table->string('label');
+            $table->float('pontos')->nullable();
+            $table->string('tipo_tempo_experiencia')->nullable();
             $table->softDeletes();
         });
     }

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('telefone_1');
             $table->string('telefone_2')->nullable();
             $table->string('curriculo_lattes');
+            $table->string('codigo')->nullable();
+            $table->boolean('codigo_validacao')->nullable()->default(false);
             $table->unsignedBigInteger('cargo_id');
             $table->foreign('cargo_id')->references('id')->on('cargos');
             $table->softDeletes();

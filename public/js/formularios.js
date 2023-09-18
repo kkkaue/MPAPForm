@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 else {
                     return `
-                        <div class="sm:col-span-6">
+                        <div class="sm:col-span-6 mb-3">
                             <label for="${requisito.id}_1" class="block text-sm font-medium text-gray-700">
                                 ${requisito.label}
                             </label>
@@ -63,6 +63,20 @@ document.addEventListener("DOMContentLoaded", function() {
                                         </label>
                                     </div>
                                     <input type="file" name="${requisito.id}[]" id="${requisito.id}_1" class="hidden">
+                                </div>
+                                <div class="flex mt-2 items-center justify-end gap-4">
+                                    <div class="flex items-center mb-4">
+                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">02 anos ou mais</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">01 ano</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Não possui</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,14 +115,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     else {
                         return `
-                            <div class="sm:col-span-6">
+                            <div class="sm:col-span-6 mb-3">
                                 <label for="${requisito.id}_1" class="block text-sm font-medium text-gray-700">
                                     ${requisito.label}
                                 </label>
                             </div>
                             <div class="sm:col-span-6 sm:col-end-13">
                                 <div id="divDocumento_${requisito.id}">
-                                    <div class="flex justify-end">
+                                    <div class= "flex justify-end">
                                         <div class="flex flex-row items-center w-10/12 text-xs border border-gray-200 rounded-lg">
                                             <label for="${requisito.id}_1" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
                                                 Escolher arquivo
@@ -118,6 +132,20 @@ document.addEventListener("DOMContentLoaded", function() {
                                             </label>
                                         </div>
                                         <input type="file" name="${requisito.id}[]" id="${requisito.id}_1" class="hidden">
+                                    </div>
+                                    <div class="flex mt-2 items-center justify-end gap-4">
+                                        <div class="flex items-center mb-4">
+                                            <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">02 anos ou mais</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">01 ano</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Não possui</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -178,10 +206,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const cargoData = {
             1: {
                 requisitos: [
-                    { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, experiencia_profissional: false },
-                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, experiencia_profissional: false },
-                    { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false, experiencia_profissional: true },
-                    { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false, experiencia_profissional: true },
+                    { label: "Histórico escolar", id: "historico_escolar", documento_unico: true,},
+                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true},
+                    { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false},
+                    { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false},
                 ],
             },
             2: {

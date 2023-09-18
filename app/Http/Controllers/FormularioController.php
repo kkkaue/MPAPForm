@@ -35,8 +35,10 @@ class FormularioController extends Controller
     public function store(Request $request)
     {
         if($request->cargo_id == 1){
-            $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario']));
-            
+            dd($request->all());
+            $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario', 'experiencia_profissional_radio','trabalho_voluntario_radio']));
+            $codigo = rand();
+            $novo->update(['codigo' => $codigo]);
             if ($request->hasFile('historico_escolar')) {
                 $nameFile = null;
 
@@ -117,6 +119,7 @@ class FormularioController extends Controller
 
             if ($request->hasFile('experiencia_profissional')) {
                 foreach ($request->experiencia_profissional as $key => $value) {
+                    
                     $nameFile = null;
     
                     // Verifica se informou o arquivo e se é válido
@@ -146,12 +149,14 @@ class FormularioController extends Controller
                             ->withInput();
     
                     $arquivo_experiencia = 'https://d23jrrdgfqmi9v.cloudfront.net/' . $file;
-                    Anexo::create([
+                    $novoAnexo = Anexo::create([
                         'formulario_id' => $novo->id,
                         'cargo_id' => $novo->cargo_id,
                         'arquivo' => $arquivo_experiencia,
                         'label' => 'experiencia'
                     ]);
+
+                    $novoAnexo->update(['pontos' => $request->experiencia_profissional_radio[$key]]);
                 }
             }
 
@@ -194,13 +199,25 @@ class FormularioController extends Controller
                     ]);
                 }
             }
+            
 
             //enviar email de confimação de inscrição
-            $email = new InscricaoConfirmadaEmail();
+            $email = new InscricaoConfirmadaEmail($codigo);
             Mail::to($request->email)->send($email);
             return redirect()->back()->with('mensagem', 'Inscrição realizada com sucesso!');
         }
 
+    }
+
+    public function validar($codigo){
+        
+        $dado = Formulario::where('codigo', $codigo)->first();
+        if ($dado){
+            $dado->update(['status_validacao' => true]);
+            echo "Inscrição validada com sucesso!";
+        } else {
+            echo "cadastro não encontrado";
+        }
     }
 
     /**
