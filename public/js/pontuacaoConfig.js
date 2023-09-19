@@ -2,19 +2,19 @@ export const pontuacaoConfig = {
   curriculum_vitae: {
     curso_curta_duracao: {
       pontuacao: 0.25,
-      limite: 0.5,
+      limite: 0.50,
     },
     curso_especializacao: {
       pontuacao: 0.25,
-      limite: 0.5,
+      limite: 0.50,
     },
-    curso_mestrado: {
+    diploma_mestrado: {
       pontuacao: 0.75,
-      limite: 1.5,
+      limite: 1.50,
     },
-    curso_doutorado: {
-      pontuacao: 2,
-      limite: 2.0,
+    diploma_doutorado: {
+      pontuacao: 2.00,
+      limite: 2.00,
     },
     aprovacao_concurso: {
       pontuacao: 0.25,
@@ -32,11 +32,11 @@ export const pontuacaoConfig = {
     },
     atendimento_pessoas:{
       pontuacao: 0.25,
-      limite: 1.0,
+      limite: 1.00,
     },
     libras:{
       pontuacao: 0.25,
-      limite: 1.0,
+      limite: 1.00,
     }
   },
   curriculum_vitae_estagiario:{

@@ -2,18 +2,20 @@
 import { pontuacaoConfig } from './pontuacaoConfig.js';
 
 export function atualizarPontuacao(requisito_id) {
-    const pontuacaoElement = document.getElementById("pontuacao");
-    let pontuacao = 0;
-    const requisito =  pontuacaoConfig.curriculum_vitae[requisito_id];
-    const inputsDeArquivo = document.querySelectorAll(`input[name^="${requisito_id}"]`);
-    inputsDeArquivo.forEach(input => {
-        if (input.files.length > 0) {
-            pontuacao += requisito.pontuacao;
-        }
-    });
-    
-    // Atualiza a pontuação para o usuário pegando o valor que está em string no elemento de id "pontuacao", tranformando em float e somando com a pontuação do requisito
-    pontuacaoElement.innerHTML = parseFloat(pontuacaoElement.innerHTML) + pontuacao;
-    
-    return pontuacao;
+  const pontuacaoAtual = parseFloat(document.getElementById("pontuacao").innerHTML);
+  const requisito = pontuacaoConfig.curriculum_vitae[requisito_id];
+  const inputs = document.querySelectorAll(`input[name="${requisito_id}[]"]`);
+  let pontuacaoTotal = 0;
+  inputs.forEach((input) => {
+    if (input.value) {
+      pontuacaoTotal += requisito.pontuacao;
+    }
+  });
+  //verificar se a pontuação atual chegou no limite, se não chegou, atualizar a pontuação adicionando a pontuação do ultimo arquivo inserido, se chegou, não adicionar nada
+  if (pontuacaoAtual >= requisito.limite) {
+    document.getElementById("pontuacao").innerHTML = pontuacaoAtual;
+  } else {
+    document.getElementById("pontuacao").innerHTML = pontuacaoAtual + pontuacaoTotal;
+  }
+
 }
