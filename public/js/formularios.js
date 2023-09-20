@@ -33,17 +33,39 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ${requisito.label}
                             </label>
                         </div>
-                        <div class="sm:col-span-6 sm:col-end-13 flex justify-end">
-                            <div class="flex flex-row items-center w-10/12 text-xs border border-gray-200 rounded-lg">
-                                <label for="${requisito.id}" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
-                                    Escolher arquivo
-                                </label>
-                                <label for="${requisito.id}" id="${requisito.id}_file_name">
-                                    Nenhum arquivo selecionado
-                                </label>
+                        <div class="sm:col-span-6 sm:col-end-13">
+                            <div>
+                                <div class="flex justify-end">
+                                    <div class="flex flex-row items-center w-10/12 text-xs border border-gray-200 rounded-lg">
+                                        <label for="${requisito.id}" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
+                                            Escolher arquivo
+                                        </label>
+                                        <label for="${requisito.id}" id="${requisito.id}_file_name">
+                                            Nenhum arquivo selecionado
+                                        </label>
+                                    </div>
+                                    <input type="file" name="${requisito.id}" id="${requisito.id}" class="hidden">
+                                </div>`
+                                + (requisito.radio ? `
+                                <div class="flex mt-2 items-center justify-end gap-4">
+                                    <div class="flex items-center">
+                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">2 anos ou mais</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">1 ano</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
+                                    </div>
+                                </div>
                             </div>
-                            <input type="file" name="${requisito.id}" id="${requisito.id}" class="hidden">
-                        </div>
+                        </div>` 
+                        : 
+                        `   </div>
+                        </div>`) +`
                     `;
                 }
                 else {
@@ -68,17 +90,17 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </div>`
                                 + (requisito.radio ? `
                                 <div class="flex mt-2 items-center justify-end gap-4">
-                                    <div class="flex items-center mb-4">
-                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">02 anos ou mais</label>
+                                    <div class="flex items-center">
+                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">2 anos ou mais</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">01 ano</label>
+                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">1 ano</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Não possui</label>
+                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
                                     </div>
                                 </div>
                             </div>
@@ -141,16 +163,16 @@ document.addEventListener("DOMContentLoaded", function() {
                                 + (requisito.radio ? `
                                 <div class="flex mt-2 items-center justify-end gap-4">
                                     <div class="flex items-center mb-4">
-                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">02 anos ou mais</label>
+                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">02 anos ou mais</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">01 ano</label>
+                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">01 ano</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Não possui</label>
+                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
             /* Estagiário de direito */ 1: {
                 requisitos: [
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, radio: false},
-                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, radio: false},
+                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, radio: true},
                     { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false, radio: true},
                     { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false, radio: true},
                 ],
@@ -239,7 +261,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Aprovação em concurso público de provas e títulos", id: "aprovacao_concurso", documento_unico: false},
                 ],
                 experiencias_profissionais: [
-                    { label: "Experiência profissional na área - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false },
                     { label: "Experiência no âmbito das metodologias de atendimento à pessoa", id: "experiencia_metodologias_atendimento", documento_unico: false },
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ]

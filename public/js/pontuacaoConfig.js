@@ -40,7 +40,18 @@ export const pontuacaoConfig = {
     }
   },
   curriculum_vitae_estagiario:{
-    comprovante_matricula: calcularPontuacaoComprovanteMatricula,
+    comprovante_matricula: {
+      calcularPontuacao: (variavel = null) => {
+        if (variavel === 'sim') {
+          return 0.25;
+        } else if (variavel === 'nao') {
+          return 0.00;
+        } else {
+          return 0.00;
+        }
+      },
+      limite: 0.75,
+    },
     experiencia_profissional:{
       quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
       duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional
@@ -49,35 +60,5 @@ export const pontuacaoConfig = {
       quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
       duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional
     }
-  }
-}
-
-function calcularPontuacaoComprovanteMatricula(duracaoMatricula) {
-  if (duracaoMatricula < 1) {
-    return { pontuacao: 0.5, limite: 2 };
-  } else if (duracaoMatricula >= 1 && duracaoMatricula < 2) {
-    return { pontuacao: 1, limite: 2 };
-  } else {
-    return { pontuacao: 2, limite: 2 };
-  }
-}
-
-function calcularPontuacaoQuantidadeExperienciaProfissional(quantidadeExperienciaProfissional){
-  if (quantidadeExperienciaProfissional >= 1 && quantidadeExperienciaProfissional < 2) {
-    return { pontuacao: 1, limite: 4 };
-  } else if (quantidadeExperienciaProfissional >= 2) {
-    return { pontuacao: 2, limite: 4 };
-  } else {
-    return { pontuacao: 0, limite: 4 };
-  }
-}
-
-function calcularPontuacaoDuracaoExperienciaProfissional(duracaoExperienciaProfissional){
-  if (duracaoExperienciaProfissional >= 0.1 && duracaoExperienciaProfissional < 0.5) {
-    return { pontuacao: 1, limite: 4 };
-  } else if(duracaoExperienciaProfissional >= 0.6){
-    return { pontuacao: 2, limite: 4 };
-  } else {
-    return { pontuacao: 0, limite: 4 };
   }
 }

@@ -34,8 +34,37 @@ class FormularioController extends Controller
      */
     public function store(Request $request)
     {
+        $regras = [
+            'nome' => 'required|string|min:3|max:100',
+            'cpf' => 'required',
+            'nome_rua' => 'required',
+            'numero_rua' => 'required', 
+            'email' => 'required|email',
+            'telefone_1' => 'required',
+            'telefone_2' => 'nullable',
+            'curriculo_lattes' => 'required',
+            'cargo_id' => 'required|not_in:Selecione uma opção',
+        ];
+
+        $messagens = [
+            'nome.required' => 'O campo Nome é obrigatório',
+            'nome.string' => 'O campo Nome deve ser uma string',
+            'nome.min' => 'O campo Nome deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo Nome deve ter no máximo 100 caracteres',
+            'cpf.required' => 'O campo CPF é obrigatório',
+            'nome_rua.required' => 'O campo Endereço é obrigatório',
+            'numero_rua.required' => 'O campo Endereço é obrigatório',
+            'email.required' => 'O campo Email é obrigatório',
+            'email.email' => 'O campo Email deve ser um email válido',
+            'telefone_1.required' => 'O campo Telefone é obrigatório',
+            'curriculo_lattes.required' => 'O campo Currículo lattes é obrigatório',
+            'cargo_id.required' => 'O campo Cargo é obrigatório',
+            'cargo_id.not_in' => 'O campo Cargo é obrigatório',
+        ];
+
+        //$request->validate($regras, $messagens);
+        
         if($request->cargo_id == 1){
-            dd($request->all());
             $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario', 'experiencia_profissional_radio','trabalho_voluntario_radio']));
             $codigo = rand();
             $novo->update(['codigo' => $codigo]);
