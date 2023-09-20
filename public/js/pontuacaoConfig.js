@@ -22,19 +22,19 @@ export const pontuacaoConfig = {
     },
   },
   experiencia_profissional: {
-    politicas_garantidoras_direitos: {
+    experiencia_sistema_politicas_garantidoras_direito: {
       pontuacao: 0.25,
       limite: 2.75,
     },
-    assesor_juridico:{
+    assessor_juridico:{
       pontuacao: 0.25,
       limite: 2.75,
     },
-    atendimento_pessoas:{
+    experiencia_metodologias_atendimento:{
       pontuacao: 0.25,
       limite: 1.00,
     },
-    libras:{
+    experiencia_libras:{
       pontuacao: 0.25,
       limite: 1.00,
     }

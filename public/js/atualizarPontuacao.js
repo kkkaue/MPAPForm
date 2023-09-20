@@ -2,20 +2,32 @@
 import { pontuacaoConfig } from './pontuacaoConfig.js';
 
 export function atualizarPontuacao(requisito_id) {
-  const pontuacaoAtual = parseFloat(document.getElementById("pontuacao").innerHTML);
-  const requisito = pontuacaoConfig.curriculum_vitae[requisito_id];
-  const inputs = document.querySelectorAll(`input[name="${requisito_id}[]"]`);
-  let pontuacaoTotal = 0;
-  inputs.forEach((input) => {
-    if (input.value) {
-      pontuacaoTotal += requisito.pontuacao;
+
+  let pontuacaoRequisito = 0;
+  let limiteRequisito = 0;
+
+  for (let requisito in pontuacaoConfig) {
+    for( let subrequisito in pontuacaoConfig[requisito]) {
+      if (requisito_id === subrequisito) {
+        pontuacaoRequisito = pontuacaoConfig[requisito][subrequisito].pontuacao;
+        limiteRequisito = pontuacaoConfig[requisito][subrequisito].limite;
+        break;
+      }
     }
-  });
-  //verificar se a pontuação atual chegou no limite, se não chegou, atualizar a pontuação adicionando a pontuação do ultimo arquivo inserido, se chegou, não adicionar nada
-  if (pontuacaoAtual >= requisito.limite) {
-    document.getElementById("pontuacao").innerHTML = pontuacaoAtual;
-  } else {
-    document.getElementById("pontuacao").innerHTML = pontuacaoAtual + pontuacaoTotal;
   }
 
+  const pontuacaoFinal = document.getElementById('pontuacao');
+  const inputs = document.querySelectorAll(`input[name="${requisito_id}[]"]`);
+  let pontuacaoTotalRequisito = 0;
+  inputs.forEach((input) => {
+    if (input.files.length > 0) {
+      pontuacaoTotalRequisito += pontuacaoRequisito;
+    }
+  });
+  if (pontuacaoTotalRequisito > limiteRequisito) {
+    pontuacaoFinal.innerHTML = pontuacaoFinal.innerHTML
+  } 
+  else {
+    pontuacaoFinal.innerHTML = parseFloat(pontuacaoFinal.innerHTML) + pontuacaoRequisito;
+  }
 }

@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function getCargoInfo(cargo) {
         const cargoData = {
-            1: {
+            /* Estagiário de direito */ 1: {
                 requisitos: [
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, radio: false},
                     { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, radio: false},
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false, radio: true},
                 ],
             },
-            2: {
+            /* Assistente administrativo */ 2: {
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true},
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true},
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ]
             },
-            3: {
+            /* Assessor Jurídico */ 3: {
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },
@@ -256,12 +256,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Aprovação em concurso público de provas e títulos", id: "aprovacao_concurso", documento_unico: false },
                 ],
                 experiencias_profissionais: [
-                    { label: "Experiência profissional na área - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false },
+                    { label: "Experiência profissional na área - Certificados ou Declarações", id: "assessor_juridico", documento_unico: false },
                     { label: "Experiência no âmbito das metodologias de atendimento à pessoa", id: "experiencia_metodologias_atendimento", documento_unico: false },
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ],
             },
-            4: {
+            /* Assistente Social */ 4: {
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },
@@ -273,13 +273,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Aprovação em concurso público de provas e títulos", id: "aprovacao_concurso", documento_unico: false },
                 ],
                 experiencias_profissionais: [
-                    { label: "sistema de políticas garantidoras de direito, SUAS, SUS, Educação", id: "experiencia_sistema_politicas_garantidoras_direito", documento_unico: false },
+                    { label: "Experiência com sistema de políticas garantidoras de direito, SUAS, SUS, Educação", id: "experiencia_sistema_politicas_garantidoras_direito", documento_unico: false },
                     { label: "Experiência no âmbito das metodologias de atendimento à pessoa", id: "experiencia_metodologias_atendimento", documento_unico: false },
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ],
             },
 
-            5:{
+            /* Pedagogo(a) */ 5:{
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },
@@ -291,12 +291,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Aprovação em concurso público de provas e títulos", id: "aprovacao_concurso", documento_unico: false },
                 ],
                 experiencias_profissionais: [
-                    { label: "sistema de políticas garantidoras de direito, SUAS, SUS, Educação", id: "experiencia_sistema_politicas_garantidoras_direito", documento_unico: false },
+                    { label: "Experiência com sistema de políticas garantidoras de direito, SUAS, SUS, Educação", id: "experiencia_sistema_politicas_garantidoras_direito", documento_unico: false },
                     { label: "Experiência no âmbito das metodologias de atendimento à pessoa", id: "experiencia_metodologias_atendimento", documento_unico: false },
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ],
             },
-            6:{
+            /* Psicólogo(a) */ 6:{
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },
@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Aprovação em concurso público de provas e títulos", id: "aprovacao_concurso", documento_unico: false },
                 ],
                 experiencias_profissionais: [
-                    { label: "sistema de políticas garantidoras de direito, SUAS, SUS, Educação", id: "experiencia_sistema_politicas_garantidoras_direito", documento_unico: false },
+                    { label: "Experiência com sistema de políticas garantidoras de direito, SUAS, SUS, Educação", id: "experiencia_sistema_politicas_garantidoras_direito", documento_unico: false },
                     { label: "Experiência no âmbito das metodologias de atendimento à pessoa", id: "experiencia_metodologias_atendimento", documento_unico: false },
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ],
