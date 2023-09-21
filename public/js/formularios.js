@@ -2,6 +2,15 @@ import { adicionarNovoInput } from "./adicionarDocumento.js";
 import { atualizarNomeArquivo } from "./atualizarNomeArquivo.js";
 import { atualizarPontuacao } from "./atualizarPontuacao.js";
 
+const CARGOS = {
+    ESTAGIARIO_DIREITO: 1,
+    ASSISTENTE_ADMINISTRATIVO: 2,
+    ASSESSOR_JURIDICO: 3,
+    ASSISTENTE_SOCIAL: 4,
+    PEDAGOGO: 5,
+    PSICOLOGO: 6,
+};
+
 document.addEventListener("DOMContentLoaded", function() {
     const draggableCard = document.getElementById("draggable-card");
     const cargoSelect = document.getElementById("cargo_id");
@@ -49,16 +58,16 @@ document.addEventListener("DOMContentLoaded", function() {
                                 + (requisito.radio ? `
                                 <div class="flex mt-2 items-center justify-end gap-4">
                                     <div class="flex items-center">
-                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">2 anos ou mais</label>
+                                        <input id="radio-1" type="radio" value="${requisito.radio[0].value}" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-1" class="ml-2 text-xs font-light text-gray-900">${requisito.radio[0].label}</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">1 ano</label>
+                                        <input id="radio-2" type="radio" value="${requisito.radio[1].value}" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-2" class="ml-2 text-xs font-light text-gray-900">${requisito.radio[1].label}</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
+                                        <input id="radio-3" type="radio" value="${requisito.radio[2].value}" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="radio-3" class="ml-2 text-xs font-light text-gray-900">${requisito.radio[2].label}</label>
                                     </div>
                                 </div>
                             </div>
@@ -95,11 +104,11 @@ document.addEventListener("DOMContentLoaded", function() {
                                         <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">2 anos ou mais</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <input id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                                         <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">1 ano</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <input id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                                         <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
                                     </div>
                                 </div>
@@ -167,11 +176,11 @@ document.addEventListener("DOMContentLoaded", function() {
                                         <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">02 anos ou mais</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <input id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                                         <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">01 ano</label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <input id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                                         <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
                                     </div>
                                 </div>
@@ -241,15 +250,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function getCargoInfo(cargo) {
         const cargoData = {
-            /* Estagiário de direito */ 1: {
+            [CARGOS.ESTAGIARIO_DIREITO]: {
                 requisitos: [
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, radio: false},
-                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, radio: true},
+                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, radio:[{label: "24 meses ou mais", value: 1}, {label: "De 23 a 12 meses", value: 2}, {label: "11 meses ou menos", value: 3}]},
                     { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false, radio: true},
                     { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false, radio: true},
                 ],
             },
-            /* Assistente administrativo */ 2: {
+            [CARGOS.ASSISTENTE_ADMINISTRATIVO]: {
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true},
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true},
@@ -265,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ]
             },
-            /* Assessor Jurídico */ 3: {
+            [CARGOS.ASSESSOR_JURIDICO]: {
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },
@@ -282,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ],
             },
-            /* Assistente Social */ 4: {
+            [CARGOS.ASSISTENTE_SOCIAL]: {
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },
@@ -300,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ],
             },
 
-            /* Pedagogo(a) */ 5:{
+            [CARGOS.PEDAGOGO]:{
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },
@@ -317,7 +326,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     { label: "Experiência em Língua Brasileira de Sinais (LIBRAS)", id: "experiencia_libras", documento_unico: false },
                 ],
             },
-            /* Psicólogo(a) */ 6:{
+            [CARGOS.PSICOLOGO]:{
                 requisitos: [
                     { label: "Certificado de conclusão de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de conclusão de Curso de Graduação", id: "diploma_graduacao", documento_unico: true },

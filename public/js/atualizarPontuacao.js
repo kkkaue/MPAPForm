@@ -1,9 +1,9 @@
 import { pontuacaoConfig } from './pontuacaoConfig.js';
 
-function obterInformacoesSubrequisito(requisito_id){
+function obterInformacoesRequisito(requisitoId) {
   for (const requisito in pontuacaoConfig) {
     for (const subrequisito in pontuacaoConfig[requisito]) {
-      if (subrequisito === requisito_id) {
+      if (subrequisito === requisitoId) {
         return pontuacaoConfig[requisito][subrequisito];
       }
     }
@@ -11,33 +11,33 @@ function obterInformacoesSubrequisito(requisito_id){
   return null;
 }
 
-export function atualizarPontuacao(requisito_id, variavel = null) {
-  const configRequisito = obterInformacoesSubrequisito(requisito_id);
+export function atualizarPontuacao(requisitoId, variavel = null) {
+  const configuracaoRequisito = obterInformacoesRequisito(requisitoId);
 
-  if(!configRequisito){
-    console.log(`Requisito ${requisito_id} não encontrado`);
+  if (!configuracaoRequisito) {
+    console.error(`Requisito ${requisitoId} não encontrado`);
     return;
   }
 
-  let pontuacao = configRequisito.pontuacao || 0;
-  if (configRequisito.calcularPontuacao){
-    pontuacao = configRequisito.calcularPontuacao(variavel);
+  const pontuacaoBase = configuracaoRequisito.pontuacao || 0;
+
+  if (configuracaoRequisito.calcularPontuacao) {
+    pontuacaoBase = configuracaoRequisito.calcularPontuacao(variavel);
   }
 
-  const limite = configRequisito.limite;
-  const pontuacaoFinal = document.getElementById('pontuacao');
-  const inputs = document.querySelectorAll(`input[name="${requisito_id}[]"]`);
+  const limite = configuracaoRequisito.limite;
+  const pontuacaoFinalElement = document.getElementById('pontuacao');
+  const inputs = document.querySelectorAll(`input[name="${requisitoId}[]"]`);
 
   const pontuacaoTotalRequisito = Array.from(inputs)
-  .map((input) => (input.files.length > 0 ? pontuacao : 0))
-  .reduce((total, value) => total + value, 0);
+    .map((input) => (input.files.length > 0 ? pontuacaoBase : 0))
+    .reduce((total, value) => total + value, 0);
 
-  const pontuacaoAtual = parseFloat(pontuacaoFinal.innerHTML);
+  const pontuacaoAtual = parseFloat(pontuacaoFinalElement.innerHTML);
 
-  if(pontuacaoTotalRequisito > limite){
-    pontuacaoFinal.innerHTML = pontuacaoAtual;
-  }
-  else{
-    pontuacaoFinal.innerHTML = pontuacaoAtual + pontuacao;
+  if (pontuacaoTotalRequisito > limite) {
+    pontuacaoFinalElement.innerHTML = pontuacaoAtual;
+  } else {
+    pontuacaoFinalElement.innerHTML = pontuacaoAtual + pontuacaoBase;
   }
 }

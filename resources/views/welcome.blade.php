@@ -151,7 +151,8 @@
                   </select>
                 </div>
               </div>
-              <div id="documentos_comprobatorios" class="hidden grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t last:border-transparent border-gray-200">
+              <div id="documentos_comprobatorios" class=" grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t last:border-transparent border-gray-200">
+                
               </div>
               <div id="draggable-card" class="hidden fixed top-36 right-12 p-6 bg-white rounded-lg shadow border floating-card">
                 <div class="flex flex-col items-center justify-center">

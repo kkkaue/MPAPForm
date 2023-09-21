@@ -53,12 +53,12 @@ export const pontuacaoConfig = {
       limite: 0.75,
     },
     experiencia_profissional:{
-      quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
-      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional
+      /* quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
+      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional */
     },
     trabalhos_voluntarios: {
-      quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
-      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional
+      /* quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
+      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional */
     }
   }
 }
