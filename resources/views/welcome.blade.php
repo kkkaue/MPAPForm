@@ -15,7 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           <div class="bg-white rounded-xl shadow border p-4 sm:p-7">
             <div class="text-center mb-8">
               <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
@@ -152,7 +152,94 @@
                 </div>
               </div>
               <div id="documentos_comprobatorios" class=" grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t last:border-transparent border-gray-200">
+                <div class="sm:col-span-12 flex gap-4">
+                  <h2 class="text-lg font-semibold text-gray-800">
+                    Documentos comprobatórios - estagio
+                  </h2>
+                  <p class="flex text-xs items-center justify-center text-gray-800">(PDF, até 5MB)</p>
+                </div>
+      
+                <div class="sm:col-span-12 flex items-center justify-center">
+                  <span class="inline-block text-base font-medium text-gray-800">
+                    Documentos para análise de Curriculum Vitae
+                  </span>
+                </div>
+      
+                <div class="sm:col-span-5 relative">
+                  <label for="historico_escolar" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
+                    Histórico escolar <button id="popover-button" class="ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle stroke-gray-500"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+                  </label>
+
+                  <div class="absolute -top-56 z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96" id="popover-content">
+                    <div class="p-3 space-y-2">
+                      <h3 class="font-semibold text-gray-900">Informações sobre Upload</h3>
+                      <p>O formato deve ser em PDF com tamanho máximo de 5MB</p>
+                  
+                      <h3 class="font-semibold text-gray-900">Pontuação:</h3>
+                      <p>Revisão de Conclusão do curso (tempo restante):</p>
+                      <p> - 24 meses ou mais (2 pontos)</p>
+                      <p> - De 23 a 12 meses (1 pontos)</p>
+                      <p> - 11 meses ou menos (0.5 pontos)</p>
+                    </div>
+                  </div>
+                </div>
                 
+                
+
+                <div class="sm:col-span-4 sm:col-end-13 flex justify-end">
+                  <div class="flex flex-row items-center w-full text-xs border border-gray-200 rounded-lg">
+                    <label for="historico_escolar" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
+                      Escolher arquivo
+                    </label>
+                    <label for="historico_escolar" id="historico_escolar_file_name">
+                      Nenhum arquivo selecionado
+                    </label>
+                  </div>
+                  <input type="file" name="historico_escolar" id="historico_escolar" class="hidden">
+                </div>
+      
+                <div class="sm:col-span-7">
+                  <label for="comprovante_matricula" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+                    Comprovante de matrícula
+                  </label>
+                </div>
+      
+                <div class="sm:col-span-4 sm:col-end-13">
+                  <input type="file" name="comprovante_matricula" id="comprovante_matricula" class="block w-full ml-auto border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500
+                  file:border-0
+                  file:bg-gray-200 file:mr-4
+                  file:py-2 file:px-3">
+                </div>
+      
+                <div class="sm:col-span-7">
+                  <label for="experiencia_profissional_1" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+                    Experiências Profissionais - Certificados ou Declarações
+                  </label>
+                </div>
+      
+                <div class="sm:col-span-4 sm:col-end-13">
+                  <div id="divDocumento_experiencia_profissional">
+                    <input type="file" name="experiencia_profissional_1" id="experiencia_profissional_1" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500
+                    file:border-0
+                    file:bg-gray-200 file:mr-4
+                    file:py-2 file:px-3" accept=".pdf" required>
+                  </div>
+                </div>
+      
+                <div class="sm:col-span-7">
+                  <label for="trabalho_voluntario_1" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+                    Trabalhos Voluntários - Certificados ou Declarações
+                  </label>
+                </div>
+      
+                <div class="sm:col-span-4 sm:col-end-13">
+                  <div id="divDocumento_trabalho_voluntario">
+                    <input type="file" name="trabalho_voluntario_1" id="trabalho_voluntario_1" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500
+                    file:border-0
+                    file:bg-gray-200 file:mr-4
+                    file:py-2 file:px-3">
+                  </div>  
+                </div>
               </div>
               <div id="draggable-card" class="hidden fixed top-36 right-12 p-6 bg-white rounded-lg shadow border floating-card">
                 <div class="flex flex-col items-center justify-center">
@@ -168,6 +255,19 @@
           </div>
         </div>
 
+        <script>
+          // JavaScript para mostrar o popover com hover
+          const popover = document.getElementById('popover-content');
+          const popoverButton = document.getElementById('popover-button');
+
+          popoverButton.addEventListener('mouseover', () => {
+            popover.classList.remove('opacity-0', 'invisible');
+          });
+
+          popoverButton.addEventListener('mouseout', () => {
+            popover.classList.add('opacity-0', 'invisible');
+          });
+        </script>
         <script>
           // Função para criar um card flutuante arrastável
           function createDraggableCard() {

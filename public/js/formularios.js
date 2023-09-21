@@ -42,10 +42,10 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ${requisito.label}
                             </label>
                         </div>
-                        <div class="sm:col-span-6 sm:col-end-13">
+                        <div class="sm:col-span-4 sm:col-end-13">
                             <div>
                                 <div class="flex justify-end">
-                                    <div class="flex flex-row items-center w-10/12 text-xs border border-gray-200 rounded-lg">
+                                    <div class="flex flex-row items-center w-full text-xs border border-gray-200 rounded-lg">
                                         <label for="${requisito.id}" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
                                             Escolher arquivo
                                         </label>
@@ -84,10 +84,10 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ${requisito.label}
                             </label>
                         </div>
-                        <div class="sm:col-span-6 sm:col-end-13">
+                        <div class="sm:col-span-4 sm:col-end-13">
                             <div id="divDocumento_${requisito.id}">
                                 <div class= "flex justify-end">
-                                    <div class="flex flex-row items-center w-10/12 text-xs border border-gray-200 rounded-lg">
+                                    <div class="flex flex-row items-center w-full text-xs border border-gray-200 rounded-lg">
                                         <label for="${requisito.id}_1" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
                                             Escolher arquivo
                                         </label>
@@ -136,8 +136,8 @@ document.addEventListener("DOMContentLoaded", function() {
                                     ${requisito.label}
                                 </label>
                             </div>
-                            <div class="sm:col-span-6 sm:col-end-13 flex justify-end">
-                                <div class="flex flex-row items-center w-10/12 text-xs border border-gray-200 rounded-lg">
+                            <div class="sm:col-span-4 sm:col-end-13 flex justify-end">
+                                <div class="flex flex-row items-center w-full text-xs border border-gray-200 rounded-lg">
                                     <label for="${requisito.id}" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
                                         Escolher arquivo
                                     </label>
@@ -156,10 +156,10 @@ document.addEventListener("DOMContentLoaded", function() {
                                 ${requisito.label}
                             </label>
                         </div>
-                        <div class="sm:col-span-6 sm:col-end-13">
+                        <div class="sm:col-span-4 sm:col-end-13">
                             <div id="divDocumento_${requisito.id}">
                                 <div class= "flex justify-end">
-                                    <div class="flex flex-row items-center w-10/12 text-xs border border-gray-200 rounded-lg">
+                                    <div class="flex flex-row items-center w-full text-xs border border-gray-200 rounded-lg">
                                         <label for="${requisito.id}_1" class="rounded-l-lg border-0 bg-gray-200 mr-3 py-2 px-3">
                                             Escolher arquivo
                                         </label>
