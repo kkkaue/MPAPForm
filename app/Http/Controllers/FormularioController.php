@@ -63,6 +63,7 @@ class FormularioController extends Controller
         ];
 
         //$request->validate($regras, $messagens);
+        /* dd($request->all()); */
         
         if($request->cargo_id == 1){
             $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario', 'experiencia_profissional_radio','trabalho_voluntario_radio']));
@@ -185,7 +186,7 @@ class FormularioController extends Controller
                         'label' => 'experiencia'
                     ]);
 
-                    $novoAnexo->update(['pontos' => $request->experiencia_profissional_radio[$key]]);
+                    /* $novoAnexo->update(['pontos' => $request->experiencia_profissional_radio[$key]]); */
                 }
             }
 
@@ -233,7 +234,7 @@ class FormularioController extends Controller
             //enviar email de confimação de inscrição
             $email = new InscricaoConfirmadaEmail($codigo);
             Mail::to($request->email)->send($email);
-            return redirect()->back()->with('mensagem', 'Inscrição realizada com sucesso!');
+            return redirect()->back()->with('mensagem', 'Inscrição realizada com sucesso! Por favor verifique seu email para validar sua inscrição.');
         }
 
     }
@@ -242,7 +243,7 @@ class FormularioController extends Controller
         
         $dado = Formulario::where('codigo', $codigo)->first();
         if ($dado){
-            $dado->update(['status_validacao' => true]);
+            $dado->update(['codigo_validacao' => true]);
             echo "Inscrição validada com sucesso!";
         } else {
             echo "cadastro não encontrado";
@@ -280,4 +281,9 @@ class FormularioController extends Controller
     {
         //
     }
+
+    public function test(){
+        return view('mail.inscricao');
+    }
+        
 }

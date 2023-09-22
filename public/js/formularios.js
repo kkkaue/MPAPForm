@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(requisito.documento_unico){
                     return `
                         <div class="sm:col-span-6">
-                            <label for="${requisito.id}" class="block text-sm font-medium text-gray-700">
+                            <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                 ${requisito.label}
                             </label>
                         </div>
@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 else {
                     return `
-                        <div class="sm:col-span-6 mb-3">
-                            <label for="${requisito.id}_1" class="block text-sm font-medium text-gray-700">
+                        <div class="sm:col-span-6">
+                            <label for="${requisito.id}_1" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                 ${requisito.label}
                             </label>
                         </div>
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if(requisito.documento_unico){
                         return `
                             <div class="sm:col-span-6">
-                                <label for="${requisito.id}" class="block text-sm font-medium text-gray-700">
+                                <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                     ${requisito.label}
                                 </label>
                             </div>
@@ -151,8 +151,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     else {
                         return `
-                        <div class="sm:col-span-6 mb-3">
-                            <label for="${requisito.id}_1" class="block text-sm font-medium text-gray-700">
+                        <div class="sm:col-span-6">
+                            <label for="${requisito.id}_1" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                 ${requisito.label}
                             </label>
                         </div>
@@ -253,9 +253,9 @@ document.addEventListener("DOMContentLoaded", function() {
             [CARGOS.ESTAGIARIO_DIREITO]: {
                 requisitos: [
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, radio: false},
-                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, radio:[{label: "24 meses ou mais", value: 1}, {label: "De 23 a 12 meses", value: 2}, {label: "11 meses ou menos", value: 3}]},
-                    { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false, radio: true},
-                    { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false, radio: true},
+                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true},
+                    { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false},
+                    { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false},
                 ],
             },
             [CARGOS.ASSISTENTE_ADMINISTRATIVO]: {
