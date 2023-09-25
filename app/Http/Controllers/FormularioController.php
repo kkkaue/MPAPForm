@@ -66,7 +66,7 @@ class FormularioController extends Controller
         /* dd($request->all()); */
         
         if($request->cargo_id == 1){
-            $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario', 'experiencia_profissional_radio','trabalho_voluntario_radio']));
+            $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario', 'experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
             $codigo = rand();
             $novo->update(['codigo' => $codigo]);
             if ($request->hasFile('historico_escolar')) {

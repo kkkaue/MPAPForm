@@ -41,24 +41,46 @@ export const pontuacaoConfig = {
   },
   curriculum_vitae_estagiario:{
     comprovante_matricula: {
-      calcularPontuacao: (variavel = null) => {
-        if (variavel === 'sim') {
-          return 0.25;
-        } else if (variavel === 'nao') {
+      calcularPontuacao: (variavel) => {
+        if (variavel == 1) {
+          return 2.00;
+        } else if (variavel == 2) {
+          return 1.00;
+        } else if (variavel == 3) {
+          return 0.50;
+        } else {
+          return 0.00;
+        }
+      },
+      limite: 2.00,
+    },
+    experiencia_profissional: {
+      calcularPontuacao: (variavel) => {
+        if (variavel == 1) {
+          return 2.00;
+        } else if (variavel == 2) {
+          return 1.00;
+        } else if (variavel == 3) {
           return 0.00;
         } else {
           return 0.00;
         }
       },
-      limite: 0.75,
+      limite: 4.00,
     },
-    experiencia_profissional:{
-      /* quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
-      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional */
-    },
-    trabalhos_voluntarios: {
-      /* quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
-      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional */
+    trabalho_voluntario: {
+      calcularPontuacao: (variavel) => {
+        if (variavel == 1) {
+          return 2.00;
+        } else if (variavel == 2) {
+          return 1.00;
+        } else if (variavel == 3) {
+          return 0.00;
+        } else {
+          return 0.00;
+        }
+      },
+      limite: 4.00,
     }
   }
 }

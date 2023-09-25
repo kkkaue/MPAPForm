@@ -1,6 +1,7 @@
 import { adicionarNovoInput } from "./adicionarDocumento.js";
 import { atualizarNomeArquivo } from "./atualizarNomeArquivo.js";
 import { atualizarPontuacao } from "./atualizarPontuacao.js";
+import { openPopup } from "./pop-up.js";
 
 const CARGOS = {
     ESTAGIARIO_DIREITO: 1,
@@ -37,11 +38,51 @@ document.addEventListener("DOMContentLoaded", function() {
             ${cargoInfo.requisitos.map((requisito) => {
                 if(requisito.documento_unico){
                     return `
-                        <div class="sm:col-span-6">
+                        <div class="sm:col-span-5 relative">
                             <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
-                                ${requisito.label}
+                                ${requisito.label} <button id="popover-button" class="ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle stroke-gray-500"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
                             </label>
+                            <div class="absolute -top-56 z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96" id="popover-content">
+                                <div class="p-3 space-y-2">
+                                    <h3 class="font-semibold text-gray-900">Informações sobre Upload</h3>
+                                    <p>O formato deve ser em PDF com tamanho máximo de 5MB</p>
+                                    <h3 class="font-semibold text-gray-900">Pontuação:</h3>
+                                    <p>Revisão de Conclusão do curso (tempo restante):</p>
+                                    <p> - 24 meses ou mais (2 pontos)</p>
+                                    <p> - De 23 a 12 meses (1 pontos)</p>
+                                    <p> - 11 meses ou menos (0.5 pontos)</p>
+                                </div>
+                            </div>
                         </div>
+                        `
+                        + (requisito.popup ? 
+                            `
+                            <div id="${requisito.popup.idModal}" class="fixed invisible top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+                                <!-- Div do pop-up -->
+                                <div id="popup" class="bg-white p-8 rounded-lg shadow-md">
+                                    <h2 class="text-xl font-medium text-gray-900"">${requisito.popup.label}</h2>
+                                    <div class="flex mt-2 items-center justify-center gap-4">
+                                        <div class="flex items-center">
+                                            <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="radio-1" class="ml-2 text-sm text-gray-700">${requisito.popup.options[0]}</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="radio-2" type="radio" value="2" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="radio-2" class="ml-2 text-sm text-gray-700">${requisito.popup.options[1]}</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="radio-3" type="radio" value="3" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="radio-3" class="ml-2 text-sm text-gray-700">${requisito.popup.options[2]}</label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 flex justify-end gap-3">
+                                        <button id="${requisito.popup.idButton}" type="button" class="flex-1 rounded-lg border border-blue-500 bg-blue-500 px-4 py-2 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-blue-700 hover:bg-blue-700 focus:ring focus:ring-blue-200 disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300">Confirmar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            ` 
+                            : ``) + 
+                        `
                         <div class="sm:col-span-4 sm:col-end-13">
                             <div>
                                 <div class="flex justify-end">
@@ -54,35 +95,50 @@ document.addEventListener("DOMContentLoaded", function() {
                                         </label>
                                     </div>
                                     <input type="file" name="${requisito.id}" id="${requisito.id}" class="hidden">
-                                </div>`
-                                + (requisito.radio ? `
-                                <div class="flex mt-2 items-center justify-end gap-4">
-                                    <div class="flex items-center">
-                                        <input id="radio-1" type="radio" value="${requisito.radio[0].value}" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-1" class="ml-2 text-xs font-light text-gray-900">${requisito.radio[0].label}</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="radio-2" type="radio" value="${requisito.radio[1].value}" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-2" class="ml-2 text-xs font-light text-gray-900">${requisito.radio[1].label}</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="radio-3" type="radio" value="${requisito.radio[2].value}" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-3" class="ml-2 text-xs font-light text-gray-900">${requisito.radio[2].label}</label>
-                                    </div>
                                 </div>
                             </div>
-                        </div>` 
-                        : 
-                        `   </div>
-                        </div>`) +`
-                    `;
+                        </div>`;
                 }
                 else {
                     return `
-                        <div class="sm:col-span-6">
+                        <div class="sm:col-span-5 relative">
                             <label for="${requisito.id}_1" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
-                                ${requisito.label}
+                                ${requisito.label} <button id="popover-button" class="ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle stroke-gray-500"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
                             </label>
+                            <div class="absolute -top-56 z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96" id="popover-content">
+                                <div class="p-3 space-y-2">
+                                    <h3 class="font-semibold text-gray-900">Informações sobre Upload</h3>
+                                    <p>O formato deve ser em PDF com tamanho máximo de 5MB</p>
+                                    <h3 class="font-semibold text-gray-900">Pontuação:</h3>
+                                    <p>Revisão de Conclusão do curso (tempo restante):</p>
+                                    <p> - 24 meses ou mais (2 pontos)</p>
+                                    <p> - De 23 a 12 meses (1 pontos)</p>
+                                    <p> - 11 meses ou menos (0.5 pontos)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="${requisito.popup.idModal}" class="fixed invisible top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+                            <!-- Div do pop-up -->
+                            <div id="popup" class="bg-white p-8 rounded-lg shadow-md">
+                                <h2 class="text-xl font-medium text-gray-900"">${requisito.popup.label}</h2>
+                                <div class="flex mt-2 items-center justify-center gap-4">
+                                    <div class="flex items-center">
+                                        <input id="${requisito.popup.idModal}_radio-1" type="radio" value="1" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="${requisito.popup.idModal}_radio-1" class="ml-2 text-sm text-gray-700">${requisito.popup.options[0]}</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="${requisito.popup.idModal}_radio-2" type="radio" value="2" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="${requisito.popup.idModal}_radio-2" class="ml-2 text-sm text-gray-700">${requisito.popup.options[1]}</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="${requisito.popup.idModal}_radio-3" type="radio" value="3" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="${requisito.popup.idModal}_radio-3" class="ml-2 text-sm text-gray-700">${requisito.popup.options[2]}</label>
+                                    </div>
+                                </div>
+                                <div class="mt-5 flex justify-end gap-3">
+                                    <button id="${requisito.popup.idButton}" type="button" class="flex-1 rounded-lg border border-blue-500 bg-blue-500 px-4 py-2 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-blue-700 hover:bg-blue-700 focus:ring focus:ring-blue-200 disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300">Confirmar</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="sm:col-span-4 sm:col-end-13">
                             <div id="divDocumento_${requisito.id}">
@@ -96,27 +152,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                         </label>
                                     </div>
                                     <input type="file" name="${requisito.id}[]" id="${requisito.id}_1" class="hidden">
-                                </div>`
-                                + (requisito.radio ? `
-                                <div class="flex mt-2 items-center justify-end gap-4">
-                                    <div class="flex items-center">
-                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">2 anos ou mais</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">1 ano</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ` : 
-                        `   </div> 
-                        </div>`);
+                        </div>`;
                 }
             }).join("")}
         `;
@@ -127,11 +165,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         Experiência profissional
                     </span>
                 </div>
-
                 ${cargoInfo.experiencias_profissionais.map((requisito) => {
                     if(requisito.documento_unico){
                         return `
-                            <div class="sm:col-span-6">
+                            <div class="sm:col-span-5">
                                 <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                     ${requisito.label}
                                 </label>
@@ -151,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     else {
                         return `
-                        <div class="sm:col-span-6">
+                        <div class="sm:col-span-5">
                             <label for="${requisito.id}_1" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                 ${requisito.label}
                             </label>
@@ -168,27 +205,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                         </label>
                                     </div>
                                     <input type="file" name="${requisito.id}[]" id="${requisito.id}_1" class="hidden">
-                                </div>`
-                                + (requisito.radio ? `
-                                <div class="flex mt-2 items-center justify-end gap-4">
-                                    <div class="flex items-center mb-4">
-                                        <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-1" class="ml-2 text-sm font-medium text-gray-900">02 anos ou mais</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="radio-2" type="radio" value="2" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-2" class="ml-2 text-sm font-medium text-gray-900">01 ano</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="radio-3" type="radio" value="3" name="${requisito.id}_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="radio-3" class="ml-2 text-sm font-medium text-gray-900">Não possui</label>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ` : 
-                        `   </div> 
-                        </div>`);
+                        </div>`;
                     }
                 }).join("")}
             `;
@@ -199,19 +218,25 @@ document.addEventListener("DOMContentLoaded", function() {
             if(!requisito.documento_unico){
                 const divDocumento = document.getElementById(`divDocumento_${requisito.id}`);
                 divDocumento.addEventListener("change", function(event) {
-                    adicionarNovoInput(divDocumento, event);
+                    adicionarNovoInput(divDocumento, event, requisito);
                     atualizarPontuacao(requisito.id);
                 });
                 // adiciona a função que altera nome em requisitos não únicos
                 const InputDocumento = document.getElementById(`${requisito.id}_1`);
                 InputDocumento.addEventListener("change", function() {
                     atualizarNomeArquivo(`${requisito.id}_1`);
+                    if(requisito.popup){
+                        openPopup(requisito.popup.idModal, requisito.popup.idButton);
+                    }
                 });
             } else {
                 // adiciona a função que altera nome em requisitos únicos
                 const InputDocumento = document.getElementById(`${requisito.id}`);
                 InputDocumento.addEventListener("change", function() {
                     atualizarNomeArquivo(requisito.id);
+                    if(requisito.popup){
+                        openPopup(requisito.popup.idModal, requisito.popup.idButton);
+                    }
                     atualizarPontuacao(requisito.id);
                 });
             }
@@ -252,10 +277,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const cargoData = {
             [CARGOS.ESTAGIARIO_DIREITO]: {
                 requisitos: [
-                    { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, radio: false},
-                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true},
-                    { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false},
-                    { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false},
+                    { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, popup: false},
+                    { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, popup:{idModal:"comprovante_matricula_modal_1", idButton:"comprovante_matricula_button_1", label: "Quanto tempo para a conclusão do curso?", options: ["24 meses ou mais", "De 23 a 12 meses", "11 meses ou menos"]}},
+                    { label: "Experiências Profissionais - Certificados ou Declarações", id: "experiencia_profissional", documento_unico: false, popup: {idModal:"experiencia_profissional_modal_1", idButton:"experiencia_profissional_button_1", label: "Quanto tempo de duração?", options: ["A partir de 06 meses", "01 a 05 meses", "Não possui"]}},
+                    { label: "Trabalhos Voluntários - Certificados ou Declarações", id: "trabalho_voluntario", documento_unico: false, popup: {idModal:"trabalho_voluntario_modal_1", idButton:"trabalho_voluntario_button_1", label: "Quanto tempo de duração?", options: ["A partir de 06 meses", "01 a 05 meses", "Não possui"]}},
                 ],
             },
             [CARGOS.ASSISTENTE_ADMINISTRATIVO]: {

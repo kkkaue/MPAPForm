@@ -19,7 +19,7 @@ export function atualizarPontuacao(requisitoId, variavel = null) {
     return;
   }
 
-  const pontuacaoBase = configuracaoRequisito.pontuacao || 0;
+  let pontuacaoBase = configuracaoRequisito.pontuacao || 0;
 
   if (configuracaoRequisito.calcularPontuacao) {
     pontuacaoBase = configuracaoRequisito.calcularPontuacao(variavel);

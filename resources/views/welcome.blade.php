@@ -137,7 +137,7 @@
             </div>
           </div>
           <div id="documentos_comprobatorios" class=" grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t last:border-transparent border-gray-200">
-            <div class="sm:col-span-12 flex gap-4">
+            {{-- <div class="sm:col-span-12 flex gap-4">
               <h2 class="text-lg font-semibold text-gray-800">
                 Documentos comprobatórios - estagio
               </h2>
@@ -169,7 +169,29 @@
               </div>
             </div>
             
-            
+            <div id="modal" class="fixed invisible top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <!-- Div do pop-up -->
+              <div id="popup" class="bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-xl font-medium text-gray-900"">Quanto tempo para a conclusão do curso?</h2>
+                <div class="flex mt-2 items-center justify-center gap-4">
+                  <div class="flex items-center">
+                      <input id="radio-1" type="radio" value="1" name="comprovante_matricula_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                      <label for="radio-1" class="ml-2 text-sm text-gray-700">24 meses ou mais</label>
+                  </div>
+                  <div class="flex items-center">
+                      <input id="radio-2" type="radio" value="2" name="comprovante_matricula_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                      <label for="radio-2" class="ml-2 text-sm text-gray-700">De 23 a 12 meses</label>
+                  </div>
+                  <div class="flex items-center">
+                      <input id="radio-3" type="radio" value="3" name="comprovante_matricula_radio[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                      <label for="radio-3" class="ml-2 text-sm text-gray-700">11 meses ou menos</label>
+                  </div>
+                </div>
+                <div class="mt-5 flex justify-end gap-3">
+                  <button type="button" class="flex-1 rounded-lg border border-blue-500 bg-blue-500 px-4 py-2 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-blue-700 hover:bg-blue-700 focus:ring focus:ring-blue-200 disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300">Confirm</button>
+                </div>
+              </div>
+            </div>
 
             <div class="sm:col-span-4 sm:col-end-13 flex justify-end">
               <div class="flex flex-row items-center w-full text-xs border border-gray-200 rounded-lg">
@@ -207,7 +229,7 @@
                 <input type="file" name="experiencia_profissional_1" id="experiencia_profissional_1" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500
                 file:border-0
                 file:bg-gray-200 file:mr-4
-                file:py-2 file:px-3" accept=".pdf" required>
+                file:py-2 file:px-3" accept=".pdf" >
               </div>
             </div>
 
@@ -224,7 +246,7 @@
                 file:bg-gray-200 file:mr-4
                 file:py-2 file:px-3">
               </div>  
-            </div>
+            </div> --}}
           </div>
           <div id="draggable-card" class="hidden fixed top-36 right-12 p-6 bg-white rounded-lg shadow border floating-card">
             <div class="flex flex-col items-center justify-center">
@@ -309,7 +331,8 @@
       
       // Inicialize a função quando a página carregar
       window.addEventListener('load', createDraggableCard);
-    </script>                       
+    </script>  
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script type="module" src="{{asset('js/formularios.js')}}"></script>
@@ -317,5 +340,6 @@
     <script type="module" src="{{asset('js/adicionarContato.js')}}"></script>
     <script type="module" src="{{asset('js/adicionarDocumento.js')}}"></script>
     <script type="module" src="{{asset('js/atualizarNomeArquivo.js')}}"></script>
+    <script type="module" src="{{asset('js/pop-up.js')}}"></script>
   </body>
 </x-layouts.main>
