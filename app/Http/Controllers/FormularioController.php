@@ -40,6 +40,7 @@ class FormularioController extends Controller
         //verifique o valor de cargo_id
         $cargoId = $request->cargo_id;
         if($cargoId == 1){
+            $request = $request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']);
             $resposta = $this->handleCargo1($request);
         } elseif ($cargoId == 2){
             $resposta = $this->handleCargo2($request);
@@ -111,10 +112,20 @@ class FormularioController extends Controller
     }
 
     private function handleCargo(FormularioRequest $request, ...$filaLabels){
+        $novo = Formulario::firstOrCreate($request-> except(['_token', ...$filaLabels]));
+        $codigo = rand();
+        $novo->update(['codigo' => $codigo]);
+        $novo->update(['codigo_validacao' => false]);
+
+        foreach ($filaLabels as $key => $value) {
+            $this->uploadFile($request->$value, $value, $value, $novo);
+        }
+
+        return ['status' => true, 'codigo' => $codigo];
     }
 
-    private function handleCargo1(FormularioRequest $request){
-        $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario', 'experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
+    private function handleCargo1($request){
+        $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario']));
         $codigo = rand();
         $novo->update(['codigo' => $codigo]);
         $novo->update(['codigo_validacao' => false]);
