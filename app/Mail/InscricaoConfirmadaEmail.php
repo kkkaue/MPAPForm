@@ -13,13 +13,15 @@ class InscricaoConfirmadaEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
     /**
      * Create a new message instance.
      */
-    public function __construct($data)
+    public $data;
+    public $nome;
+    public function __construct($data, $nome)
     {
         $this->data = $data;
+        $this->nome = $nome;
     }
 
     /**

@@ -14,12 +14,13 @@
                     </div>
                     <div class="">
                         <p class="text-2xl font-semibold mb-4">Sua inscrição foi realizada com sucesso!</p>
-                        <p class="text-gray-600 leading-5">Olá, Kauê inscrição foi realizada com sucesso.<br> Por favor, verifique seu e-mail para a confirmação.</p>
+                        <p class="text-gray-600 leading-5">Olá, {{$nome}}. Sua inscrição foi realizada com sucesso.<br> Por favor, verifique seu e-mail para a confirmação.</p>
+                        
                     </div>
                     <!-- Pergunta de Confirmação de E-mail -->
                     <div>
-                        <p class="text-gray-600 mb3">Você recebeu o e-mail de confirmação?</p>
-                        {{-- <a href="http://localhost:8000/validar/{{$data}}" class="bg-gray-900 text-white px-4 py-2 mb-4 rounded hover:bg-gray-800">Sim, Confirme</a> --}}
+                        <p class="text-gray-600 mb-3">Você recebeu o e-mail de confirmação?</p>
+                        <a href="http://localhost:8000/validar/{{$data}}" class="bg-gray-900 text-white px-4 py-2 mb-4 rounded hover:bg-gray-800">Sim, Confirme</a>
                     </div>
                 </div>
             </div>
