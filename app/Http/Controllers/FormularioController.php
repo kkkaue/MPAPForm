@@ -125,6 +125,7 @@ class FormularioController extends Controller
     }
 
     private function handleCargo1($request){
+        //agora posso tentar implementar o handleCargo
         $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario']));
         $codigo = rand();
         $novo->update(['codigo' => $codigo]);
