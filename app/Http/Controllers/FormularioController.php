@@ -110,6 +110,9 @@ class FormularioController extends Controller
         return view('mail.inscricao');
     }
 
+    private function handleCargo(FormularioRequest $request, ...$filaLabels){
+    }
+
     private function handleCargo1(FormularioRequest $request){
         $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario', 'experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
         $codigo = rand();
