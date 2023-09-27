@@ -33,14 +33,35 @@ class FormularioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FormularioRequest $request)
+    public function store(Request $request)
     {
-        /* dd($request->all()); */
+        //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
+        $files = $request->allFiles();
+        foreach ($files as $key => $value) {
+            // deve verificar se o value não é um array de arquivos
+            if (is_array($value)){
+                foreach ($value as $key => $file) {
+                    if ($file->getSize() > 5000000){
+                        return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo muito grande');
+                    }
+                    if ($file->extension() != 'pdf'){
+                        return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo não é PDF!');
+                    }
+                }
+            } else {
+                if ($value->getSize() > 5000000){
+                    return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo muito grande!');
+                }
+                if ($value->extension() != 'pdf'){
+                    return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo não é PDF!');
+                }
+            }
+        }
         
         //verifique o valor de cargo_id
         $cargoId = $request->cargo_id;
         if($cargoId == 1){
-            $request = $request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']);
+            $request = new FormularioRequest($request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
             $resposta = $this->handleCargo1($request);
         } elseif ($cargoId == 2){
             $resposta = $this->handleCargo2($request);
@@ -107,10 +128,6 @@ class FormularioController extends Controller
         //
     }
 
-    public function test(){
-        return view('mail.inscricao');
-    }
-
     private function handleCargo(FormularioRequest $request, ...$filaLabels){
         $novo = Formulario::firstOrCreate($request-> except(['_token', ...$filaLabels]));
         $codigo = rand();
@@ -124,8 +141,8 @@ class FormularioController extends Controller
         return ['status' => true, 'codigo' => $codigo];
     }
 
-    private function handleCargo1($request){
-        //agora posso tentar implementar o handleCargo
+    private function handleCargo1(FormularioRequest $request) : array
+    {
         $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario']));
         $codigo = rand();
         $novo->update(['codigo' => $codigo]);
