@@ -1,5 +1,17 @@
 export const pontuacaoConfig = {
   curriculum_vitae: {
+    certificado_ensino_medio:{
+      pontuacao: 0.00,
+      limite: 0.00,
+    },
+    diploma_graduacao:{
+      pontuacao: 0.00,
+      limite: 0.00,
+    },
+    historico_escolar:{
+      pontuacao: 0.00,
+      limite: 0.00,
+    },
     curso_curta_duracao: {
       pontuacao: 0.25,
       limite: 0.50,

@@ -224,7 +224,12 @@ document.addEventListener("DOMContentLoaded", function() {
             if(!requisito.documento_unico){
                 const divDocumento = document.getElementById(`divDocumento_${requisito.id}`);
                 divDocumento.addEventListener("change", function(event) {
-                    adicionarNovoInput(divDocumento, event, requisito);
+                    if (requisito.popup){
+                        adicionarNovoInput(divDocumento, event, requisito);
+                    }
+                    else{
+                        adicionarNovoInput(divDocumento, event);
+                    }
                     atualizarPontuacao(requisito.id);
                 });
                 // adiciona a função que altera nome em requisitos não únicos

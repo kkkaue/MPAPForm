@@ -2,7 +2,7 @@ import { atualizarNomeArquivo } from "./atualizarNomeArquivo.js";
 import { adicionarNovoModal } from "./adicionarNovoModal.js";
 import { openPopup } from "./pop-up.js";
 
-export function adicionarNovoInput(divDocumento, event, requisito) {
+export function adicionarNovoInput(divDocumento, event, requisito = null) {
 
     const inputsDeArquivo = divDocumento.querySelectorAll('input[type="file"]');
     const ultimoInput = inputsDeArquivo[inputsDeArquivo.length - 1];
@@ -25,12 +25,20 @@ export function adicionarNovoInput(divDocumento, event, requisito) {
             <input type="file" name="${novoName}" id="${novoId}" class="hidden">
         `;
         novoInput.classList.add("flex", "justify-end", "mt-2");
-        const novoModal = adicionarNovoModal(requisito);
-        novoInput.querySelector("input").addEventListener("change", function (event) {
-            openPopup(novoModal.novoIdModal, novoModal.novoIdButton);
-            atualizarNomeArquivo(event.target.id);
-            adicionarNovoInput(divDocumento, event, novoModal.novoRequisito);
-        });
+        if (requisito) {
+            const novoModal = adicionarNovoModal(requisito);
+            novoInput.querySelector("input").addEventListener("change", function (event) {
+                openPopup(novoModal.novoIdModal, novoModal.novoIdButton);
+                atualizarNomeArquivo(event.target.id);
+                adicionarNovoInput(divDocumento, event, novoModal.novoRequisito);
+            });
+        } 
+        else {
+            novoInput.querySelector("input").addEventListener("change", function (event) {
+                atualizarNomeArquivo(event.target.id);
+                adicionarNovoInput(divDocumento, event);
+            });
+        }
         divDocumento.appendChild(novoInput);
     }
 }

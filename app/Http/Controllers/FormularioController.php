@@ -33,8 +33,9 @@ class FormularioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FormularioRequest $request)
     {
+        //dd($request->all());
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
         foreach ($files as $key => $value) {
@@ -42,18 +43,18 @@ class FormularioController extends Controller
             if (is_array($value)){
                 foreach ($value as $key => $file) {
                     if ($file->getSize() > 5000000){
-                        return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo muito grande');
+                        return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $file->getClientOriginalName() . ' é maior que 5MB!');
                     }
                     if ($file->extension() != 'pdf'){
-                        return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo não é PDF!');
+                        return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $file->getClientOriginalName() . ' não é PDF!');
                     }
                 }
             } else {
                 if ($value->getSize() > 5000000){
-                    return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo muito grande!');
+                    return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $value->getClientOriginalName() . ' é maior que 5MB!');
                 }
                 if ($value->extension() != 'pdf'){
-                    return redirect()->back()->with('error', 'Falha ao realizar inscrição! Arquivo não é PDF!');
+                    return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $value->getClientOriginalName() . ' não é PDF!');
                 }
             }
         }
@@ -74,14 +75,14 @@ class FormularioController extends Controller
         } elseif ($cargoId == 6){
             $resposta = $this->handleCargo6($request);
         } else {
-            return redirect()->back()->with('error', 'Falha ao realizar inscrição!');
+            return redirect()->back()->with('error', 'Falha no envio dos documentos!');
         }
 
         if ($resposta['status']){
             Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome));
             return redirect()->back()->with('success', 'Inscrição realizada com sucesso!');
         } else {
-            return redirect()->back()->with('error', 'Falha ao realizar inscrição!');
+            return redirect()->back()->with('error', 'Falha no envio dos documentos!');
         }
     }
 
@@ -128,202 +129,56 @@ class FormularioController extends Controller
         //
     }
 
-    private function handleCargo(FormularioRequest $request, ...$filaLabels){
-        $novo = Formulario::firstOrCreate($request-> except(['_token', ...$filaLabels]));
+    private function handleCargo(FormularioRequest $request, array $files) {
+        $novo = Formulario::firstOrCreate($request->except(['_token', ...$files]));
         $codigo = rand();
         $novo->update(['codigo' => $codigo]);
         $novo->update(['codigo_validacao' => false]);
 
-        foreach ($filaLabels as $key => $value) {
-            $this->uploadFile($request->$value, $value, $value, $novo);
+        foreach ($files as $key => $value) {
+            if ($request->$value){
+                if(is_array($request->$value)){
+                    foreach ($request->$value as $key => $file) {
+                        $this->uploadFile($file, $value, $value, $novo);
+                    }
+                } else {
+                    $this->uploadFile($request->$value, $value, $value, $novo);
+                }
+            }
         }
 
         return ['status' => true, 'codigo' => $codigo];
-    }
+    }    
 
     private function handleCargo1(FormularioRequest $request) : array
     {
-        $novo = Formulario::firstOrCreate($request->except(['_token', 'historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario']));
-        $codigo = rand();
-        $novo->update(['codigo' => $codigo]);
-        $novo->update(['codigo_validacao' => false]);
-
-        $this->uploadFile($request->historico_escolar, 'historico', 'historico', $novo);
-        $this->uploadFile($request->comprovante_matricula, 'comprovante', 'comprovante', $novo);
-        
-        foreach ($request->experiencia_profissional as $key => $value) {
-            $this->uploadFile($value, 'experiencia', 'experiencia', $novo);
-        }
-        foreach ($request->trabalho_voluntario as $key => $value) {
-            $this->uploadFile($value, 'trabalho', 'trabalho', $novo);
-        }
-
-        return ['status' => true, 'codigo' => $codigo];
+        $files = ['historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario'];
+        return $this->handleCargo($request, $files);
     }
 
     private function handleCargo2(FormularioRequest $request){
-        $novo = Formulario::firstOrCreate($request->except(['_token', 'certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso']));
-        $codigo = rand();
-        $novo->update(['codigo' => $codigo]);
-        $novo->update(['codigo_validacao' => false]);
-
-        $this->uploadFile($request->certificado_ensino_medio, 'certificado', 'certificado', $novo);
-        $this->uploadFile($request->diploma_graduacao, 'diploma', 'diploma', $novo);
-        $this->uploadFile($request->historico_escolar, 'historico', 'historico', $novo);
-
-        foreach ($request->curso_curta_duracao as $key => $value) {
-            $this->uploadFile($value, 'curso_curta_duracao', 'curso_curta_duracao', $novo);
-        }
-
-        foreach ($request->curso_especializacao as $key => $value) {
-            $this->uploadFile($value, 'curso_especializacao', 'curso_especializacao', $novo);
-        }
-
-        foreach ($request->diploma_mestrado as $key => $value) {
-            $this->uploadFile($value, 'diploma_mestrado', 'diploma_mestrado', $novo);
-        }
-
-        foreach ($request->diploma_doutorado as $key => $value) {
-            $this->uploadFile($value, 'diploma_doutorado', 'diploma_doutorado', $novo);
-        }
-
-        foreach ($request->aprovacao_concurso as $key => $value) {
-            $this->uploadFile($value, 'aprovacao_concurso', 'aprovacao_concurso', $novo);
-        }
-
-        return ['status' => true, 'codigo' => $codigo];
+        $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
+        return $this->handleCargo($request, $files);
     }
 
     private function handleCargo3(FormularioRequest $request){
-        $novo = Formulario::firstOrCreate($request->except(['_token', 'certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso']));
-        $codigo = rand();
-        $novo->update(['codigo' => $codigo]);
-        $novo->update(['codigo_validacao' => false]);
-
-        $this->uploadFile($request->certificado_ensino_medio, 'certificado', 'certificado', $novo);
-        $this->uploadFile($request->diploma_graduacao, 'diploma', 'diploma', $novo);
-        $this->uploadFile($request->historico_escolar, 'historico', 'historico', $novo);
-
-        foreach ($request->curso_curta_duracao as $key => $value) {
-            $this->uploadFile($value, 'curso_curta_duracao', 'curso_curta_duracao', $novo);
-        }
-
-        foreach ($request->curso_especializacao as $key => $value) {
-            $this->uploadFile($value, 'curso_especializacao', 'curso_especializacao', $novo);
-        }
-
-        foreach ($request->diploma_mestrado as $key => $value) {
-            $this->uploadFile($value, 'diploma_mestrado', 'diploma_mestrado', $novo);
-        }
-
-        foreach ($request->diploma_doutorado as $key => $value) {
-            $this->uploadFile($value, 'diploma_doutorado', 'diploma_doutorado', $novo);
-        }
-
-        foreach ($request->aprovacao_concurso as $key => $value) {
-            $this->uploadFile($value, 'aprovacao_concurso', 'aprovacao_concurso', $novo);
-        }
-
-        return ['status' => true, 'codigo' => $codigo];
+        $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'assessor_juridico', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
+        return $this->handleCargo($request, $files);
     }
 
     private function handleCargo4(FormularioRequest $request){
-        $novo = Formulario::firstOrCreate($request->except(['_token', 'certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso']));
-        $codigo = rand();
-        $novo->update(['codigo' => $codigo]);
-        $novo->update(['codigo_validacao' => false]);
-
-        $this->uploadFile($request->certificado_ensino_medio, 'certificado', 'certificado', $novo);
-        $this->uploadFile($request->diploma_graduacao, 'diploma', 'diploma', $novo);
-        $this->uploadFile($request->historico_escolar, 'historico', 'historico', $novo);
-
-        foreach ($request->curso_curta_duracao as $key => $value) {
-            $this->uploadFile($value, 'curso_curta_duracao', 'curso_curta_duracao', $novo);
-        }
-
-        foreach ($request->curso_especializacao as $key => $value) {
-            $this->uploadFile($value, 'curso_especializacao', 'curso_especializacao', $novo);
-        }
-
-        foreach ($request->diploma_mestrado as $key => $value) {
-            $this->uploadFile($value, 'diploma_mestrado', 'diploma_mestrado', $novo);
-        }
-
-        foreach ($request->diploma_doutorado as $key => $value) {
-            $this->uploadFile($value, 'diploma_doutorado', 'diploma_doutorado', $novo);
-        }
-
-        foreach ($request->aprovacao_concurso as $key => $value) {
-            $this->uploadFile($value, 'aprovacao_concurso', 'aprovacao_concurso', $novo);
-        }
-
-        return ['status' => true, 'codigo' => $codigo];
+        $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
+        return $this->handleCargo($request, $files);
     }
 
     private function handleCargo5(FormularioRequest $request){
-        $novo = Formulario::firstOrCreate($request->except(['_token', 'certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso']));
-        $codigo = rand();
-        $novo->update(['codigo' => $codigo]);
-        $novo->update(['codigo_validacao' => false]);
-
-        $this->uploadFile($request->certificado_ensino_medio, 'certificado', 'certificado', $novo);
-        $this->uploadFile($request->diploma_graduacao, 'diploma', 'diploma', $novo);
-        $this->uploadFile($request->historico_escolar, 'historico', 'historico', $novo);
-
-        foreach ($request->curso_curta_duracao as $key => $value) {
-            $this->uploadFile($value, 'curso_curta_duracao', 'curso_curta_duracao', $novo);
-        }
-
-        foreach ($request->curso_especializacao as $key => $value) {
-            $this->uploadFile($value, 'curso_especializacao', 'curso_especializacao', $novo);
-        }
-
-        foreach ($request->diploma_mestrado as $key => $value) {
-            $this->uploadFile($value, 'diploma_mestrado', 'diploma_mestrado', $novo);
-        }
-
-        foreach ($request->diploma_doutorado as $key => $value) {
-            $this->uploadFile($value, 'diploma_doutorado', 'diploma_doutorado', $novo);
-        }
-
-        foreach ($request->aprovacao_concurso as $key => $value) {
-            $this->uploadFile($value, 'aprovacao_concurso', 'aprovacao_concurso', $novo);
-        }
-
-        return ['status' => true, 'codigo' => $codigo];
+        $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
+        return $this->handleCargo($request, $files);
     }
 
     private function handleCargo6(FormularioRequest $request){
-        $novo = Formulario::firstOrCreate($request->except(['_token', 'certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso']));
-        $codigo = rand();
-        $novo->update(['codigo' => $codigo]);
-        $novo->update(['codigo_validacao' => false]);
-
-        $this->uploadFile($request->certificado_ensino_medio, 'certificado', 'certificado', $novo);
-        $this->uploadFile($request->diploma_graduacao, 'diploma', 'diploma', $novo);
-        $this->uploadFile($request->historico_escolar, 'historico', 'historico', $novo);
-
-        foreach ($request->curso_curta_duracao as $key => $value) {
-            $this->uploadFile($value, 'curso_curta_duracao', 'curso_curta_duracao', $novo);
-        }
-
-        foreach ($request->curso_especializacao as $key => $value) {
-            $this->uploadFile($value, 'curso_especializacao', 'curso_especializacao', $novo);
-        }
-
-        foreach ($request->diploma_mestrado as $key => $value) {
-            $this->uploadFile($value, 'diploma_mestrado', 'diploma_mestrado', $novo);
-        }
-
-        foreach ($request->diploma_doutorado as $key => $value) {
-            $this->uploadFile($value, 'diploma_doutorado', 'diploma_doutorado', $novo);
-        }
-
-        foreach ($request->aprovacao_concurso as $key => $value) {
-            $this->uploadFile($value, 'aprovacao_concurso', 'aprovacao_concurso', $novo);
-        }
-
-        return ['status' => true, 'codigo' => $codigo];
+        $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
+        return $this->handleCargo($request, $files);
     }
 
     private function uploadFile($file, $name, $label, $novo){
