@@ -54,7 +54,7 @@ class FormularioController extends Controller
                     return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $value->getClientOriginalName() . ' é maior que 5MB!');
                 }
                 if ($value->extension() != 'pdf'){
-                    return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $value->getClientOriginalName() . ' não é PDF!');
+                    return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $value->getClientOriginalName() . ' não é do tipo pdf!');
                 }
             }
         }
