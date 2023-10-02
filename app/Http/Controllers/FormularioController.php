@@ -18,7 +18,7 @@ class FormularioController extends Controller
         $pdf = Pdf::loadView('pdf.inscricao' , [
             'codigo' => '123456',
             'user' => [
-                'nome' => 'teste',
+                'nome' => 'Kaue de magalhães',
                 'email' => 'test@test.com',
                 'cpf' => '123.456.789-10',
                 "nome_rua" => "rua abc",
