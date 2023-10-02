@@ -70,7 +70,8 @@
         <div class="content">
             <div class="header">
                 <h1>Olá, {{ $user['nome'] }}!</h1>
-                <p>Seu cadastro foi realizado com sucesso!</p>
+                <p>Seu cadastro foi realizado com sucesso! Seu código de inscrição é:</p>
+                <h2>{{ $codigo }}</h2>
             </div>
             <div class="user-info">
                 <p><strong>Nome:</strong> {{ $user['nome'] }}</p>

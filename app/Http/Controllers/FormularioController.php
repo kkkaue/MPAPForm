@@ -29,7 +29,7 @@ class FormularioController extends Controller
                 "cargo_id" => "1",
             ]
         ]);
-        return $pdf = $pdf->stream();
+        return $pdf = $pdf->setWarnings(true)->stream();
     }
     /**
      * Display a listing of the resource.
@@ -53,7 +53,7 @@ class FormularioController extends Controller
      */
     public function store(FormularioRequest $request)
     {
-        dd($request->all());
+        //dd($request->all());
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
         foreach ($files as $key => $value) {
