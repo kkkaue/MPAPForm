@@ -8,11 +8,29 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Anexo;
 use App\Models\Cargo;
 use App\Models\Formulario;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FormularioController extends Controller
 {
+    public function test(){
+        $pdf = Pdf::loadView('pdf.inscricao' , [
+            'codigo' => '123456',
+            'user' => [
+                'nome' => 'teste',
+                'email' => 'test@test.com',
+                'cpf' => '123.456.789-10',
+                "nome_rua" => "rua abc",
+                "numero_rua" => "123",
+                "email" => "exemplo@exemplo.com",
+                "telefone_1" => "(09) 90909-0909",
+                "curriculo_lattes" => "http://lattes.cnpq.br/123456789",
+                "cargo_id" => "1",
+            ]
+        ]);
+        return $pdf = $pdf->stream();
+    }
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +53,7 @@ class FormularioController extends Controller
      */
     public function store(FormularioRequest $request)
     {
-        //dd($request->all());
+        dd($request->all());
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
         foreach ($files as $key => $value) {
@@ -62,8 +80,8 @@ class FormularioController extends Controller
         //verifique o valor de cargo_id
         $cargoId = $request->cargo_id;
         if($cargoId == 1){
-            $request = new FormularioRequest($request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
-            $resposta = $this->handleCargo1($request);
+            $requestExceptRadioInputs = new FormularioRequest($request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
+            $resposta = $this->handleCargo1($requestExceptRadioInputs);
         } elseif ($cargoId == 2){
             $resposta = $this->handleCargo2($request);
         } elseif ($cargoId == 3){
@@ -79,7 +97,14 @@ class FormularioController extends Controller
         }
 
         if ($resposta['status']){
-            Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome));
+            $pdf = Pdf::loadView('pdf.inscricao' , [
+                'codigo' => $resposta['codigo'],
+                //todos os dados passados no request
+                'dados' => $request->except(['_token']),
+            ]);
+            $pdf = $pdf->output();
+
+            Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome, $pdf));
             return redirect()->back()->with('success', 'Inscrição realizada com sucesso!');
         } else {
             return redirect()->back()->with('error', 'Falha no envio dos documentos!');

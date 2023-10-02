@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -18,10 +19,13 @@ class InscricaoConfirmadaEmail extends Mailable
      */
     public $data;
     public $nome;
-    public function __construct($data, $nome)
+    public $pdf;
+
+    public function __construct($data, $nome , $pdf)
     {
         $this->data = $data;
         $this->nome = $nome;
+        $this->pdf = $pdf;
     }
 
     /**
@@ -51,6 +55,10 @@ class InscricaoConfirmadaEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+
+        return [
+            Attachment::fromData(fn () => $this->pdf, 'inscricao.pdf')
+                ->withMime('application/pdf'),
+        ];
     }
 }
