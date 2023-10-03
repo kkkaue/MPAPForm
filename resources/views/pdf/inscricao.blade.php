@@ -8,72 +8,68 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
         }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .logo {
+        .logo{
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 13px;
         }
 
         .logo img {
-            width: 150px;
+            width: 175px;
+            display: block;
+            margin: 0 auto;
         }
 
-        .content {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .header {
+        .comprovante{
             text-align: center;
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
+            padding: 5px;
+            background-color: #ADB9BD;
         }
 
-        .header h1 {
-            margin: 0;
+        .comprovante h1{
             font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
         }
 
-        .user-info {
-            margin-top: 20px;
+        .info-section{
+            padding-left: 3px;
+            padding-top: 10px
+            border-bottom: 1px solid #000000;
+            display: flex;
         }
 
-        .user-info p {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-
-        .signature {
-            margin-top: 20px;
-            text-align: center;
-            font-style: italic;
+        .section-title{
+            font-size: 20px;
+            margin-bottom: auto;
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div>
         <div class="logo">
             <img src="{{ storage_path('app/public/logo-mpap.png') }}" alt="Logo">
         </div>
-        <div class="content">
-            <div class="header">
+        <div class="comprovante">
+            <h1>
+                Comprovante de inscrição
+            </h1>
+        </div>
+        <section class="info-section">
+            <div class="section-title">
+                Candidato
+            </div>
+            
+        </section>
+        <div>
+            <div>
                 <h1>Olá, {{ $user['nome'] }}!</h1>
                 <p>Seu cadastro foi realizado com sucesso! Seu código de inscrição é:</p>
                 <h2>{{ $codigo }}</h2>
             </div>
-            <div class="user-info">
+            <div>
                 <p><strong>Nome:</strong> {{ $user['nome'] }}</p>
                 <p><strong>CPF:</strong> {{ $user['cpf'] }}</p>
                 <p><strong>Endereço:</strong> {{ $user['nome_rua'] }}, {{$user['numero_rua']}}</p>
@@ -96,7 +92,7 @@
                     @endif
                 </p>
             </div>
-            <div class="signature">
+            <div>
                 <p>Atenciosamente,<br>Equipe de Desenvolvimento do Sistema de Inscrições</p>
             </div>
         </div>

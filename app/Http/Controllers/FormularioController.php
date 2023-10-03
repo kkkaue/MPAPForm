@@ -9,6 +9,7 @@ use App\Models\Anexo;
 use App\Models\Cargo;
 use App\Models\Formulario;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
