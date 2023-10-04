@@ -15,7 +15,10 @@ use Spatie\Browsershot\Browsershot;
 class FormularioController extends Controller
 {
     public function test(){
-        return response()->streamDownload(function () { 
+        $paths = $this->getNodeAndNpmPaths();
+        $nodePath = $paths['node'];
+        $npmPath = $paths['npm'];
+        return response()->streamDownload(function () use ($nodePath, $npmPath) { 
             echo Browsershot::html(view('pdf.inscricao' , [
                 'codigo' => '123456',
                 'user' => [
@@ -29,9 +32,12 @@ class FormularioController extends Controller
                     "cargo_id" => "1",
                 ]
             ])->render())
-                ->setNodeBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/node')
-                ->setNpmBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/npm')
+                ->setOption('temp-dir', '/caminho/para/diretorio/temporario')
+                ->setNodeBinary($nodePath)
+                ->setNpmBinary($npmPath)
                 ->noSandbox()
+                ->usePipe()
+                ->ignoreHttpsErrors()
                 ->newHeadless()
                 ->pdf(); 
         }, 'file_name.pdf', ['Content-Type' => 'application/pdf'], 'inline');
@@ -102,12 +108,15 @@ class FormularioController extends Controller
         }
 
         if ($resposta['status']){
+            $paths = $this->getNodeAndNpmPaths();
+            $nodePath = $paths['node'];
+            $npmPath = $paths['npm'];
             $pdf = Browsershot::html(view('pdf.inscricao' , [
                 'codigo' => $resposta['codigo'],
                 'user' => $request->except(['_token']),
             ])->render())
-                ->setNodeBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/node')
-                ->setNpmBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/npm')
+                ->setNodeBinary($nodePath)
+                ->setNpmBinary($npmPath)
                 ->noSandbox()
                 ->newHeadless()
                 ->pdf();
@@ -247,5 +256,27 @@ class FormularioController extends Controller
             'arquivo' => $arquivo,
             'label' => $label
             ]);
+    }
+
+    function getNodeAndNpmPaths() {
+        $nodeBinary = '';
+        $npmBinary = '';
+    
+        if ($this->isWindows()) {
+            $nodeBinary = 'C:\\Program Files\\nodejs\\node.exe';
+            $npmBinary = 'C:\Users\kaue.brandao\AppData\Roaming\npm';
+        } else {
+            $nodeBinary = '/home/kaue/.nvm/versions/node/v18.17.0/bin/node';
+            $npmBinary = '/home/kaue/.nvm/versions/node/v18.17.0/bin/npm';
+        }
+    
+        return [
+            'node' => $nodeBinary,
+            'npm' => $npmBinary
+        ];
+    }
+    
+    function isWindows() {
+        return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
     }
 }
