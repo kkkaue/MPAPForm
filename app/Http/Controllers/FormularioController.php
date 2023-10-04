@@ -8,29 +8,33 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Anexo;
 use App\Models\Cargo;
 use App\Models\Formulario;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Browsershot\Browsershot;
 
 class FormularioController extends Controller
 {
     public function test(){
-        $pdf = Pdf::loadView('pdf.inscricao' , [
-            'codigo' => '123456',
-            'user' => [
-                'nome' => 'Kaue de magalhães',
-                'email' => 'test@test.com',
-                'cpf' => '123.456.789-10',
-                "nome_rua" => "rua abc",
-                "numero_rua" => "123",
-                "email" => "exemplo@exemplo.com",
-                "telefone_1" => "(09) 90909-0909",
-                "curriculo_lattes" => "http://lattes.cnpq.br/123456789",
-                "cargo_id" => "1",
-            ]
-        ]);
-        return $pdf = $pdf->setWarnings(true)->stream();
+        return response()->streamDownload(function () { 
+            echo Browsershot::html(view('pdf.inscricao' , [
+                'codigo' => '123456',
+                'user' => [
+                    'nome' => 'Kaue de magalhães',
+                    'email' => 'exemplo@exemplo.com',
+                    'cpf' => '123.456.789-10',
+                    "nome_rua" => "rua abc",
+                    "numero_rua" => "123",
+                    "telefone_1" => "(09) 90909-0909",
+                    "curriculo_lattes" => "http://lattes.cnpq.br/123456789",
+                    "cargo_id" => "1",
+                ]
+            ])->render())
+                ->setNodeBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/node')
+                ->setNpmBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/npm')
+                ->noSandbox()
+                ->newHeadless()
+                ->pdf(); 
+        }, 'file_name.pdf', ['Content-Type' => 'application/pdf'], 'inline');
     }
     /**
      * Display a listing of the resource.
@@ -98,12 +102,15 @@ class FormularioController extends Controller
         }
 
         if ($resposta['status']){
-            $pdf = Pdf::loadView('pdf.inscricao' , [
+            $pdf = Browsershot::html(view('pdf.inscricao' , [
                 'codigo' => $resposta['codigo'],
-                //todos os dados passados no request
-                'dados' => $request->except(['_token']),
-            ]);
-            $pdf = $pdf->output();
+                'user' => $request->except(['_token']),
+            ])->render())
+                ->setNodeBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/node')
+                ->setNpmBinary('/home/kaue/.nvm/versions/node/v18.17.0/bin/npm')
+                ->noSandbox()
+                ->newHeadless()
+                ->pdf();
 
             Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome, $pdf));
             return redirect()->back()->with('success', 'Inscrição realizada com sucesso!');
