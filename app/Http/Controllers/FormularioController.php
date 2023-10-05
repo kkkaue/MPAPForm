@@ -8,16 +8,15 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Anexo;
 use App\Models\Cargo;
 use App\Models\Formulario;
-use HeadlessChromium\BrowserFactory;
-use HeadlessChromium\Page;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\View;
 use Spatie\Browsershot\Browsershot;
 
 class FormularioController extends Controller
 {
+    private $htmlFile;
+    private $pdfOutputFile;
+    private $htmlTemp;
     public function generatePdfTest()
     {
         $html = view('pdf.inscricao', [
@@ -29,30 +28,54 @@ class FormularioController extends Controller
                 'nome_rua' => 'rua abc',
                 'numero_rua' => '123',
                 'telefone_1' => '(09) 90909-0909',
-                'curriculo_lattes' => 'http://lattes.cnpq.br/123456789',
+                'curriculo_lattes' => 'lattes.cnpq.br/123456789',
                 'cargo_id' => '1',
             ]
         ])->render();
-        
-        $htmlFile = tempnam(sys_get_temp_dir(), 'html_') . '.html';
+
+        $htmlTemp = tempnam(sys_get_temp_dir(), 'html_');
+
+        // Acrescente a extensão .html para o arquivo final
+        $htmlFile = $htmlTemp . '.html';
         file_put_contents($htmlFile, $html);
 
+        //dd($htmlFile);
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $command = "google-chrome-stable --headless --disable-gpu --no-pdf-header-footer --disable-pdf-tagging --print-to-pdf= file://$htmlFile";
-        } else {
+            $htmlFile = str_replace('\\', '\\\\', $htmlFile);
+            $pdfOutputFile = 'c:\\xampp\\htdocs\\mpap-form2\\mpap-form\\public\\output.pdf';
+            $command = "start chrome --headless --disable-gpu --no-pdf-header-footer --disable-pdf-tagging --print-to-pdf=\"$pdfOutputFile\" \"file:///$htmlFile\"";
+        } else { 
             $command = "google-chrome-stable --headless --disable-gpu --no-pdf-header-footer --disable-pdf-tagging --print-to-pdf= file://$htmlFile";
         }
         
         shell_exec($command);
 
-        header('Content-Type: application/pdf'); 
-        header('Content-Disposition: inline; filename="output.pdf"'); 
+        $tempoMaximo = 5; 
 
-        readfile('output.pdf'); 
+        $tempoInicial = time();
+        while (!file_exists($pdfOutputFile) && (time() - $tempoInicial) < $tempoMaximo) {
+            sleep(1);
+        }
+
+        if (file_exists($pdfOutputFile)) {
+            $pdf = file_get_contents($pdfOutputFile);
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename="output.pdf"');
+            header('Content-Length: ' . strlen($pdf));
+            header('Cache-Control: private, max-age=0, must-revalidate');
+            header('Pragma: public');
+            echo $pdf;
+        } else {
+            echo "O arquivo PDF não pôde ser encontrado após aguardar $tempoMaximo segundos.";
+        }
+        //limpar o sistema dos arquivos gerados
+        unlink($htmlFile);
+        unlink($pdfOutputFile);
+        unlink($htmlTemp);
     }
 
-
-    public function returnViewPdfTest(){
+    public function viewPdfTest()
+    {
         return view ('pdf.inscricao', [
             'codigo' => '123456',
             'user' => [
@@ -62,37 +85,74 @@ class FormularioController extends Controller
                 "nome_rua" => "rua abc",
                 "numero_rua" => "123",
                 "telefone_1" => "(09) 90909-0909",
-                "curriculo_lattes" => "http://lattes.cnpq.br/123456789",
+                "curriculo_lattes" => "lattes.cnpq.br/123456789",
                 "cargo_id" => "1",
             ]
         ]);
     }
 
-    public function pdf_deprecated(){
-        $paths = $this->getNodeAndNpmPaths();
-        $nodePath = $paths['node'];
-        $npmPath = $paths['npm'];
-        return response()->streamDownload(function () use ($nodePath, $npmPath) { 
-            echo Browsershot::html(view('pdf.inscricao' , [
-                'codigo' => '123456',
-                'user' => [
-                    'nome' => 'Kaue de magalhães',
-                    'email' => 'exemplo@exemplo.com',
-                    'cpf' => '123.456.789-10',
-                    "nome_rua" => "rua abc",
-                    "numero_rua" => "123",
-                    "telefone_1" => "(09) 90909-0909",
-                    "curriculo_lattes" => "http://lattes.cnpq.br/123456789",
-                    "cargo_id" => "1",
-                ]
-            ])->render())
-                ->setNodeBinary($nodePath)
-                ->setNpmBinary($npmPath)
-                ->noSandbox()
-                ->usePipe()
-                ->newHeadless()
-                ->pdf(); 
-        }, 'file_name.pdf', ['Content-Type' => 'application/pdf'], 'inline');
+    public function generatePdf($codigo, $request)
+    {
+        $html = view('pdf.inscricao', [
+            'codigo' => $codigo,
+            'user' => [
+                'nome' => $request['nome'],
+                'email' => $request['email'],
+                'cpf' => $request['cpf'],
+                'nome_rua' => $request['nome_rua'],
+                'numero_rua' => $request['numero_rua'],
+                'telefone_1' => $request['telefone_1'],
+                'curriculo_lattes' => $request['curriculo_lattes'],
+                'cargo_id' => $request['cargo_id'],
+            ]
+        ])->render();
+
+        
+        $htmlTemp = tempnam(sys_get_temp_dir(), 'html_');
+        
+        // Acrescente a extensão .html para o arquivo final
+        $htmlFile = $htmlTemp . '.html';
+        file_put_contents($htmlFile, $html);
+        
+        //dd($htmlFile);
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $htmlFile = str_replace('\\', '\\\\', $htmlFile);
+            $pdfOutputFile = 'c:\\xampp\\htdocs\\mpap-form2\\mpap-form\\public\\output.pdf';
+            $command = "start chrome --headless --disable-gpu --no-pdf-header-footer --disable-pdf-tagging --print-to-pdf=\"$pdfOutputFile\" \"file:///$htmlFile\"";
+        } else { 
+            $command = "google-chrome-stable --headless --disable-gpu --no-pdf-header-footer --disable-pdf-tagging --print-to-pdf= file://$htmlFile";
+        }
+        
+        shell_exec($command);
+        
+        $tempoMaximo = 5;
+        
+        $tempoInicial = time();
+        while (!file_exists($pdfOutputFile) && (time() - $tempoInicial) < $tempoMaximo) {
+            sleep(1);
+        }
+        
+        //PENSAR EM COMO MODIFICAR ISSO PARA ENVIAR PARA O USUÁRIO POR EMAIL E DEPOIS APAGAR O ARQUIVO
+        if (file_exists($pdfOutputFile)) {
+            $pdf = file_get_contents($pdfOutputFile);
+
+        } else {
+            echo "O arquivo PDF não pôde ser encontrado após aguardar $tempoMaximo segundos.";
+        }
+        
+        $this->htmlFile = $htmlFile;
+        $this->pdfOutputFile = $pdfOutputFile;
+        $this->htmlTemp = $htmlTemp;
+        
+        return $pdf;
+    }
+
+    private function cleanTemporaryFiles()
+    {
+        // Limpar o sistema dos arquivos gerados
+        unlink($this->htmlFile);
+        unlink($this->pdfOutputFile);
+        unlink($this->htmlTemp);
     }
     /**
      * Display a listing of the resource.
@@ -160,20 +220,9 @@ class FormularioController extends Controller
         }
 
         if ($resposta['status']){
-            $paths = $this->getNodeAndNpmPaths();
-            $nodePath = $paths['node'];
-            $npmPath = $paths['npm'];
-            $pdf = Browsershot::html(view('pdf.inscricao' , [
-                'codigo' => $resposta['codigo'],
-                'user' => $request->except(['_token']),
-            ])->render())
-                ->setNodeBinary($nodePath)
-                ->setNpmBinary($npmPath)
-                ->noSandbox()
-                ->newHeadless()
-                ->pdf();
-
+            $pdf = $this->generatePdf($resposta['codigo'], $request->except(['_token']));
             Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome, $pdf));
+            $this->cleanTemporaryFiles();
             return redirect()->back()->with('success', 'Inscrição realizada com sucesso!');
         } else {
             return redirect()->back()->with('error', 'Falha no envio dos documentos!');

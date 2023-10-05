@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <div class="px-10">
+    <div>
         <div class="py-4">
             <img class="w-44 mx-auto" src="{{ storage_path('app/public/logo-mpap.png') }}" alt="Logo">
         </div>

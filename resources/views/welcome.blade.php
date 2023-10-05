@@ -2,7 +2,7 @@
   <body>
     <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <div class="bg-white rounded-xl shadow border p-4 sm:p-7">
-        <div class="text-center mb-8">
+        <div class="text-center mb-4">
           <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
             Ficha de inscrição
           </h2>
