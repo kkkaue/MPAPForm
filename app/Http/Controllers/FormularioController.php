@@ -8,13 +8,67 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Anexo;
 use App\Models\Cargo;
 use App\Models\Formulario;
+use HeadlessChromium\BrowserFactory;
+use HeadlessChromium\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Spatie\Browsershot\Browsershot;
 
 class FormularioController extends Controller
 {
-    public function test(){
+    public function generatePdfTest()
+    {
+        $html = view('pdf.inscricao', [
+            'codigo' => 123,
+            'user' => [
+                'nome' => 'Kaue de magalhães',
+                'email' => 'exemplo@exemplo.com',
+                'cpf' => '123.456.789-10',
+                'nome_rua' => 'rua abc',
+                'numero_rua' => '123',
+                'telefone_1' => '(09) 90909-0909',
+                'curriculo_lattes' => 'http://lattes.cnpq.br/123456789',
+                'cargo_id' => '1',
+            ]
+        ])->render();
+        
+        $htmlFile = tempnam(sys_get_temp_dir(), 'html_') . '.html';
+        file_put_contents($htmlFile, $html);
+
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $command = "google-chrome-stable --headless --disable-gpu --no-pdf-header-footer --disable-pdf-tagging --print-to-pdf= file://$htmlFile";
+        } else {
+            $command = "google-chrome-stable --headless --disable-gpu --no-pdf-header-footer --disable-pdf-tagging --print-to-pdf= file://$htmlFile";
+        }
+        
+        shell_exec($command);
+
+        header('Content-Type: application/pdf'); 
+        header('Content-Disposition: inline; filename="output.pdf"'); 
+
+        readfile('output.pdf'); 
+    }
+
+
+    public function returnViewPdfTest(){
+        return view ('pdf.inscricao', [
+            'codigo' => '123456',
+            'user' => [
+                'nome' => 'Kaue de magalhães',
+                'email' => 'exemplo@exemplo.com',
+                'cpf' => '123.456.789-10',
+                "nome_rua" => "rua abc",
+                "numero_rua" => "123",
+                "telefone_1" => "(09) 90909-0909",
+                "curriculo_lattes" => "http://lattes.cnpq.br/123456789",
+                "cargo_id" => "1",
+            ]
+        ]);
+    }
+
+    public function pdf_deprecated(){
         $paths = $this->getNodeAndNpmPaths();
         $nodePath = $paths['node'];
         $npmPath = $paths['npm'];
@@ -32,12 +86,10 @@ class FormularioController extends Controller
                     "cargo_id" => "1",
                 ]
             ])->render())
-                ->setOption('temp-dir', '/caminho/para/diretorio/temporario')
                 ->setNodeBinary($nodePath)
                 ->setNpmBinary($npmPath)
                 ->noSandbox()
                 ->usePipe()
-                ->ignoreHttpsErrors()
                 ->newHeadless()
                 ->pdf(); 
         }, 'file_name.pdf', ['Content-Type' => 'application/pdf'], 'inline');
