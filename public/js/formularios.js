@@ -59,20 +59,20 @@ document.addEventListener("DOMContentLoaded", function() {
                             `
                             <div id="${requisito.popup.idModal}" class="fixed invisible top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
                                 <!-- Div do pop-up -->
-                                <div id="popup" class="bg-white p-8 rounded-lg shadow-md">
+                                <div id="${requisito.id}_popup" class="bg-white p-8 rounded-lg shadow-md">
                                     <h2 class="text-xl font-medium text-gray-900"">${requisito.popup.label}</h2>
                                     <div class="flex mt-2 items-center justify-center gap-4">
                                         <div class="flex items-center">
-                                            <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                            <label for="radio-1" class="ml-2 text-sm text-gray-700">${requisito.popup.options[0]}</label>
+                                            <input id="${requisito.id}_radio-1" type="radio" value="1" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="${requisito.id}_radio-1" class="ml-2 text-sm text-gray-700">${requisito.popup.options[0]}</label>
                                         </div>
                                         <div class="flex items-center">
-                                            <input id="radio-2" type="radio" value="2" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                            <label for="radio-2" class="ml-2 text-sm text-gray-700">${requisito.popup.options[1]}</label>
+                                            <input id="${requisito.id}_radio-2" type="radio" value="2" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="${requisito.id}_radio-2" class="ml-2 text-sm text-gray-700">${requisito.popup.options[1]}</label>
                                         </div>
                                         <div class="flex items-center">
-                                            <input id="radio-3" type="radio" value="3" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                            <label for="radio-3" class="ml-2 text-sm text-gray-700">${requisito.popup.options[2]}</label>
+                                            <input id="${requisito.id}_radio-3" type="radio" value="3" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="${requisito.id}_radio-3" class="ml-2 text-sm text-gray-700">${requisito.popup.options[2]}</label>
                                         </div>
                                     </div>
                                     <div class="mt-5 flex justify-end gap-3">
@@ -122,20 +122,20 @@ document.addEventListener("DOMContentLoaded", function() {
                             `
                             <div id="${requisito.popup.idModal}" class="fixed invisible top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
                                 <!-- Div do pop-up -->
-                                <div id="popup" class="bg-white p-8 rounded-lg shadow-md">
+                                <div id="${requisito.id}_popup" class="bg-white p-8 rounded-lg shadow-md">
                                     <h2 class="text-xl font-medium text-gray-900"">${requisito.popup.label}</h2>
                                     <div class="flex mt-2 items-center justify-center gap-4">
                                         <div class="flex items-center">
-                                            <input id="radio-1" type="radio" value="1" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                            <label for="radio-1" class="ml-2 text-sm text-gray-700">${requisito.popup.options[0]}</label>
+                                            <input id="${requisito.id}_radio-1" type="radio" value="1" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="${requisito.id}_radio-1" class="ml-2 text-sm text-gray-700">${requisito.popup.options[0]}</label>
                                         </div>
                                         <div class="flex items-center">
-                                            <input id="radio-2" type="radio" value="2" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                            <label for="radio-2" class="ml-2 text-sm text-gray-700">${requisito.popup.options[1]}</label>
+                                            <input id="${requisito.id}_radio-2" type="radio" value="2" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="${requisito.id}_radio-2" class="ml-2 text-sm text-gray-700">${requisito.popup.options[1]}</label>
                                         </div>
                                         <div class="flex items-center">
-                                            <input id="radio-3" type="radio" value="3" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                            <label for="radio-3" class="ml-2 text-sm text-gray-700">${requisito.popup.options[2]}</label>
+                                            <input id="${requisito.id}_radio-3" type="radio" value="3" name="${requisito.id}_radio[0]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                            <label for="${requisito.id}_radio-3" class="ml-2 text-sm text-gray-700">${requisito.popup.options[2]}</label>
                                         </div>
                                     </div>
                                     <div class="mt-5 flex justify-end gap-3">
