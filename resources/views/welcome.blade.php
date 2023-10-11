@@ -1,7 +1,7 @@
 <x-layouts.main>
   <body>
     <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-      <div class="bg-white rounded-xl shadow border p-4 sm:p-7">
+      <div class="bg-white rounded-xl shadow border p-4 sm:p-6">
         <div class="text-center mb-4">
           <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
             Ficha de inscrição
@@ -261,8 +261,8 @@
           </div>
           <div id="draggable-card" class="hidden fixed top-36 right-12 p-6 bg-white rounded-lg shadow border floating-card">
             <div class="flex flex-col items-center justify-center">
-              <h2 class="text-xl font-semibold text-gray-800 mb-2 select-none">Sua pontuação atual:</h2>
-              <span id="pontuacao" class="text-4xl font-bold text-blue-500 select-none">0.00</span>
+              <h2 class="text-xl font-semibold text-gray-800 mb-2 select-none">Sua pontuação parcial:</h2>
+              <span id="pontuacao" class="text-4xl font-bold text-blue-500 select-none">0</span>
             </div>
           </div>
           <button type="submit"
@@ -273,19 +273,6 @@
       </div>
     </div>
 
-    <script>
-      // JavaScript para mostrar o popover com hover
-      const popover = document.getElementById('popover-content');
-      const popoverButton = document.getElementById('popover-button');
-
-      popoverButton.addEventListener('mouseover', () => {
-        popover.classList.remove('opacity-0', 'invisible');
-      });
-
-      popoverButton.addEventListener('mouseout', () => {
-        popover.classList.add('opacity-0', 'invisible');
-      });
-    </script>
     <script>
       // Função para criar um card flutuante arrastável
       function createDraggableCard() {
