@@ -305,13 +305,13 @@ document.addEventListener("DOMContentLoaded", function() {
             if(!requisito.documento_unico){
                 const divDocumento = document.getElementById(`divDocumento_${requisito.id}`);
                 divDocumento.addEventListener("change", function(event) {
+                    atualizarPontuacao(requisito.id);
                     if (requisito.popup){
                         adicionarNovoInput(divDocumento, event, requisito);
                     }
                     else{
                         adicionarNovoInput(divDocumento, event);
                     }
-                    atualizarPontuacao(requisito.id);
                 });
                 // adiciona a função que altera nome em requisitos não únicos
                 const InputDocumento = document.getElementById(`${requisito.id}_1`);
@@ -326,11 +326,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 // adiciona a função que altera nome em requisitos únicos
                 const InputDocumento = document.getElementById(`${requisito.id}`);
                 InputDocumento.addEventListener("change", function() {
+                    atualizarPontuacao(requisito.id);
                     atualizarNomeArquivo(requisito.id);
                     if(requisito.popup){
                         openPopup(requisito.popup.idModal, requisito.popup.idButton);
                     }
-                    atualizarPontuacao(requisito.id);
                 });
                 ativarPopover(requisito.id);
             }

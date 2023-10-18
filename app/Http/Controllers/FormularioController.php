@@ -174,9 +174,9 @@ class FormularioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(FormularioRequest $request)
+    public function store(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
         foreach ($files as $key => $value) {
@@ -223,7 +223,7 @@ class FormularioController extends Controller
             $pdf = $this->generatePdf($resposta['codigo'], $request->except(['_token']));
             Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome, $pdf));
             $this->cleanTemporaryFiles();
-            return redirect()->back()->with('success', 'Inscrição realizada com sucesso!');
+            return redirect()->back()->with('success', 'Você está quase lá! para finalizar o processo, por favor, verifique seu email e valide sua inscrição!');
         } else {
             return redirect()->back()->with('error', 'Falha no envio dos documentos!');
         }
