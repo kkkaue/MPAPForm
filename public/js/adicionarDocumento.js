@@ -30,14 +30,14 @@ export function adicionarNovoInput(divDocumento, event, requisitoId, requisito =
             const novoModal = adicionarNovoModal(requisito);
             novoInput.querySelector("input").addEventListener("change", function (event) {
                 openPopup(novoModal.novoIdModal, novoModal.novoIdButton);
-                atualizarPontuacao(requisitoId);
+                atualizarPontuacao(novoInput.querySelector("input").id, requisitoId);
                 atualizarNomeArquivo(event.target.id);
                 adicionarNovoInput(divDocumento, event, requisitoId, novoModal.novoRequisito);
             });
         } 
         else {
             novoInput.querySelector("input").addEventListener("change", function (event) {
-                atualizarPontuacao(requisitoId);
+                atualizarPontuacao(novoInput.querySelector("input").id, requisitoId);
                 atualizarNomeArquivo(event.target.id);
                 adicionarNovoInput(divDocumento, event, requisitoId);
             });

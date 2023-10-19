@@ -14,7 +14,6 @@ function obterInformacoesRequisito(requisitoId) {
 }
 
 export function atualizarPontuacao(inputId, requisitoId, variavel = null) {
-
   if (idUltimoInputAlterado === inputId) {
     return;
   }
