@@ -1,6 +1,6 @@
 import { atualizarPontuacao } from "./atualizarPontuacao.js";
 
-export function openPopup(idModal, idButton) {
+export function openPopup(inputId, idModal, idButton) {
     const modal = document.getElementById(idModal);
     const closePopupButton = document.getElementById(idButton);
 
@@ -18,7 +18,7 @@ export function openPopup(idModal, idButton) {
         const radiosPopupArray = Array.from(radiosPopup);
         const radioSelecionadoPopup = radiosPopupArray.find((radio) => radio.checked);
         const requisitoId = radioSelecionadoPopup.name.replace(/_radio\[\d+\]/g, '');
-        atualizarPontuacao(requisitoId, radioSelecionadoPopup.value);
+        atualizarPontuacao(inputId, requisitoId, radioSelecionadoPopup.value);
         modal.classList.add('invisible');
 
         // Remove o evento após ser acionado

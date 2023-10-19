@@ -20,7 +20,7 @@ export function atualizarPontuacao(inputId, requisitoId, variavel = null) {
   }
   idUltimoInputAlterado = inputId;
   console.log(`ID do elemento: ${inputId}`);
-  
+  console.log(requisitoId);
   const configuracaoRequisito = obterInformacoesRequisito(requisitoId);
   
   if (!configuracaoRequisito) {
