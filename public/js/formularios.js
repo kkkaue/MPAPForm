@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                             Nenhum arquivo selecionado
                                         </label>
                                     </div>
-                                    <input type="file" name="${requisito.id}" id="${requisito.id}" class="hidden">
+                                    <input type="file" name="${requisito.id}[]" id="${requisito.id}" class="hidden">
                                 </div>
                             </div>
                         </div>`;
@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                         Nenhum arquivo selecionado
                                     </label>
                                 </div>
-                                <input type="file" name="${requisito.id}" id="${requisito.id}" class="hidden">
+                                <input type="file" name="${requisito.id}[]" id="${requisito.id}" class="hidden">
                             </div>
                         `;
                     }
@@ -304,18 +304,26 @@ document.addEventListener("DOMContentLoaded", function() {
         cargoInfo.requisitos.forEach((requisito) => {
             if(!requisito.documento_unico){
                 const divDocumento = document.getElementById(`divDocumento_${requisito.id}`);
-                divDocumento.addEventListener("change", function(event) {
-                    atualizarPontuacao(requisito.id);
+                const inputs = divDocumento.querySelectorAll('input[type="file"]');
+                let ultimoInput;
+                    // Verifica se encontrou algum input
+                    if (inputs.length > 0) {
+                        // Seleciona o último input de tipo "file" no array de inputs
+                        ultimoInput = inputs[inputs.length - 1];
+                    }
+                ultimoInput.addEventListener("change", function(event) {
+                    atualizarPontuacao(ultimoInput.id, requisito.id);
+                    // Obtém o elemento de entrada de arquivo
                     if (requisito.popup){
-                        adicionarNovoInput(divDocumento, event, requisito);
+                        adicionarNovoInput(divDocumento, event, requisito.id, requisito);
                     }
                     else{
-                        adicionarNovoInput(divDocumento, event);
+                        adicionarNovoInput(divDocumento, event, requisito.id);
                     }
                 });
                 // adiciona a função que altera nome em requisitos não únicos
-                const InputDocumento = document.getElementById(`${requisito.id}_1`);
-                InputDocumento.addEventListener("change", function() {
+                const inputDocumento = document.getElementById(`${requisito.id}_1`);
+                inputDocumento.addEventListener("change", function() {
                     atualizarNomeArquivo(`${requisito.id}_1`);
                     if(requisito.popup){
                         openPopup(requisito.popup.idModal, requisito.popup.idButton);
@@ -323,14 +331,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 ativarPopover(requisito.id);
             } else {
-                // adiciona a função que altera nome em requisitos únicos
-                const InputDocumento = document.getElementById(`${requisito.id}`);
-                InputDocumento.addEventListener("change", function() {
-                    atualizarPontuacao(requisito.id);
+                const inputDocumento = document.getElementById(`${requisito.id}`);
+                inputDocumento.addEventListener("change", function() {
                     atualizarNomeArquivo(requisito.id);
                     if(requisito.popup){
                         openPopup(requisito.popup.idModal, requisito.popup.idButton);
+                        return;
                     }
+                    atualizarPontuacao(inputDocumento.id, requisito.id);
                 });
                 ativarPopover(requisito.id);
             }
@@ -341,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(!requisito.documento_unico){
                     const divDocumento = document.getElementById(`divDocumento_${requisito.id}`);
                     divDocumento.addEventListener("change", function(event) {
-                        adicionarNovoInput(divDocumento, event);
+                        adicionarNovoInput(divDocumento, event, requisito.id);
                         atualizarPontuacao(requisito.id);
                     });
                     // adiciona a função que altera nome em requisitos não únicos

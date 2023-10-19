@@ -3,9 +3,11 @@ import { atualizarPontuacao } from "./atualizarPontuacao.js";
 export function openPopup(idModal, idButton) {
     const modal = document.getElementById(idModal);
     const closePopupButton = document.getElementById(idButton);
+
     modal.classList.remove('invisible');
-    closePopupButton.addEventListener('click', () => {
-        //verifica se algum radio desse modal está selecionado
+
+    const closePopupHandler = () => {
+        // Verifica se algum radio desse modal está selecionado
         const radios = modal.querySelectorAll('input[type="radio"]');
         const radioSelecionado = Array.from(radios).some((radio) => radio.checked);
         if (!radioSelecionado) {
@@ -18,5 +20,11 @@ export function openPopup(idModal, idButton) {
         const requisitoId = radioSelecionadoPopup.name.replace(/_radio\[\d+\]/g, '');
         atualizarPontuacao(requisitoId, radioSelecionadoPopup.value);
         modal.classList.add('invisible');
-    });
+
+        // Remove o evento após ser acionado
+        closePopupButton.removeEventListener('click', closePopupHandler);
+    };
+
+    // Adiciona o evento de clique, mas somente uma vez
+    closePopupButton.addEventListener('click', closePopupHandler, { once: true });
 }
