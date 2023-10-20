@@ -312,21 +312,15 @@ document.addEventListener("DOMContentLoaded", function() {
                         ultimoInput = inputs[inputs.length - 1];
                     }
                 ultimoInput.addEventListener("change", function(event) {
-                    atualizarPontuacao(ultimoInput.id, requisito.id);
-                    // Obtém o elemento de entrada de arquivo
                     if (requisito.popup){
+                        atualizarNomeArquivo(`${requisito.id}_1`);
+                        openPopup(ultimoInput.id, requisito.popup.idModal, requisito.popup.idButton);
                         adicionarNovoInput(divDocumento, event, requisito.id, requisito);
                     }
                     else{
+                        atualizarNomeArquivo(`${requisito.id}_1`);
+                        atualizarPontuacao(ultimoInput.id, requisito.id);
                         adicionarNovoInput(divDocumento, event, requisito.id);
-                    }
-                });
-                // adiciona a função que altera nome em requisitos não únicos
-                const inputDocumento = document.getElementById(`${requisito.id}_1`);
-                inputDocumento.addEventListener("change", function() {
-                    atualizarNomeArquivo(`${requisito.id}_1`);
-                    if(requisito.popup){
-                        openPopup(inputDocumento.id, requisito.popup.idModal, requisito.popup.idButton);
                     }
                 });
                 ativarPopover(requisito.id);

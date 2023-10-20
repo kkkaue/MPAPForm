@@ -29,8 +29,7 @@ export function adicionarNovoInput(divDocumento, event, requisitoId, requisito =
         if (requisito) {
             const novoModal = adicionarNovoModal(requisito);
             novoInput.querySelector("input").addEventListener("change", function (event) {
-                openPopup(novoModal.novoIdModal, novoModal.novoIdButton);
-                atualizarPontuacao(novoInput.querySelector("input").id, requisitoId);
+                openPopup(novoInput.querySelector("input").id, novoModal.novoIdModal, novoModal.novoIdButton);
                 atualizarNomeArquivo(event.target.id);
                 adicionarNovoInput(divDocumento, event, requisitoId, novoModal.novoRequisito);
             });

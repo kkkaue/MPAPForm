@@ -100,11 +100,10 @@
                 <div class="w-full flex flex-col">
                     <div class="flex flex-col">
                         <h1 class="mt-1 text-xs" style="color: #303030;">
-                            Concurso
+                            Processo seletivo
                         </h1>
                         <p class="text-base font-semibold text-black">
-                            Processo seletivo Centro de Atendimento às Vítimas Nós Pertencemos do 
-                            Ministério Público do Estado do Amapá (CAVINP/MP-AP)
+                            Processo seletivo simplificado para contratação por tempo determinado de equipe multidisciplinar para o Centro de Atendimento às Vítimas (CAVINP)
                         </p>
                     </div>
                 </div>
@@ -138,7 +137,7 @@
                             Data de inscrição
                         </h1>
                         <p class="text-base font-semibold text-black">
-                            28/09/2021 - 10:00
+                            {{ $created_at->format('d/m/Y - H:i') }}
                         </p>
                     </div>
                 </div>

@@ -14,22 +14,22 @@ class CargoSeeder extends Seeder
     public function run(): void
     {
         DB::table('cargos')->insert([
-            'nome' => 'Estagiário de Direito',
+            'nome' => 'Estagiário de Direito - CAVINP',
         ]);
         DB::table('cargos')->insert([
-            'nome' => 'Assistente Administrativo',
+            'nome' => 'Assistente Administrativo - CAVINP',
         ]);
         DB::table('cargos')->insert([
-            'nome' => 'Assessor Jurídico',
+            'nome' => 'Assessor Jurídico - CAVINP',
         ]);
         DB::table('cargos')->insert([
-            'nome' => 'Assistente Social',
+            'nome' => 'Assistente Social - CAVINP',
         ]);
         DB::table('cargos')->insert([
-            'nome' => 'Pedagogo(a)',
+            'nome' => 'Pedagogo(a) - CAVINP',
         ]);
         DB::table('cargos')->insert([
-            'nome' => 'Psicólogo(a)',
+            'nome' => 'Psicólogo(a) - CAVINP',
         ]);
     }
 }

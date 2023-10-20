@@ -1,6 +1,6 @@
 import { pontuacaoConfig } from './pontuacaoConfig.js';
 
-let idUltimoInputAlterado = 0;
+let inputsAlterados = [];
 
 function obterInformacoesRequisito(requisitoId) {
   for (const requisito in pontuacaoConfig) {
@@ -14,12 +14,18 @@ function obterInformacoesRequisito(requisitoId) {
 }
 
 export function atualizarPontuacao(inputId, requisitoId, variavel = null) {
-  if (idUltimoInputAlterado === inputId) {
+  const pontuacaoFinalElement = document.getElementById('pontuacao');
+  const inputs = document.querySelectorAll(`input[name="${requisitoId}[]"]`);
+  let pontuacaoAtual = parseFloat(pontuacaoFinalElement.innerHTML);
+  let inputAlterado = { inputId: inputId, variavel: variavel, pontuacaoAntiga: 0 };
+  
+  if (inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId && inputAlterado.variavel == variavel)) {
     return;
+  } else if (inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId && inputAlterado.variavel !== variavel)){
+    pontuacaoAtual = pontuacaoAtual - inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId).pontuacaoAntiga;
   }
-  idUltimoInputAlterado = inputId;
-  console.log(`ID do elemento: ${inputId}`);
-  console.log(requisitoId);
+  inputsAlterados.push(inputAlterado);
+
   const configuracaoRequisito = obterInformacoesRequisito(requisitoId);
   
   if (!configuracaoRequisito) {
@@ -34,17 +40,12 @@ export function atualizarPontuacao(inputId, requisitoId, variavel = null) {
   }
   
   const limite = configuracaoRequisito.limite;
-  const pontuacaoFinalElement = document.getElementById('pontuacao');
-  const inputs = document.querySelectorAll(`input[name="${requisitoId}[]"]`);
 
   const pontuacaoTotalRequisito = Array.from(inputs)
   .map((input) => (input.files.length > 0 ? pontuacaoBase : 0))
   .reduce((total, value) => total + value, 0);
   
-  const pontuacaoAtual = parseFloat(pontuacaoFinalElement.innerHTML);
-  /* console.log("oi");
-  pontuacao = pontuacao + 1;
-  console.log(pontuacao); */
+  inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId).pontuacaoAntiga = pontuacaoBase;
 
   if (pontuacaoTotalRequisito > limite) {
     pontuacaoFinalElement.innerHTML = pontuacaoAtual;

@@ -91,7 +91,7 @@ class FormularioController extends Controller
         ]);
     }
 
-    public function generatePdf($codigo, $request)
+    public function generatePdf($codigo, $request, $created_at)
     {
         $html = view('pdf.inscricao', [
             'codigo' => $codigo,
@@ -104,7 +104,8 @@ class FormularioController extends Controller
                 'telefone_1' => $request['telefone_1'],
                 'curriculo_lattes' => $request['curriculo_lattes'],
                 'cargo_id' => $request['cargo_id'],
-            ]
+            ],
+            'created_at' => $created_at
         ])->render();
 
         
@@ -113,6 +114,8 @@ class FormularioController extends Controller
         // Acrescente a extensão .html para o arquivo final
         $htmlFile = $htmlTemp . '.html';
         file_put_contents($htmlFile, $html);
+
+        $pdfOutputFile = '/home/kaue/codes/mpap_form/teste2/public/output.pdf';
         
         //dd($htmlFile);
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -125,7 +128,7 @@ class FormularioController extends Controller
         
         shell_exec($command);
         
-        $tempoMaximo = 5;
+        $tempoMaximo = 20;
         
         $tempoInicial = time();
         while (!file_exists($pdfOutputFile) && (time() - $tempoInicial) < $tempoMaximo) {
@@ -174,9 +177,9 @@ class FormularioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FormularioRequest $request)
     {
-        dd($request->all());
+        //dd($request->all());
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
         foreach ($files as $key => $value) {
@@ -217,10 +220,10 @@ class FormularioController extends Controller
             $resposta = $this->handleCargo6($request);
         } else {
             return redirect()->back()->with('error', 'Falha no envio dos documentos!');
-        }
+        } 
 
         if ($resposta['status']){
-            $pdf = $this->generatePdf($resposta['codigo'], $request->except(['_token']));
+            $pdf = $this->generatePdf($resposta['codigo'], $request->except(['_token']), Formulario::where('codigo', $resposta['codigo'])->first()->created_at);
             Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome, $pdf));
             $this->cleanTemporaryFiles();
             return redirect()->back()->with('success', 'Você está quase lá! para finalizar o processo, por favor, verifique seu email e valide sua inscrição!');
