@@ -201,17 +201,17 @@
                 Cargo pretendido
               </label>
             </div>
-
+            
             <div class="sm:col-span-9">
               <select id="cargo_id" name="cargo_id"
-                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500">
-                  <option>Selecione uma opção</option>
-                  @foreach($cargos as $key=>$value)
-                  <option value="{{$key}}">{{$value}}</option>
-                  @endforeach
-              </select>
-            </div>
+              class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500">
+              <option>Selecione uma opção</option>
+              @foreach($cargos as $key=>$value)
+              <option value="{{$key}}">{{$value}}</option>
+              @endforeach
+            </select>
           </div>
+        </div>
           <div id="documentos_comprobatorios" class=" grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0 border-t last:border-transparent border-gray-200">
           </div>
           <div id="draggable-card" class="hidden fixed top-36 right-12 p-6 bg-white rounded-lg shadow border floating-card">
@@ -219,11 +219,12 @@
               <h2 class="text-xl font-semibold text-gray-800 mb-2 select-none">Sua pontuação parcial:</h2>
               <span id="pontuacao" class="text-4xl font-bold text-blue-500 select-none">0</span>
             </div>
+            <input id="pontuacao-submit" name="pontuacao" class="hidden" type="text">
           </div>
           <button type="submit"
-            class="py-3 px-4 w-full inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm">
-            Enviar inscrição
-          </button>
+          class="py-3 px-4 w-full inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm">
+          Enviar inscrição
+        </button>
         </form>
       </div>
     </div>

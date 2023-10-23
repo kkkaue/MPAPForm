@@ -28,6 +28,7 @@ return new class extends Migration
             $table->boolean('auditiva')->nullable()->default(false);
             $table->boolean('visual')->nullable()->default(false);
             $table->boolean('neurodivergencia')->nullable()->default(false);
+            $table->string('pontuacao')->nullable()->default(0);
             $table->string('codigo')->nullable();
             $table->boolean('codigo_validacao')->nullable()->default(false);
             $table->unsignedBigInteger('cargo_id');

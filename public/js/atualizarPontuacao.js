@@ -15,6 +15,7 @@ function obterInformacoesRequisito(requisitoId) {
 
 export function atualizarPontuacao(inputId, requisitoId, variavel = null) {
   const pontuacaoFinalElement = document.getElementById('pontuacao');
+  const pontuacaoFinalInput = document.getElementById('pontuacao-submit');
   const inputs = document.querySelectorAll(`input[name="${requisitoId}[]"]`);
   let pontuacaoAtual = parseFloat(pontuacaoFinalElement.innerHTML);
   let inputAlterado = { inputId: inputId, variavel: variavel, pontuacaoAntiga: 0 };
@@ -49,7 +50,9 @@ export function atualizarPontuacao(inputId, requisitoId, variavel = null) {
 
   if (pontuacaoTotalRequisito > limite) {
     pontuacaoFinalElement.innerHTML = pontuacaoAtual;
+    pontuacaoFinalInput.value = pontuacaoFinalElement.innerHTML;
   } else {
     pontuacaoFinalElement.innerHTML = pontuacaoAtual + pontuacaoBase;
+    pontuacaoFinalInput.value = pontuacaoFinalElement.innerHTML;
   }
 }
