@@ -41,19 +41,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     return `
                         <div class="sm:col-span-5 relative">
                             <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
-                                ${requisito.label} <button id="popover-button-${requisito.id}" class="ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle stroke-gray-500"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+                                ${requisito.label}
                             </label>
-                            <div id="popover-content-${requisito.id}" class="absolute -top-56 z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96">
-                                <div class="p-3 space-y-2">
-                                    <h3 class="font-semibold text-gray-900">Informações sobre Upload</h3>
-                                    <p>O formato deve ser em PDF com tamanho máximo de 5MB</p>
-                                    <h3 class="font-semibold text-gray-900">Pontuação:</h3>
-                                    <p>Revisão do curso (tempo restante):</p>
-                                    <p> - 24 meses ou mais (2 pontos)</p>
-                                    <p> - De 23 a 12 meses (1 pontos)</p>
-                                    <p> - 11 meses ou menos (0.5 pontos)</p>
-                                </div>
-                            </div>
                         </div>
                         `
                         + (requisito.popup ? 
@@ -104,19 +93,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     return `
                         <div class="sm:col-span-5 relative">
                             <label for="${requisito.id}_1" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
-                                ${requisito.label} <button id="popover-button-${requisito.id}" class="ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle stroke-gray-500"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+                                ${requisito.label}
                             </label>
-                            <div id="popover-content-${requisito.id}" class="absolute -top-56 z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96">
-                                <div class="p-3 space-y-2">
-                                    <h3 class="font-semibold text-gray-900">Informações sobre Upload</h3>
-                                    <p>O formato deve ser em PDF com tamanho máximo de 5MB</p>
-                                    <h3 class="font-semibold text-gray-900">Pontuação:</h3>
-                                    <p>Revisão do curso (tempo restante):</p>
-                                    <p> - 24 meses ou mais (2 pontos)</p>
-                                    <p> - De 23 a 12 meses (1 pontos)</p>
-                                    <p> - 11 meses ou menos (0.5 pontos)</p>
-                                </div>
-                            </div>
                         </div>
                         `
                         + (requisito.popup ? 
@@ -177,19 +155,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         return `
                             <div class="sm:col-span-5 relative">
                                 <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
-                                    ${requisito.label} <button id="popover-button-${requisito.id}" class="ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle stroke-gray-500"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+                                    ${requisito.label}
                                 </label>
-                                <div id="popover-content-${requisito.id}" class="absolute -top-56 z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96">
-                                    <div class="p-3 space-y-2">
-                                        <h3 class="font-semibold text-gray-900">Informações sobre Upload</h3>
-                                        <p>O formato deve ser em PDF com tamanho máximo de 5MB</p>
-                                        <h3 class="font-semibold text-gray-900">Pontuação:</h3>
-                                        <p>Revisão do curso (tempo restante):</p>
-                                        <p> - 24 meses ou mais (2 pontos)</p>
-                                        <p> - De 23 a 12 meses (1 pontos)</p>
-                                        <p> - 11 meses ou menos (0.5 pontos)</p>
-                                    </div>
-                                </div>
                             </div>
                             `
                             + (requisito.popup ? 
@@ -237,19 +204,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         return `
                         <div class="sm:col-span-5 relative">
                             <label for="${requisito.id}_1" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
-                                ${requisito.label} <button id="popover-button-${requisito.id}" class="ml-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle stroke-gray-500"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+                                ${requisito.label}
                             </label>
-                            <div id="popover-content-${requisito.id}" class="absolute -top-56 z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96">
-                                <div class="p-3 space-y-2">
-                                    <h3 class="font-semibold text-gray-900">Informações sobre Upload</h3>
-                                    <p>O formato deve ser em PDF com tamanho máximo de 5MB</p>
-                                    <h3 class="font-semibold text-gray-900">Pontuação:</h3>
-                                    <p>Revisão do curso (tempo restante):</p>
-                                    <p> - 24 meses ou mais (2 pontos)</p>
-                                    <p> - De 23 a 12 meses (1 pontos)</p>
-                                    <p> - 11 meses ou menos (0.5 pontos)</p>
-                                </div>
-                            </div>
                         </div>
                         `
                         + (requisito.popup ? 
@@ -323,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         adicionarNovoInput(divDocumento, event, requisito.id);
                     }
                 });
-                ativarPopover(requisito.id);
+                /* ativarPopover(requisito.id); */
             } else {
                 const inputDocumento = document.getElementById(`${requisito.id}`);
                 inputDocumento.addEventListener("change", function() {
@@ -334,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     atualizarPontuacao(inputDocumento.id, requisito.id);
                 });
-                ativarPopover(requisito.id);
+                /* ativarPopover(requisito.id); */
             }
         });
 
