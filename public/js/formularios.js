@@ -380,6 +380,7 @@ document.addEventListener("DOMContentLoaded", function() {
             [CARGOS.ESTAGIARIO_DIREITO]: {
                 requisitos: [
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true, popup: false},
+                    { label: "Certificado de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true, popup: false},
                     { label: "Comprovante de matrícula", id: "comprovante_matricula", documento_unico: true, popup:{idModal:"comprovante_matricula_modal_1", idButton:"comprovante_matricula_button_1", label: "Quanto tempo para a conclusão do curso?", options: ["24 meses ou mais", "De 23 a 12 meses", "11 meses ou menos"]}},
                     { label: "Experiências Profissionais", id: "experiencia_profissional", documento_unico: false, popup: {idModal:"experiencia_profissional_modal_1", idButton:"experiencia_profissional_button_1", label: "Quanto tempo de duração?", options: ["A partir de 06 meses", "01 a 05 meses", "Não possui"]}},
                     { label: "Trabalhos Voluntários", id: "trabalho_voluntario", documento_unico: false, popup: {idModal:"trabalho_voluntario_modal_1", idButton:"trabalho_voluntario_button_1", label: "Quanto tempo de duração?", options: ["A partir de 06 meses", "01 a 05 meses", "Não possui"]}},

@@ -66,13 +66,36 @@
 
             <div class="sm:col-span-3">
               <label for="nome_rua" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+                Genero
+              </label>
+            </div>
+
+            <div class="sm:col-span-9 flex">
+              <div class="flex items-center">
+                <div class="flex items-center mr-3">
+                    <input id="masculino" type="radio" value="masculino" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                    <label for="masculino" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Masculino</label>
+                </div>
+                <div class="flex items-center mr-3">
+                    <input id="feminino" type="radio" value="feminino" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                    <label for="feminino" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Feminino</label>
+                </div>
+                <div class="flex items-center mr-3">
+                    <input id="nao-binario" type="radio" value="nao-binario" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                    <label for="nao-binario" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Não Binário</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="nome_rua" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Endereço
               </label>
             </div>
 
             <div class="sm:col-span-9">
               <div class="sm:col-span-9">
-                <div class="sm:flex mb-2.5">
+                <div class="sm:flex">
                   <input placeholder="Av. Fab" id="nome_rua" name="nome_rua" type="text" class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500">
                   <input placeholder="123" id="numero_rua" name="numero_rua" type="text" class="py-2 px-3 pr-5 block w-1/6 border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500">
                 </div>
@@ -129,6 +152,48 @@
               <input id="curriculo_lattes" name="curriculo_lattes" type="text"
                 placeholder="Ex: lattes.cnpq.br/123456789"
                 class="py-2 px-3 block w-1/2 border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="nome_rua" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+                Você é portador de alguma deficiência (PCD)? Se sim, qual?
+              </label>
+            </div>
+
+            <div class="sm:col-span-2 mt-5">
+              <div class="flex">
+                <div id="noPCD" class="flex items-center mr-3" onclick="ocultarTiposDeficiencia()">
+                  <input id="nao" type="radio" value="false" name="possui-deficiencia" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                  <label for="nao" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Não</label>
+                </div>
+                <div id="isPCD" class="flex items-center" onclick="exibirTiposDeficiencia()">
+                  <input id="sim" type="radio" value="true" name="possui-deficiencia" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                  <label for="sim" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Sim</label>
+                </div>
+              </div>
+            </div>
+            <div class="sm:col-span-7">
+              <div id="tipo-deficiencia" class="hidden py-2 px-4 border border-gray-200 rounded-md">
+                <label for="nome_rua" class="inline-block mb-4 text-sm font-medium text-gray-500">
+                  Nos informe qual tipo de deficiência você possui:
+                </label>
+                <div class="flex items-center pl-2 mb-2">
+                  <input id="fisica-motora" type="checkbox" value="true" name="fisica-motora" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="fisica-motora" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Física/Motora</label>
+                </div>
+                <div class="flex items-center pl-2 mb-2">
+                  <input id="auditiva" type="checkbox" value="true" name="auditiva" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="auditiva" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Auditiva</label>
+                </div>
+                <div class="flex items-center pl-2 mb-2">
+                  <input id="visual" type="checkbox" value="true" name="visual" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="visual" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Visual</label>
+                </div>
+                <div class="flex items-center pl-2">
+                  <input id="neurodivergencia" type="checkbox" value="true" name="neurodivergencia" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="neurodivergencia" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Neurodivergência</label>
+                </div>
+              </div>
             </div>
 
             <div class="sm:col-span-3">
@@ -219,6 +284,29 @@
       
       // Inicialize a função quando a página carregar
       window.addEventListener('load', createDraggableCard);
+    </script>
+
+    <script>
+      /* função para exibir os tipos de deficiencia caso seja clicado no elemnto de id "isPCD" */
+      function exibirTiposDeficiencia() {
+        const isPCD = document.getElementById('isPCD');
+        const tipoDeficiencia = document.getElementById('tipo-deficiencia');
+        const sim = document.getElementById('sim');
+
+        if (sim.checked) {
+          tipoDeficiencia.classList.remove('hidden');
+        }
+      }
+
+      function ocultarTiposDeficiencia(){
+        const isPCD = document.getElementById('noPCD');
+        const tipoDeficiencia = document.getElementById('tipo-deficiencia');
+        const nao = document.getElementById('nao');
+
+        if (nao.checked) {
+          tipoDeficiencia.classList.add('hidden');
+        }
+      }
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

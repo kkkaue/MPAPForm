@@ -298,7 +298,7 @@ class FormularioController extends Controller
 
     private function handleCargo1(FormularioRequest $request) : array
     {
-        $files = ['historico_escolar', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario'];
+        $files = ['historico_escolar','certificado_ensino_medio', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario'];
         return $this->handleCargo($request, $files);
     }
 
