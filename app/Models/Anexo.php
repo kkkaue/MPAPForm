@@ -4,8 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Anexo extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    protected $table = 'anexos';
+    protected $guarded = [
+        'id',
+    ];
 }

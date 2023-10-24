@@ -35,14 +35,14 @@ function adicionarContato() {
     inputContato.classList.add("px-3");
     inputContato.classList.add("pr-11");
     inputContato.classList.add("block");
-    inputContato.classList.add("w-1/3");
+    inputContato.classList.add("w-11/12");
     inputContato.classList.add("border-gray-200");
     inputContato.classList.add("shadow-sm");
     inputContato.classList.add("rounded-lg");
     inputContato.classList.add("text-sm");
     inputContato.classList.add("focus:border-blue-500");
     inputContato.classList.add("focus:ring-blue-500");
-    inputContato.classList.add("mt-1.5");
+    inputContato.classList.add("mt-2");
 
     divContato.appendChild(inputContato);
     aplicarMascaraContato(".telefone");

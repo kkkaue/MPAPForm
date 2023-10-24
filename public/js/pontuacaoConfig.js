@@ -1,83 +1,98 @@
 export const pontuacaoConfig = {
   curriculum_vitae: {
+    certificado_ensino_medio:{
+      pontuacao: 0.00,
+      limite: 0.00,
+    },
+    diploma_graduacao:{
+      pontuacao: 0.00,
+      limite: 0.00,
+    },
+    historico_escolar:{
+      pontuacao: 0.00,
+      limite: 0.00,
+    },
     curso_curta_duracao: {
-      pontuacao: 0.25,
-      limite: 0.5,
+      pontuacao: 0.5,
+      limite: 1.50,
     },
     curso_especializacao: {
       pontuacao: 0.25,
-      limite: 0.5,
+      limite: 0.50,
     },
-    curso_mestrado: {
-      pontuacao: 0.75,
-      limite: 1.5,
+    diploma_mestrado: {
+      pontuacao: 0.50,
+      limite: 0.50,
     },
-    curso_doutorado: {
-      pontuacao: 2,
-      limite: 2.0,
+    diploma_doutorado: {
+      pontuacao: 1.00,
+      limite: 1.00,
     },
     aprovacao_concurso: {
       pontuacao: 0.25,
-      limite: 0.75,
+      limite: 0.50,
     },
   },
   experiencia_profissional: {
-    politicas_garantidoras_direitos: {
+    experiencia_sistema_politicas_garantidoras_direito: {
       pontuacao: 0.25,
-      limite: 2.75,
+      limite: 2.50,
     },
-    assesor_juridico:{
+    assessor_juridico:{
       pontuacao: 0.25,
-      limite: 2.75,
+      limite: 2.50,
     },
-    atendimento_pessoas:{
+    experiencia_metodologias_atendimento:{
       pontuacao: 0.25,
-      limite: 1.0,
+      limite: 1.50,
     },
-    libras:{
+    experiencia_libras:{
       pontuacao: 0.25,
-      limite: 1.0,
+      limite: 1.00,
     }
   },
   curriculum_vitae_estagiario:{
-    comprovante_matricula: calcularPontuacaoComprovanteMatricula,
-    experiencia_profissional:{
-      quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
-      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional
+    comprovante_matricula: {
+      calcularPontuacao: (variavel) => {
+        if (variavel == 1) {
+          return 2.00;
+        } else if (variavel == 2) {
+          return 1.00;
+        } else if (variavel == 3) {
+          return 0.50;
+        } else {
+          return 0.00;
+        }
+      },
+      limite: 2.00,
     },
-    trabalhos_voluntarios: {
-      quantidade_experiencia: calcularPontuacaoQuantidadeExperienciaProfissional,
-      duracao_experiencia: calcularPontuacaoDuracaoExperienciaProfissional
+    experiencia_profissional: {
+      calcularPontuacao: (variavel) => {
+        if (variavel == 1) {
+          return 2.00;
+        } else if (variavel == 2) {
+          return 1.00;
+        } else if (variavel == 3) {
+          return 0.00;
+        } else {
+          return 0.00;
+        }
+      },
+      limite: 4.00,
+    },
+    trabalho_voluntario: {
+      calcularPontuacao: (variavel) => {
+        if (variavel == 1) {
+          return 2.00;
+        } else if (variavel == 2) {
+          return 1.00;
+        } else if (variavel == 3) {
+          return 0.00;
+        } else {
+          return 0.00;
+        }
+      },
+      limite: 4.00,
     }
-  }
-}
-
-function calcularPontuacaoComprovanteMatricula(duracaoMatricula) {
-  if (duracaoMatricula < 1) {
-    return { pontuacao: 0.5, limite: 2 };
-  } else if (duracaoMatricula >= 1 && duracaoMatricula < 2) {
-    return { pontuacao: 1, limite: 2 };
-  } else {
-    return { pontuacao: 2, limite: 2 };
-  }
-}
-
-function calcularPontuacaoQuantidadeExperienciaProfissional(quantidadeExperienciaProfissional){
-  if (quantidadeExperienciaProfissional >= 1 && quantidadeExperienciaProfissional < 2) {
-    return { pontuacao: 1, limite: 4 };
-  } else if (quantidadeExperienciaProfissional >= 2) {
-    return { pontuacao: 2, limite: 4 };
-  } else {
-    return { pontuacao: 0, limite: 4 };
-  }
-}
-
-function calcularPontuacaoDuracaoExperienciaProfissional(duracaoExperienciaProfissional){
-  if (duracaoExperienciaProfissional >= 0.1 && duracaoExperienciaProfissional < 0.5) {
-    return { pontuacao: 1, limite: 4 };
-  } else if(duracaoExperienciaProfissional >= 0.6){
-    return { pontuacao: 2, limite: 4 };
-  } else {
-    return { pontuacao: 0, limite: 4 };
   }
 }
