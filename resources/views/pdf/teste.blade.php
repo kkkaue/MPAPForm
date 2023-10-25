@@ -16,6 +16,10 @@
         padding: 20px;
       }
 
+      .clearfix {
+        clear: both;
+      }
+
       #caixa-logo {
         padding-top: 1rem;
         padding-bottom: 1rem;
@@ -120,9 +124,117 @@
           </p>
         </div>
       </div>
-      <div class="caixa-info">c</div>
+      <div class="caixa-info">
+        <div>
+          <h1 class="campo-info">
+            Telefone
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            {{ $user['telefone_1'] }}
+          </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div id="container">
+      <div class="caixa-info">
+        <div>
+          <h1 class="campo-info">
+            Endereço
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            {{ $user['nome_rua'] }}, {{$user['numero_rua']}}
+          </p>
+        </div>
+      </div>
+      <div class="caixa-info">
+        <div>
+          <h1 class="campo-info">
+            Email
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            {{ $user['email'] }}
+          </p>
+        </div>
+      </div>
+      <div class="caixa-info">
+        <div>
+          <h1 class="campo-info">
+            Curriculo Lattes
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            {{ $user['curriculo_lattes'] }}
+          </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
     </div>
   </section>
-  <section></section>
+  
+  <section>
+    <div id="caixa-subtitulo">
+      <h2 id="subtitulo">
+        Inscrição
+      </h2>
+    </div>
+    <div id="container">
+      <div class="caixa-info" style="width: 100%">
+        <div>
+          <h1 class="campo-info">
+            Processo seletivo
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            Processo seletivo simplificado para contratação por tempo determinado de equipe multidisciplinar para o Centro de Atendimento às Vítimas (CAVINP)
+          </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div id="container">
+      <div class="caixa-info">
+        <div>
+          <h1 class="campo-info">
+            Cargo
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            @if($user['cargo_id'] == 1)
+                Estagiário de direito
+            @elseif($user['cargo_id'] == 2)
+                Assistente Administrativo
+            @elseif($user['cargo_id'] == 3)
+                Assessor Jurídico
+            @elseif($user['cargo_id'] == 4)
+                Assistente Social
+            @elseif($user['cargo_id'] == 5)
+                Psicólogo
+            @elseif($user['cargo_id'] == 6)
+                Pedagogo
+            @endif
+          </p>
+        </div>
+      </div>
+      <div class="caixa-info">
+        <div>
+          <h1 class="campo-info">
+            Data de inscrição
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            {{ $created_at->format('d/m/Y - H:i') }}
+          </p>
+        </div>
+      </div>
+      <div class="caixa-info">
+        <div>
+          <h1 class="campo-info">
+            Código de inscrição
+          </h1>
+          <p class="info" class="text-base font-semibold text-black">
+            {{ $codigo }}
+          </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </section>
 </body>
 </html>
