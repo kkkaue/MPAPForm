@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Anexo;
 use App\Models\Cargo;
 use App\Models\Formulario;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Browsershot\Browsershot;
@@ -17,6 +18,25 @@ class FormularioController extends Controller
     private $htmlFile;
     private $pdfOutputFile;
     private $htmlTemp;
+
+    public function pdfTest(){
+        $dados = [
+            'codigo' => '123456',
+            'user' => [
+                'nome' => 'Kaue de magalhães',
+                'email' => 'exemplo@exemplo.com',
+                'cpf' => '123.456.789-10',
+                "nome_rua" => "rua abc",
+                "numero_rua" => "123",
+                "telefone_1" => "(09) 90909-0909",
+                "curriculo_lattes" => "lattes.cnpq.br/123456789",
+                "cargo_id" => "1",
+            ]
+        ];
+
+        $pdf = Pdf::loadView('pdf.teste', $dados);
+        return $pdf->stream();
+    }
     public function generatePdfTest()
     {
         $html = view('pdf.inscricao', [
