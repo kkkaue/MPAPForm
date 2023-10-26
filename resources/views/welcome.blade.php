@@ -3,7 +3,7 @@
     <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <div class="bg-white rounded-xl shadow border p-4 sm:p-6">
         <div class="text-center mb-4">
-          <h2 class="text-2xl md:text-2xl font-bold text-gray-800">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
             Ficha de inscrição
           </h2>
         </div>
@@ -309,5 +309,15 @@
         }
       }
     </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script type="module" src="{{asset('js/formularios.js')}}"></script>
+    <script type="module" src="{{asset('js/mascara.js')}}"></script>
+    <script type="module" src="{{asset('js/adicionarContato.js')}}"></script>
+    <script type="module" src="{{asset('js/adicionarDocumento.js')}}"></script>
+    <script type="module" src="{{asset('js/atualizarNomeArquivo.js')}}"></script>
+    <script type="module" src="{{asset('js/resetarPontuacao.js')}}"></script>
+    <script type="module" src="{{asset('js/pop-up.js')}}"></script>
   </body>
 </x-layouts.main>
