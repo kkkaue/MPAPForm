@@ -3,7 +3,7 @@
     <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       <div class="bg-white rounded-xl shadow border p-4 sm:p-6">
         <div class="text-center mb-4">
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
+          <h2 class="text-2xl md:text-2xl font-bold text-gray-800">
             Ficha de inscrição
           </h2>
         </div>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="sm:col-span-3">
-              <label for="nome" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+              <label for="nome" class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Nome completo/CPF
               </label>
             </div>
@@ -65,7 +65,7 @@
             </div>
 
             <div class="sm:col-span-3">
-              <label for="nome_rua" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+              <label for="nome_rua" class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Genero
               </label>
             </div>
@@ -73,22 +73,22 @@
             <div class="sm:col-span-9 flex">
               <div class="flex items-center">
                 <div class="flex items-center mr-3">
-                    <input id="masculino" type="radio" value="masculino" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                    <label for="masculino" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Masculino</label>
+                    <input id="masculino" type="radio" value="masculino" name="genero" class="peer/masculino w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                    <label for="masculino" class="peer-checked/masculino:text-blue-600 ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Masculino</label>
                 </div>
                 <div class="flex items-center mr-3">
-                    <input id="feminino" type="radio" value="feminino" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                    <label for="feminino" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Feminino</label>
+                    <input id="feminino" type="radio" value="feminino" name="genero" class="peer/feminino w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                    <label for="feminino" class="peer-checked/feminino:text-blue-600 ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Feminino</label>
                 </div>
                 <div class="flex items-center mr-3">
-                    <input id="nao-binario" type="radio" value="nao-binario" name="genero" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                    <label for="nao-binario" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Não Binário</label>
+                    <input id="nao-binario" type="radio" value="nao-binario" name="genero" class="peer/naoBinario w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                    <label for="nao-binario" class="peer-checked/naoBinario:text-blue-600 ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Não Binário</label>
                 </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="nome_rua" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+              <label for="nome_rua" class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Endereço
               </label>
             </div>
@@ -103,7 +103,7 @@
             </div>
 
             <div class="sm:col-span-3">
-              <label for="email" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+              <label for="email" class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Email
               </label>
             </div>
@@ -116,7 +116,7 @@
 
             <div class="sm:col-span-3">
               <div class="inline-block">
-                <label for="telefone_1" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+                <label for="telefone_1" class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                   Telefone
                 </label>
               </div>
@@ -143,7 +143,7 @@
             </div>
 
             <div class="sm:col-span-3">
-              <label for="curriculo_lattes" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+              <label for="curriculo_lattes" class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Currículo Lattes
               </label>
             </div>
@@ -155,7 +155,7 @@
             </div>
 
             <div class="sm:col-span-3">
-              <label for="nome_rua" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+              <label class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Você é portador de alguma deficiência (PCD)? Se sim, qual?
               </label>
             </div>
@@ -163,12 +163,12 @@
             <div class="sm:col-span-2 mt-5">
               <div class="flex">
                 <div id="noPCD" class="flex items-center mr-3" onclick="ocultarTiposDeficiencia()">
-                  <input id="nao" type="radio" value="false" name="possui-deficiencia" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                  <label for="nao" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Não</label>
+                  <input id="nao" type="radio" value="false" name="possui-deficiencia" class="peer/nao w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                  <label for="nao" class="peer-checked/nao:text-blue-600 ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Não</label>
                 </div>
                 <div id="isPCD" class="flex items-center" onclick="exibirTiposDeficiencia()">
-                  <input id="sim" type="radio" value="true" name="possui-deficiencia" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                  <label for="sim" class="ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Sim</label>
+                  <input id="sim" type="radio" value="true" name="possui-deficiencia" class="peer/sim w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                  <label for="sim" class="peer-checked/sim:text-blue-600 ml-1 text-sm font-medium text-gray-500 hover:text-gray-600">Sim</label>
                 </div>
               </div>
             </div>
@@ -178,26 +178,26 @@
                   Nos informe qual tipo de deficiência você possui:
                 </label>
                 <div class="flex items-center pl-2 mb-2">
-                  <input id="fisica-motora" type="checkbox" value="true" name="fisica-motora" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                  <label for="fisica-motora" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Física/Motora</label>
+                  <input id="fisica-motora" type="checkbox" value="true" name="fisica-motora" class="peer/fisicaMotora w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="fisica-motora" class="peer-checked/fisicaMotora:text-blue-600 ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Física/Motora</label>
                 </div>
                 <div class="flex items-center pl-2 mb-2">
-                  <input id="auditiva" type="checkbox" value="true" name="auditiva" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                  <label for="auditiva" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Auditiva</label>
+                  <input id="auditiva" type="checkbox" value="true" name="auditiva" class="peer/auditiva w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="auditiva" class="peer-checked/auditiva:text-blue-600 ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Auditiva</label>
                 </div>
                 <div class="flex items-center pl-2 mb-2">
-                  <input id="visual" type="checkbox" value="true" name="visual" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                  <label for="visual" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Visual</label>
+                  <input id="visual" type="checkbox" value="true" name="visual" class="peer/visual w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="visual" class="peer-checked/visual:text-blue-600 ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Visual</label>
                 </div>
                 <div class="flex items-center pl-2">
-                  <input id="neurodivergencia" type="checkbox" value="true" name="neurodivergencia" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                  <label for="neurodivergencia" class="ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Neurodivergência</label>
+                  <input id="neurodivergencia" type="checkbox" value="true" name="neurodivergencia" class="peer/neurodivergencia w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                  <label for="neurodivergencia" class="peer-checked/neurodivergencia:text-blue-600 ml-2 text-sm font-medium text-gray-500 hover:text-gray-600">Neurodivergência</label>
                 </div>
               </div>
             </div>
 
             <div class="sm:col-span-3">
-              <label for="cargo_id" class="inline-block text-sm font-medium text-gray-500 mt-2.5">
+              <label for="cargo_id" class="after:content-['*'] after:ml-0.5 after:text-red-500 inline-block text-sm font-medium text-gray-500 mt-2.5">
                 Cargo pretendido
               </label>
             </div>
