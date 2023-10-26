@@ -57,7 +57,7 @@ class InscricaoConfirmadaEmail extends Mailable
     {
 
         return [
-            Attachment::fromData(fn () => $this->pdf, 'inscricao.pdf')
+            Attachment::fromData(fn () => $this->pdf, 'Comprovante-de-Inscricao.pdf')
                 ->withMime('application/pdf'),
         ];
     }
