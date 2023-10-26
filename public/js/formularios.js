@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if(requisito.documento_unico){
                     return `
                         <div class="sm:col-span-5 relative">
-                            <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
+                            <label for="${requisito.id}" class="after:content-['*'] after:ml-0.5 after:text-red-500 flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                 ${requisito.label}
                             </label>
                         </div>
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if(requisito.documento_unico){
                         return `
                             <div class="sm:col-span-5 relative">
-                                <label for="${requisito.id}" class="flex items-center text-sm font-medium text-gray-500 mt-2.5">
+                                <label for="${requisito.id}" class="after:content-['*'] after:ml-0.5 after:text-red-500 flex items-center text-sm font-medium text-gray-500 mt-2.5">
                                     ${requisito.label}
                                 </label>
                             </div>
