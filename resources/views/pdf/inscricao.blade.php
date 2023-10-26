@@ -198,17 +198,17 @@
           </h1>
           <p class="info" class="text-base font-semibold text-black">
             @if($user['cargo_id'] == 1)
-                Estagiário de direito
+                Estagiário de Direito - CAVINP
             @elseif($user['cargo_id'] == 2)
-                Assistente Administrativo
+                Assistente Administrativo - CAVINP
             @elseif($user['cargo_id'] == 3)
-                Assessor Jurídico
+                Assessor Jurídico - CAVINP
             @elseif($user['cargo_id'] == 4)
-                Assistente Social
+                Assistente Social - CAVINP
             @elseif($user['cargo_id'] == 5)
-                Psicólogo
+                Pedagogo(a) - CAVINP
             @elseif($user['cargo_id'] == 6)
-                Pedagogo
+                Psicólogo(a) - CAVINP
             @endif
           </p>
         </div>

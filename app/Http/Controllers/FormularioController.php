@@ -9,6 +9,7 @@ use App\Models\Anexo;
 use App\Models\Cargo;
 use App\Models\Formulario;
 use Barryvdh\DomPDF\Facade\Pdf;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Browsershot\Browsershot;
@@ -27,10 +28,11 @@ class FormularioController extends Controller
                 "telefone_1" => "(09) 90909-0909",
                 "curriculo_lattes" => "lattes.cnpq.br/1687231420914916",
                 "cargo_id" => "1",
-            ]
+            ],
+            'created_at' => new DateTime()
         ];
 
-        $pdf = Pdf::loadView('pdf.teste', $dados);
+        $pdf = Pdf::loadView('pdf.inscricao', $dados);
         return $pdf->stream();
     }
 
