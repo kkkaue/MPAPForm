@@ -50,7 +50,7 @@ class FormularioController extends Controller
             ],
             'created_at' => $created_at
         ];
-        $pdf = Pdf::loadView('pdf.inscricao', $dados);
+        $pdf = Pdf::loadView('pdf.inscricao', $dados)->output();
         
         return $pdf;
     }
