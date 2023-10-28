@@ -309,15 +309,5 @@
         }
       }
     </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script type="module" src="{{asset('js/formularios.js')}}"></script>
-    <script type="module" src="{{asset('js/mascara.js')}}"></script>
-    <script type="module" src="{{asset('js/adicionarContato.js')}}"></script>
-    <script type="module" src="{{asset('js/adicionarDocumento.js')}}"></script>
-    <script type="module" src="{{asset('js/atualizarNomeArquivo.js')}}"></script>
-    <script type="module" src="{{asset('js/resetarPontuacao.js')}}"></script>
-    <script type="module" src="{{asset('js/pop-up.js')}}"></script>
   </body>
 </x-layouts.main>

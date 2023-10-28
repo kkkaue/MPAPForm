@@ -14,9 +14,6 @@ class CargoSeeder extends Seeder
     public function run(): void
     {
         DB::table('cargos')->insert([
-            'nome' => 'Estagiário de Direito - CAVINP',
-        ]);
-        DB::table('cargos')->insert([
             'nome' => 'Assistente Administrativo - CAVINP',
         ]);
         DB::table('cargos')->insert([

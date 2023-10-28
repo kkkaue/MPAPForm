@@ -50,49 +50,5 @@ export const pontuacaoConfig = {
       pontuacao: 0.25,
       limite: 1.00,
     }
-  },
-  curriculum_vitae_estagiario:{
-    comprovante_matricula: {
-      calcularPontuacao: (variavel) => {
-        if (variavel == 1) {
-          return 2.00;
-        } else if (variavel == 2) {
-          return 1.00;
-        } else if (variavel == 3) {
-          return 0.50;
-        } else {
-          return 0.00;
-        }
-      },
-      limite: 2.00,
-    },
-    experiencia_profissional: {
-      calcularPontuacao: (variavel) => {
-        if (variavel == 1) {
-          return 2.00;
-        } else if (variavel == 2) {
-          return 1.00;
-        } else if (variavel == 3) {
-          return 0.00;
-        } else {
-          return 0.00;
-        }
-      },
-      limite: 4.00,
-    },
-    trabalho_voluntario: {
-      calcularPontuacao: (variavel) => {
-        if (variavel == 1) {
-          return 2.00;
-        } else if (variavel == 2) {
-          return 1.00;
-        } else if (variavel == 3) {
-          return 0.00;
-        } else {
-          return 0.00;
-        }
-      },
-      limite: 4.00,
-    }
   }
 }

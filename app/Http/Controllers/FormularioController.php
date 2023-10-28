@@ -104,9 +104,8 @@ class FormularioController extends Controller
         
         //verifique o valor de cargo_id
         $cargoId = $request->cargo_id;
-        if($cargoId == 1){
-            $requestExceptRadioInputs = new FormularioRequest($request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
-            $resposta = $this->handleCargo1($requestExceptRadioInputs);
+        if ($cargoId == 1){
+            $resposta = $this->handleCargo1($request);
         } elseif ($cargoId == 2){
             $resposta = $this->handleCargo2($request);
         } elseif ($cargoId == 3){
@@ -115,8 +114,6 @@ class FormularioController extends Controller
             $resposta = $this->handleCargo4($request);
         } elseif ($cargoId == 5){
             $resposta = $this->handleCargo5($request);
-        } elseif ($cargoId == 6){
-            $resposta = $this->handleCargo6($request);
         } else {
             return redirect()->back()->with('error', 'Falha no envio dos documentos!');
         } 
@@ -192,21 +189,20 @@ class FormularioController extends Controller
         }
 
         return ['status' => true, 'codigo' => $codigo];
-    }    
-
-    private function handleCargo1(FormularioRequest $request) : array
-    {
-        $files = ['historico_escolar','certificado_ensino_medio', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario'];
-        return $this->handleCargo($request, $files);
     }
 
-    private function handleCargo2(FormularioRequest $request){
+    private function handleCargo1(FormularioRequest $request){
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
 
-    private function handleCargo3(FormularioRequest $request){
+    private function handleCargo2(FormularioRequest $request){
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'assessor_juridico', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
+        return $this->handleCargo($request, $files);
+    }
+
+    private function handleCargo3(FormularioRequest $request){
+        $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
 
@@ -216,11 +212,6 @@ class FormularioController extends Controller
     }
 
     private function handleCargo5(FormularioRequest $request){
-        $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
-        return $this->handleCargo($request, $files);
-    }
-
-    private function handleCargo6(FormularioRequest $request){
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
