@@ -250,26 +250,4 @@ class FormularioController extends Controller
             'label' => $label
             ]);
     }
-
-    function getNodeAndNpmPaths() {
-        $nodeBinary = '';
-        $npmBinary = '';
-    
-        if ($this->isWindows()) {
-            $nodeBinary = 'C:\\Program Files\\nodejs\\node.exe';
-            $npmBinary = 'C:\Users\kaue.brandao\AppData\Roaming\npm';
-        } else {
-            $nodeBinary = '/home/kaue/.nvm/versions/node/v18.17.0/bin/node';
-            $npmBinary = '/home/kaue/.nvm/versions/node/v18.17.0/bin/npm';
-        }
-    
-        return [
-            'node' => $nodeBinary,
-            'npm' => $npmBinary
-        ];
-    }
-    
-    function isWindows() {
-        return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
-    }
 }
