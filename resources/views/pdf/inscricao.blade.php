@@ -89,7 +89,7 @@
 </head>
 <body>
   <div id="caixa-logo">
-    <img id="logo" src="{{ storage_path('app/public/logo-mpap.png') }}" alt="Logo">
+    <img id="logo" src="https://www.mpap.mp.br/templates/portal/images/logo-mpap.png" alt="Logo">
   </div>
   <div id="caixa-titulo">
     <h1 id="titulo">
@@ -198,14 +198,16 @@
           </h1>
           <p class="info" class="text-base font-semibold text-black">
             @if($user['cargo_id'] == 1)
-                Assistente Administrativo - CAVINP
+                Estagiário de Direito - CAVINP
             @elseif($user['cargo_id'] == 2)
-                Assessor Jurídico - CAVINP
+                Assistente Administrativo - CAVINP
             @elseif($user['cargo_id'] == 3)
-                Assistente Social - CAVINP
+                Assessor Jurídico - CAVINP
             @elseif($user['cargo_id'] == 4)
-                Pedagogo(a) - CAVINP
+                Assistente Social - CAVINP
             @elseif($user['cargo_id'] == 5)
+                Pedagogo(a) - CAVINP
+            @elseif($user['cargo_id'] == 6)
                 Psicólogo(a) - CAVINP
             @endif
           </p>
