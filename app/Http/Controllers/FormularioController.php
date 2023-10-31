@@ -61,7 +61,7 @@ class FormularioController extends Controller
      */
     public function index()
     {
-        
+        return view('welcome');
     }
 
     /**
@@ -70,7 +70,7 @@ class FormularioController extends Controller
     public function create()
     {
         $cargos = Cargo::pluck('nome', 'id')->toArray();
-        return view('welcome', compact('cargos'));
+        return view('forms.index', compact('cargos'));
     }
 
     /**

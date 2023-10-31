@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FormularioController::class, 'create']);
+Route::get('/', [FormularioController::class, 'index']);
+Route::get('/inscricao', [FormularioController::class, 'create']);
 Route::post('/form/store', [FormularioController::class, 'store'])->name('form.store');
 Route::get('/validar/{codigo}', [FormularioController::class, 'validar']);
 Route::get('/pdf', [FormularioController::class, 'pdfTest']);
