@@ -13,12 +13,16 @@ export const pontuacaoConfig = {
       limite: 0.00,
     },
     curso_curta_duracao: {
-      pontuacao: 0.5,
-      limite: 1.50,
+      pontuacao: 0.25,
+      limite: 0.75,
+    },
+    curso_formacao_praticas_restaurativas:{
+      pontuacao: 0.25,
+      limite: 0.75,
     },
     curso_especializacao: {
-      pontuacao: 0.25,
-      limite: 0.50,
+      pontuacao: 0.50,
+      limite: 1.50,
     },
     diploma_mestrado: {
       pontuacao: 0.50,

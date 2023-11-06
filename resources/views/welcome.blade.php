@@ -94,13 +94,13 @@
                                           <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">03</th>
                                           <td class="px-4 py-3">Curso	de	especialização (lato sensu), com carga horária mínima de 360 horas/aula na especialidade a que concorre, devidamente reconhecido pelo Ministério da Educação.</td>
                                           <td class="px-4 py-3">Será computado 0,5 ponto por curso de especialização (lato sensu).</td>
-                                          <td class="px-4 py-3">1,5</td>
+                                          <td class="px-4 py-3">1,50</td>
                                       </tr>
                                       <tr class="border-b">
                                           <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">04</th>
                                           <td class="px-4 py-3">Diploma de conclusão de Curso de mestrado (stricto sensu), na especialidade em que concorre, devidamente reconhecido pelo Ministério da Educação.</td>
                                           <td class="px-4 py-3">Será computado 0,5 ponto por curso de mestrado (stricto sensu).</td>
-                                          <td class="px-4 py-3">0,5</td>
+                                          <td class="px-4 py-3">0,50</td>
                                       </tr>
                                       <tr class="border-b">
                                           <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">05</th>
@@ -113,7 +113,7 @@
                                           <td class="px-4 py-3">Aprovação em concurso público de provas e títulos, na especialidade em que concorre</td>
                                           <td class="px-4 py-3">Serão computados 0,25 pontos por aprovação em concurso.
                                           </td>
-                                          <td class="px-4 py-3">0,5</td>
+                                          <td class="px-4 py-3">0,50</td>
                                       </tr>
                                       <tr class="border-b">
                                         <tr>
@@ -127,13 +127,13 @@
                                             
                                             </td>
                                           <td class="px-4 py-3">Será computado 0,25 ponto por semestre de experiência.</td>
-                                          <td class="px-4 py-3">2,5</td>
+                                          <td class="px-4 py-3">2,50</td>
                                       </tr>
                                       <tr class="border-b">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">08</th>
                                         <td class="px-4 py-3">Experiência na elaboração, coordenação e/ou execução de atividades e/ou pesquisas no âmbito das metodologias de atendimento à pessoa.</td>
                                         <td class="px-4 py-3">Será computado 0,25 ponto por semestre de experiência.</td>
-                                        <td class="px-4 py-3">1,5</td>
+                                        <td class="px-4 py-3">1,50</td>
                                     </tr>
                                     <tr class="border-b">
                                       <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">09</th>
