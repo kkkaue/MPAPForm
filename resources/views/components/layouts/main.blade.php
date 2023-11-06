@@ -25,4 +25,5 @@
   <script type="module" src="{{asset('js/adicionarDocumento.js')}}"></script>
   <script type="module" src="{{asset('js/atualizarNomeArquivo.js')}}"></script>
   <script type="module" src="{{asset('js/resetarPontuacao.js')}}"></script>
+  <script type="module" src="{{asset('js/pop-up.js')}}"></script>
 </html>

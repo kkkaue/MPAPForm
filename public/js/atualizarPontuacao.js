@@ -13,15 +13,17 @@ function obterInformacoesRequisito(requisitoId) {
   return null;
 }
 
-export function atualizarPontuacao(inputId, requisitoId) {
+export function atualizarPontuacao(inputId, requisitoId, variavel = null) {
   const pontuacaoFinalElement = document.getElementById('pontuacao');
   const pontuacaoFinalInput = document.getElementById('pontuacao-submit');
   const inputs = document.querySelectorAll(`input[name="${requisitoId}[]"]`);
   let pontuacaoAtual = parseFloat(pontuacaoFinalElement.innerHTML);
-  let inputAlterado = { inputId: inputId, pontuacaoAntiga: 0 };
+  let inputAlterado = { inputId: inputId, variavel: variavel, pontuacaoAntiga: 0 };
   
-  if (inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId)) {
+  if (inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId && inputAlterado.variavel == variavel)) {
     return;
+  } else if (inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId && inputAlterado.variavel !== variavel)){
+    pontuacaoAtual = pontuacaoAtual - inputsAlterados.find(inputAlterado => inputAlterado.inputId === inputId).pontuacaoAntiga;
   }
   inputsAlterados.push(inputAlterado);
 
@@ -33,6 +35,10 @@ export function atualizarPontuacao(inputId, requisitoId) {
   }
   
   let pontuacaoBase = configuracaoRequisito.pontuacao || 0;
+  
+  if (configuracaoRequisito.calcularPontuacao) {
+    pontuacaoBase = configuracaoRequisito.calcularPontuacao(variavel);
+  }
   
   const limite = configuracaoRequisito.limite;
 
