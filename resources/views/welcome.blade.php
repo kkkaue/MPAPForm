@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-  <section class="bg-white ">
+  <section class="bg-white">
     <div class="container py-10 max-w-7xl w-full px-20">
         <h1 class="border-l-[5px] pl-[10px] text-xl font-semibold text-gray-800 capitalize lg:text-2xl" style="border-color: #124676">Evento em destaque</h1>
 
@@ -157,7 +157,7 @@
         </div>
     </div>
   </section>
-  <section aria-label="Related article" class="py-16 antialiased bg-white max-w-7xl w-full">
+  {{-- <section aria-label="Related article" class="py-16 antialiased bg-white max-w-7xl w-full">
     <div class="py-4 max-w-7xl w-full px-20">
       <h1 class="border-l-[5px] pl-[10px] text-xl mb-8 font-semibold text-gray-800 capitalize lg:text-2xl" style="border-color: #124676">Outros Eventos</h1>
       <div class="grid gap-4 grid-cols-3 px-8">
@@ -221,7 +221,7 @@
         </article>
       </div>
     </div>
-  </section>
+  </section> --}}
 @endsection
 
 @section('footer')

@@ -17,6 +17,15 @@
   </head>
   <body>
     <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+      <div class="w-40 mx-auto">
+        <a href="https://www.mpap.mp.br/">
+          <img id="logo" src="https://www.mpap.mp.br/templates/portal/images/logo-mpap.png" alt="Logo">
+        </a>
+      </div>
+      <a href="https://eventos.mpap.mp.br" class="mb-2 text-blue-600 hover:underline hover: flex gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-undo-2"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/></svg>
+        Página do Evento
+      </a>
       <div class="bg-white rounded-xl shadow border p-4 sm:p-6">
         <div class="text-center mb-4">
           <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
@@ -60,6 +69,23 @@
             </div>
           </div>
           @endif
+
+          {{-- <div id="popup" class="fixed inset-0 hidden items-center justify-center z-50">
+            <div class="absolute w-full h-full bg-gray-900 opacity-50"></div>
+            <div class="bg-white flex flex-col items-center justify-center py-10 px-12 w-full md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+              <div class="text-center">
+                <!-- Título do pop-up -->
+                <div class="text-2xl font-semibold">Opa! Verificamos que você já possui cadastro</div>
+                <div class="mt-2 text-gray-600">De acordo com o seu cpf, sua inscrição já foi realizada, deseja atualizar seus dados pessoais?</div>
+              </div>
+              <!-- Botão de fechar o pop-up -->
+              <div class="modal-footer p-3 pb-0">
+                <button id="" class="bg-blue-500 hover:bg-blue-700 text-white rounded px-4 py-2">atualizar!</button>
+                <button id="" class="bg-red-500 hover:bg-red-700 text-white rounded px-4 py-2">não quero atualizar.</button>
+              </div>
+            </div>
+          </div> --}}
+
           <div class="grid sm:grid-cols-12 gap-2 sm:gap-4 py-8 first:pt-0 last:pb-0">
             <div class="sm:col-span-12">
               <h2 class="text-lg font-semibold text-gray-800">
@@ -146,7 +172,7 @@
               </div>
 
               <p id="botaoAdicionarContato" class="mt-3">
-                <button type="button" class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
+                <button type="button" class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-1 hover:underline font-medium">
                   <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  
                     viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -326,32 +352,7 @@
       }
     </script>
 
-    <script>
-      $(document).ready(function(){
-        $('#formulario').submit(function(e){
-          e.preventDefault();
-
-          var cpf = $('#cpf').val();
-
-          $.ajax({
-            url: "/verificar-cpf",
-            method: "POST",
-            data: {
-              _token: "{{ csrf_token() }}",
-              cpf: cpf
-            },
-            success: function(response){
-              if(response === 'true'){
-                // testar se está funcionando
-                console.log('CPF já cadastrado!');
-              }else{
-                console.log('CPF não cadastrado!');
-              }
-            }
-          })
-        })
-      })
-    </script>
+    
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
@@ -362,4 +363,30 @@
   <script type="module" src="{{asset('js/atualizarNomeArquivo.js')}}"></script>
   <script type="module" src="{{asset('js/resetarPontuacao.js')}}"></script>
   <script type="module" src="{{asset('js/pop-up.js')}}"></script>
+  {{-- <script>
+    $(document).ready(function(){
+      $('#formulario').submit(function(e){
+        e.preventDefault();
+
+        var cpf = $('#cpf').val();
+
+        $.ajax({
+          url: "/verificar-cpf",
+          method: "POST",
+          data: {
+            _token: "{{ csrf_token() }}",
+            cpf: cpf
+          },
+          success: function(response){
+            if(response === 'true'){
+              // testar se está funcionando
+              console.log('CPF já cadastrado!');
+            }else{
+              console.log('CPF não cadastrado!');
+            }
+          }
+        })
+      })
+    })
+  </script> --}}
 </html>

@@ -18,7 +18,7 @@
     <body class="bg-orange-100">
         <div class="min-h-screen flex flex-col justify-center items-center">
             <!-- Logo -->
-            <div class="h-40 w-40 mt-8">
+            <div class="w-40 my-8">
                 <img class="logo" src="https://www.mpap.mp.br/templates/portal/images/logo-mpap.png">
             </div>
         
@@ -43,7 +43,7 @@
         
             <!-- Footer -->
             <footer class="text-gray-500 text-sm mb-8">
-                &copy; 2023 Sua Empresa. Todos os direitos reservados.
+                &copy; 2023 Ministério Público do Estado do Amapá. Rua do Araxá, S/N - Bairro do Araxá - Macapá/AP - 68.903-883.
             </footer>
         </div>
     </body>
