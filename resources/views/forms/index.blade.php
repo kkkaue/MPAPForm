@@ -325,6 +325,33 @@
         }
       }
     </script>
+
+    <script>
+      $(document).ready(function(){
+        $('#formulario').submit(function(e){
+          e.preventDefault();
+
+          var cpf = $('#cpf').val();
+
+          $.ajax({
+            url: "/verificar-cpf",
+            method: "POST",
+            data: {
+              _token: "{{ csrf_token() }}",
+              cpf: cpf
+            },
+            success: function(response){
+              if(response === 'true'){
+                // testar se está funcionando
+                console.log('CPF já cadastrado!');
+              }else{
+                console.log('CPF não cadastrado!');
+              }
+            }
+          })
+        })
+      })
+    </script>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>

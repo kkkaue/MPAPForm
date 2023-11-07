@@ -55,6 +55,15 @@ class FormularioController extends Controller
         
         return $pdf;
     }
+
+    public function verificarCPF(Request $request)
+    {
+        $cpf = $request->cpf;
+
+        $cpfCadastrado = Formulario::where('cpf', $cpf)->first();
+
+        return $cpfCadastrado ? response('true') : response('false');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -78,6 +87,7 @@ class FormularioController extends Controller
     public function store(FormularioRequest $request)
     {
         //dd($request->all());
+
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
         foreach ($files as $key => $value) {

@@ -19,7 +19,7 @@
           <div class="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
             <p class="text-sm text-blue-600 uppercase">Processo seletivo</p>
 
-            <a href="#" class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline">
+            <a href="{{route('form.create')}}" class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline">
               Processo Seletivo CAVINP/MP-AP: Vagas para Equipe Multidisciplinar
             </a>
 
@@ -157,18 +157,18 @@
         </div>
     </div>
   </section>
-  <section aria-label="Related article" class="py-16 antialiased bg-white">
-    <div class="py-4 max-w-7xl w-full px-20 ">
+  <section aria-label="Related article" class="py-16 antialiased bg-white max-w-7xl w-full">
+    <div class="py-4 max-w-7xl w-full px-20">
       <h1 class="border-l-[5px] pl-[10px] text-xl mb-8 font-semibold text-gray-800 capitalize lg:text-2xl" style="border-color: #124676">Outros Eventos</h1>
-      <div class="grid gap-4 grid-cols-3">
-        <article class="mx-auto max-w-[24rem] rounded-md border border-gray-200 bg-white shadow-md p-4 animate-pulse">
+      <div class="grid gap-4 grid-cols-3 px-8">
+        <article class="px-auto max-w-[24rem] rounded-md border border-gray-200 bg-white shadow-md p-4 animate-pulse">
           <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded">
             <svg class="w-10 h-10 text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                 <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
                 <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
             </svg>
           </div>
-          <div class="h-2.5 bg-gray-200 rounded-full w-80 mb-4"></div>
+          <div class="h-2.5 bg-gray-200 rounded-full mb-4"></div>
           <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <div class="h-2 bg-gray-200 rounded-full"></div>
@@ -180,7 +180,7 @@
           </div>
           <span class="sr-only">Loading...</span>
         </article>
-        <article class="mx-auto max-w-[24rem] rounded-md border border-gray-200 bg-white shadow-md p-4 animate-pulse">
+        <article class="px-auto max-w-[24rem] rounded-md border border-gray-200 bg-white shadow-md p-4 animate-pulse">
           <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded">
             <svg class="w-10 h-10 text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                 <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
@@ -188,7 +188,7 @@
             </svg>
           </div>
           <div class="text-center  text-gray-400 mb-2.5">Mais eventos em breve</div>
-          <div class="h-2.5 bg-gray-200 rounded-full w-80 mb-4"></div>
+          <div class="h-2.5 bg-gray-200 rounded-full mb-4"></div>
           <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <div class="h-2 bg-gray-200 rounded-full"></div>
@@ -200,14 +200,14 @@
           </div>
           <span class="sr-only">Loading...</span>
         </article>
-        <article class="mx-auto max-w-[24rem] rounded-md border border-gray-200 bg-white shadow-md p-4 animate-pulse">
+        <article class="px-auto max-w-[24rem] rounded-md border border-gray-200 bg-white shadow-md p-4 animate-pulse">
           <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded">
             <svg class="w-10 h-10 text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
                 <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
                 <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
             </svg>
           </div>
-          <div class="h-2.5 bg-gray-200 rounded-full w-80 mb-4"></div>
+          <div class="h-2.5 bg-gray-200 rounded-full mb-4"></div>
           <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
           <div class="h-2 bg-gray-200 rounded-full"></div>
