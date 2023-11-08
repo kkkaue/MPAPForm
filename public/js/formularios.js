@@ -6,11 +6,11 @@ import { ativarPopover } from "./popover.js";
 
 const CARGOS = {
     /* ESTAGIARIO_DIREITO: 1, */
-    ASSISTENTE_ADMINISTRATIVO: 1,
-    ASSESSOR_JURIDICO: 2,
-    ASSISTENTE_SOCIAL: 3,
-    PEDAGOGO: 4,
-    PSICOLOGO: 5,
+    ASSISTENTE_ADMINISTRATIVO: 2,
+    ASSESSOR_JURIDICO: 3,
+    ASSISTENTE_SOCIAL:4,
+    PEDAGOGO: 5,
+    PSICOLOGO: 6,
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
     cargoSelect.addEventListener("change", function() {
         const selectedCargo = cargoSelect.value;
         const cargoInfo = getCargoInfo(selectedCargo);
+
+        console.log(cargoInfo);
 
         // cria dinamicamente os inputs de documentos comprobatórios
         documentosDiv.innerHTML = `
