@@ -363,7 +363,6 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             [CARGOS.ASSESSOR_JURIDICO]: {
                 requisitos: [
-                    { label: "Certificado de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de Graduação", id: "diploma_graduacao", documento_unico: true },
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true },
                     { label: "Cursos de curta duração - min 40h", id: "curso_curta_duracao", documento_unico: false },
@@ -381,7 +380,6 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             [CARGOS.ASSISTENTE_SOCIAL]: {
                 requisitos: [
-                    { label: "Certificado de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de Graduação", id: "diploma_graduacao", documento_unico: true },
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true },
                     { label: "Cursos de curta duração - min 40h", id: "curso_curta_duracao", documento_unico: false },
@@ -400,7 +398,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             [CARGOS.PEDAGOGO]:{
                 requisitos: [
-                    { label: "Certificado de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de Graduação", id: "diploma_graduacao", documento_unico: true },
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true },
                     { label: "Cursos de curta duração - min 40h", id: "curso_curta_duracao", documento_unico: false },
@@ -418,7 +415,6 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             [CARGOS.PSICOLOGO]:{
                 requisitos: [
-                    { label: "Certificado de Ensino Médio", id: "certificado_ensino_medio", documento_unico: true },
                     { label: "Diploma de Graduação", id: "diploma_graduacao", documento_unico: true },
                     { label: "Histórico escolar", id: "historico_escolar", documento_unico: true },
                     { label: "Cursos de curta duração - min 40h", id: "curso_curta_duracao", documento_unico: false },
