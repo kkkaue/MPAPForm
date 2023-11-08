@@ -20,3 +20,7 @@ Route::post('/form/store', [FormularioController::class, 'store'])->name('form.s
 Route::post('/verificar-cpf', [FormularioController::class, 'verificarCPF']);
 Route::get('/validar/{codigo}', [FormularioController::class, 'validar']);
 Route::get('/pdf', [FormularioController::class, 'pdfTest']);
+
+/* Route::get('/teste', function () {
+    return view('forms.nao-verificado');
+}); */

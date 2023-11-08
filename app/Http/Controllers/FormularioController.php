@@ -146,9 +146,9 @@ class FormularioController extends Controller
         $dado = Formulario::where('codigo', $codigo)->first();
         if ($dado){
             $dado->update(['codigo_validacao' => true]);
-            echo "Inscrição validada com sucesso!";
+            return view('forms.verificado');
         } else {
-            echo "cadastro não encontrado";
+            return view('forms.nao-verificado');
         }
     }
 
