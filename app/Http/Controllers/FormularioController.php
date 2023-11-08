@@ -118,15 +118,15 @@ class FormularioController extends Controller
             $requestExceptRadioInputs = new FormularioRequest($request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
             $resposta = $this->handleCargo1($requestExceptRadioInputs);
         } */ 
-        if ($cargoId == 1){
+        if ($cargoId == 2){
             $resposta = $this->handleCargo2($request);
-        } elseif ($cargoId == 2){
-            $resposta = $this->handleCargo3($request);
         } elseif ($cargoId == 3){
-            $resposta = $this->handleCargo4($request);
+            $resposta = $this->handleCargo3($request);
         } elseif ($cargoId == 4){
-            $resposta = $this->handleCargo5($request);
+            $resposta = $this->handleCargo4($request);
         } elseif ($cargoId == 5){
+            $resposta = $this->handleCargo5($request);
+        } elseif ($cargoId == 6){
             $resposta = $this->handleCargo6($request);
         } else {
             return redirect()->back()->with('error', 'Falha no envio dos documentos!');
