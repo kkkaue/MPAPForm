@@ -21,6 +21,7 @@ Route::post('/form/store', [FormularioController::class, 'store'])->name('form.s
 Route::get('/gerar-pdf/{codigo}', [FormularioController::class, 'gerarPDF']);
 Route::post('/verificar-cpf', [FormularioController::class, 'verificarCPF']);
 /* Route::get('/teste2', [FormularioController::class, 'reenvioEmail']); */
+Route::get('/reenvio/valida/{codigo}', [FormularioController::class, 'reenvioEmailValida']); 
 Route::get('/validar/{codigo}', [FormularioController::class, 'validar']);
 Route::get('/pdf', [FormularioController::class, 'pdfTest']);
 

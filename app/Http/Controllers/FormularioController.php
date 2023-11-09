@@ -137,8 +137,15 @@ class FormularioController extends Controller
     {
         //dd($request->all());
         $verifica = Formulario::where('cpf', $request->cpf)->first();
+        
 
         if ($verifica != null) {
+
+            if($verifica->codigo_validacao == false){
+
+                return redirect()->back()->with('valide', 'Cadastro já efetuado. Favor verificar a sua caixa de e-mail, a confirmação pode estar na caixa de spam. Caso não encontre clique a baixo para reenviar a solicitação de confirmação.')
+                ->withInput()->with('codigo', $verifica->codigo);
+            }
 
             //$comprovante = $this->generatePdf($verifica->codigo, $verifica, $verifica->created_at);
             return redirect()->back()->with('erro-cpf', 'CPF já cadastrado! Clique aqui para visualizar o seu comprovante.')
@@ -222,6 +229,18 @@ class FormularioController extends Controller
             Mail::to($l->email)->send(new InscricaoConfirmadaEmail($l->codigo, $l->nome, $pdf, $reenvio));
 
         }
+    }
+
+    public function reenvioEmailValida($codigo)
+    {
+        
+        $dados = Formulario::where('codigo', $codigo)->first();
+        
+         
+            $pdf = $this->gerarPDFReenvio($dados->codigo);
+            Mail::to($dados->email)->send(new InscricaoConfirmadaEmail($dados->codigo, $dados->nome, $pdf));
+
+            return redirect()->back()->with('success', 'E-mail enviado com sucesso!');
     }
 
     /**

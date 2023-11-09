@@ -61,6 +61,22 @@
               </div>
             </div>
           @endif
+          @if (Session::has('valide'))
+          <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              @php
+                  $codigo = \Session::get('codigo');
+              @endphp
+              <span class="font-medium">Atenção!</span> {{Session::get('valide')}}
+              <a href="{{url('/reenvio/valida/'.$codigo)}}" id="enviar" onclick="enviando()" class="text-blue-600 hover:underline">Reenviar E-mail</a>
+              <span id="enviando" class="text-blue-600 hidden">ENVIANDO E-MAIL...</span>
+            </div>
+          </div>
+          @endif
           @if (Session::has('erro-cpf'))
           <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -290,6 +306,10 @@
     </div>
 
     <script>
+      function enviando(){
+        $('#enviar').hide();
+        $('#enviando').show();
+      }
       // Função para criar um card flutuante arrastável
       function createDraggableCard() {
         // Crie um card flutuante
