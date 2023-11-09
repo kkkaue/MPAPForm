@@ -13,7 +13,8 @@
 
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
   </head>
   <body>
     <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -35,6 +36,7 @@
         <form id="formulario" action="{{route('form.store')}}" method="post" enctype="multipart/form-data">
           @csrf
           @if ( $errors->any() )
+          
             @foreach ( $errors->all() as $error )
               <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
                 <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -42,7 +44,8 @@
                 </svg>
                 <span class="sr-only">Info</span>
                 <div>
-                  <span class="font-medium">Erro!</span> {{$error}}
+                  <span class="font-medium">Erro!</span> {{$error}} <br>
+                  
                 </div>
               </div>
             @endforeach
@@ -65,7 +68,11 @@
             </svg>
             <span class="sr-only">Info</span>
             <div>
-              <span class="font-medium">Erro!</span> {{Session::get('error')}}
+              @php
+                  $codigo = \Session::get('codigo');
+              @endphp
+              <span class="font-medium">Erro2!</span> {{Session::get('error')}}
+              <a href="{{url('gerar-pdf/'.$codigo)}}" class="text-blue-600 hover:underline" target="_blank">Comprovante de Inscrição</a>
             </div>
           </div>
           @endif
@@ -352,7 +359,7 @@
       }
     </script>
 
-    
+  @livewireScripts
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>

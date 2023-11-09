@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FormularioController;
+use App\Livewire\Formulario;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FormularioController::class, 'index']);
 Route::get('/inscricao', [FormularioController::class, 'create'])->name('form.create');
 Route::post('/form/store', [FormularioController::class, 'store'])->name('form.store');
+Route::get('/gerar-pdf/{codigo}', [FormularioController::class, 'gerarPDF']);
 Route::post('/verificar-cpf', [FormularioController::class, 'verificarCPF']);
 Route::get('/validar/{codigo}', [FormularioController::class, 'validar']);
 Route::get('/pdf', [FormularioController::class, 'pdfTest']);
 
-/* Route::get('/teste', function () {
-    return view('forms.nao-verificado');
-}); */
+/* Route::get('inscricao', Formulario::class); */
+
+Route::get('/teste', function () {
+
+    return view('mail.inscricao');
+});

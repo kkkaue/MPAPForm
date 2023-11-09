@@ -56,6 +56,28 @@ class FormularioController extends Controller
         return $pdf;
     }
 
+    public function gerarPDF($codigo){
+
+        $a = Formulario::where('codigo', $codigo)->first();
+        $dados = [
+            'codigo' => $codigo,
+            'user' => [
+                'nome' => $a['nome'],
+                'email' => $a['email'],
+                'cpf' => $a['cpf'],
+                'nome_rua' => $a['nome_rua'],
+                'numero_rua' => $a['numero_rua'],
+                'telefone_1' => $a['telefone_1'],
+                'curriculo_lattes' => $a['curriculo_lattes'],
+                'cargo_id' => $a['cargo_id'],
+            ],
+            'created_at' => $a['created_at']
+        ];
+        $pdf = Pdf::loadView('pdf.inscricao', $dados);
+        
+        return $pdf->stream();
+    }
+
     public function verificarCPF(Request $request)
     {
         $cpf = $request->cpf;
@@ -87,6 +109,14 @@ class FormularioController extends Controller
     public function store(FormularioRequest $request)
     {
         //dd($request->all());
+        $verifica = Formulario::where('cpf', $request->cpf)->first();
+
+        if($verifica != null){
+
+            //$comprovante = $this->generatePdf($verifica->codigo, $verifica, $verifica->created_at);
+            return redirect()->back()->with('error', 'CPF já cadastrado! Clique aqui para visualizar o seu comprovante.')
+            ->withInput()->with('codigo', $verifica->codigo);
+        }
 
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
@@ -150,6 +180,11 @@ class FormularioController extends Controller
         } else {
             return view('forms.nao-verificado');
         }
+    }
+
+    public function reenvioEmail()
+    {
+        $lista = Formulario::all();
     }
 
     /**
