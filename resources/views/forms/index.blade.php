@@ -14,7 +14,7 @@
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
+    {{-- @livewireStyles --}}
   </head>
   <body>
     <div class="max-w-5xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -359,7 +359,7 @@
       }
     </script>
 
-  @livewireScripts
+  {{-- @livewireScripts --}}
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
