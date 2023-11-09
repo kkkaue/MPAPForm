@@ -71,7 +71,7 @@
               @php
                   $codigo = \Session::get('codigo');
               @endphp
-              <span class="font-medium">Erro2!</span> {{Session::get('error')}}
+              <span class="font-medium">Erro!</span> {{Session::get('error')}}
               <a href="{{url('gerar-pdf/'.$codigo)}}" class="text-blue-600 hover:underline" target="_blank">Comprovante de Inscrição</a>
             </div>
           </div>
