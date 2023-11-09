@@ -235,7 +235,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <div style="padding-top: 90px; ">
+    <div style="padding-top: 90px; color:red;">
       OBS: Verifique se as suas informações estão corretas, caso exista algo a corrigir, favor encaminhar um email solicitando a presente alteração, para o endereço eletrônico: suporte@mpap.mp.br
     </div>
   </section>

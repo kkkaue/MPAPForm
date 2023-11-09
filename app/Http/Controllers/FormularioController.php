@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Storage;
 
 class FormularioController extends Controller
 {
-    public function pdfTest(){
+    public function pdfTest()
+    {
         $dados = [
             'codigo' => '123456',
             'user' => [
@@ -52,11 +53,12 @@ class FormularioController extends Controller
             'created_at' => $created_at
         ];
         $pdf = Pdf::loadView('pdf.inscricao', $dados)->output();
-        
+
         return $pdf;
     }
 
-    public function gerarPDF($codigo){
+    public function gerarPDF($codigo)
+    {
 
         $a = Formulario::where('codigo', $codigo)->first();
         $dados = [
@@ -74,8 +76,31 @@ class FormularioController extends Controller
             'created_at' => $a['created_at']
         ];
         $pdf = Pdf::loadView('pdf.inscricao', $dados);
-        
+
         return $pdf->stream();
+    }
+
+    public function gerarPDFReenvio($codigo)
+    {
+
+        $a = Formulario::where('codigo', $codigo)->first();
+        $dados = [
+            'codigo' => $codigo,
+            'user' => [
+                'nome' => $a['nome'],
+                'email' => $a['email'],
+                'cpf' => $a['cpf'],
+                'nome_rua' => $a['nome_rua'],
+                'numero_rua' => $a['numero_rua'],
+                'telefone_1' => $a['telefone_1'],
+                'curriculo_lattes' => $a['curriculo_lattes'],
+                'cargo_id' => $a['cargo_id'],
+            ],
+            'created_at' => $a['created_at']
+        ];
+        $pdf = Pdf::loadView('pdf.inscricao', $dados)->output();
+
+        return $pdf;
     }
 
     public function verificarCPF(Request $request)
@@ -111,58 +136,58 @@ class FormularioController extends Controller
         //dd($request->all());
         $verifica = Formulario::where('cpf', $request->cpf)->first();
 
-        if($verifica != null){
+        if ($verifica != null) {
 
             //$comprovante = $this->generatePdf($verifica->codigo, $verifica, $verifica->created_at);
             return redirect()->back()->with('erro-cpf', 'CPF já cadastrado! Clique aqui para visualizar o seu comprovante.')
-            ->withInput()->with('codigo', $verifica->codigo);
+                ->withInput()->with('codigo', $verifica->codigo);
         }
 
         //validar os arquivos, todos devem ser menores do que 5 MB e serem PDF, não será aceito nenhum outro formato
         $files = $request->allFiles();
         foreach ($files as $key => $value) {
             // deve verificar se o value não é um array de arquivos
-            if (is_array($value)){
+            if (is_array($value)) {
                 foreach ($value as $key => $file) {
-                    if ($file->getSize() > 5000000){
+                    if ($file->getSize() > 5000000) {
                         return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $file->getClientOriginalName() . ' é maior que 5MB!');
                     }
-                    if ($file->extension() != 'pdf'){
+                    if ($file->extension() != 'pdf') {
                         return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $file->getClientOriginalName() . ' não é PDF!');
                     }
                 }
             } else {
-                if ($value->getSize() > 5000000){
+                if ($value->getSize() > 5000000) {
                     return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $value->getClientOriginalName() . ' é maior que 5MB!');
                 }
-                if ($value->extension() != 'pdf'){
+                if ($value->extension() != 'pdf') {
                     return redirect()->back()->with('error', 'Falha no envio dos documentos! O arquivo ' . $value->getClientOriginalName() . ' não é do tipo pdf!');
                 }
             }
         }
-        
+
         //verifique o valor de cargo_id
         $cargoId = $request->cargo_id;
         /* caso exista o cargo de extagiario inicialmente pedido 
         if($cargoId == 1){
             $requestExceptRadioInputs = new FormularioRequest($request->except(['experiencia_profissional_radio','trabalho_voluntario_radio', 'comprovante_matricula_radio']));
             $resposta = $this->handleCargo1($requestExceptRadioInputs);
-        } */ 
-        if ($cargoId == 2){
+        } */
+        if ($cargoId == 2) {
             $resposta = $this->handleCargo2($request);
-        } elseif ($cargoId == 3){
+        } elseif ($cargoId == 3) {
             $resposta = $this->handleCargo3($request);
-        } elseif ($cargoId == 4){
+        } elseif ($cargoId == 4) {
             $resposta = $this->handleCargo4($request);
-        } elseif ($cargoId == 5){
+        } elseif ($cargoId == 5) {
             $resposta = $this->handleCargo5($request);
-        } elseif ($cargoId == 6){
+        } elseif ($cargoId == 6) {
             $resposta = $this->handleCargo6($request);
         } else {
             return redirect()->back()->with('error', 'Falha no envio dos documentos!');
         }
 
-        if ($resposta['status']){
+        if ($resposta['status']) {
             $pdf = $this->generatePdf($resposta['codigo'], $request->except(['_token']), Formulario::where('codigo', $resposta['codigo'])->first()->created_at);
             Mail::to($request->email)->send(new InscricaoConfirmadaEmail($resposta['codigo'], $request->nome, $pdf));
             return redirect()->back()->with('success', 'Você está quase lá! para finalizar o processo, por favor, verifique seu email e valide sua inscrição!');
@@ -171,10 +196,11 @@ class FormularioController extends Controller
         }
     }
 
-    public function validar($codigo){
-        
+    public function validar($codigo)
+    {
+
         $dado = Formulario::where('codigo', $codigo)->first();
-        if ($dado){
+        if ($dado) {
             $dado->update(['codigo_validacao' => true]);
             return view('forms.verificado');
         } else {
@@ -182,9 +208,17 @@ class FormularioController extends Controller
         }
     }
 
+
     public function reenvioEmail()
     {
-        $lista = Formulario::all();
+        $lista = Formulario::where('id', 132)->get();
+        foreach ($lista as $l) {
+         
+            $pdf = $this->gerarPDFReenvio($l->codigo);
+            $reenvio = true;
+            Mail::to($l->email)->send(new InscricaoConfirmadaEmail($l->codigo, $l->nome, $pdf, $reenvio));
+
+        }
     }
 
     /**
@@ -219,15 +253,16 @@ class FormularioController extends Controller
         //
     }
 
-    private function handleCargo(FormularioRequest $request, array $files) {
+    private function handleCargo(FormularioRequest $request, array $files)
+    {
         $novo = Formulario::firstOrCreate($request->except(['_token', ...$files]));
         $codigo = rand();
         $novo->update(['codigo' => $codigo]);
         $novo->update(['codigo_validacao' => false]);
 
         foreach ($files as $key => $value) {
-            if ($request->$value){
-                if(is_array($request->$value)){
+            if ($request->$value) {
+                if (is_array($request->$value)) {
                     foreach ($request->$value as $key => $file) {
                         $this->uploadFile($file, $value, $value, $novo);
                     }
@@ -238,40 +273,46 @@ class FormularioController extends Controller
         }
 
         return ['status' => true, 'codigo' => $codigo];
-    }    
+    }
 
-    private function handleCargo1(FormularioRequest $request) : array
+    private function handleCargo1(FormularioRequest $request): array
     {
-        $files = ['historico_escolar','certificado_ensino_medio', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario'];
+        $files = ['historico_escolar', 'certificado_ensino_medio', 'comprovante_matricula', 'experiencia_profissional', 'trabalho_voluntario'];
         return $this->handleCargo($request, $files);
     }
 
-    private function handleCargo2(FormularioRequest $request){
+    private function handleCargo2(FormularioRequest $request)
+    {
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_formacao_praticas_restaurativas', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
 
-    private function handleCargo3(FormularioRequest $request){
+    private function handleCargo3(FormularioRequest $request)
+    {
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_formacao_praticas_restaurativas', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'assessor_juridico', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
 
-    private function handleCargo4(FormularioRequest $request){
+    private function handleCargo4(FormularioRequest $request)
+    {
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_formacao_praticas_restaurativas', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
 
-    private function handleCargo5(FormularioRequest $request){
+    private function handleCargo5(FormularioRequest $request)
+    {
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_formacao_praticas_restaurativas', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
 
-    private function handleCargo6(FormularioRequest $request){
+    private function handleCargo6(FormularioRequest $request)
+    {
         $files = ['certificado_ensino_medio', 'diploma_graduacao', 'historico_escolar', 'curso_curta_duracao', 'curso_formacao_praticas_restaurativas', 'curso_especializacao', 'diploma_mestrado', 'diploma_doutorado', 'aprovacao_concurso', 'experiencia_sistema_politicas_garantidoras_direito', 'experiencia_metodologias_atendimento', 'experiencia_libras'];
         return $this->handleCargo($request, $files);
     }
 
-    private function uploadFile($file, $name, $label, $novo){
+    private function uploadFile($file, $name, $label, $novo)
+    {
         $nameFile = null;
         // Verifica se informou o arquivo e se é válido
         // Define um aleatório para o arquivo baseado no timestamps atual
@@ -303,6 +344,6 @@ class FormularioController extends Controller
             'cargo_id' => $novo->cargo_id,
             'arquivo' => $arquivo,
             'label' => $label
-            ]);
+        ]);
     }
 }

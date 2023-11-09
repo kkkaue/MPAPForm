@@ -21,12 +21,14 @@ class InscricaoConfirmadaEmail extends Mailable
     public $data;
     public $nome;
     public $pdf;
+    public $reenvio;
 
-    public function __construct($data, $nome , $pdf)
+    public function __construct($data, $nome , $pdf, $reenvio = false)
     {
         $this->data = $data;
         $this->nome = $nome;
         $this->pdf = $pdf;
+        $this->reenvio = $reenvio;
     }
 
     /**

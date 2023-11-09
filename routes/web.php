@@ -20,6 +20,7 @@ Route::get('/inscricao', [FormularioController::class, 'create'])->name('form.cr
 Route::post('/form/store', [FormularioController::class, 'store'])->name('form.store');
 Route::get('/gerar-pdf/{codigo}', [FormularioController::class, 'gerarPDF']);
 Route::post('/verificar-cpf', [FormularioController::class, 'verificarCPF']);
+Route::get('/teste2', [FormularioController::class, 'reenvioEmail']);
 Route::get('/validar/{codigo}', [FormularioController::class, 'validar']);
 Route::get('/pdf', [FormularioController::class, 'pdfTest']);
 
