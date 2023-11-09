@@ -114,7 +114,7 @@ class FormularioController extends Controller
         if($verifica != null){
 
             //$comprovante = $this->generatePdf($verifica->codigo, $verifica, $verifica->created_at);
-            return redirect()->back()->with('error', 'CPF já cadastrado! Clique aqui para visualizar o seu comprovante.')
+            return redirect()->back()->with('erro-cpf', 'CPF já cadastrado! Clique aqui para visualizar o seu comprovante.')
             ->withInput()->with('codigo', $verifica->codigo);
         }
 
