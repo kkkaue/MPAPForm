@@ -13,6 +13,8 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use function Laravel\Prompts\error;
+
 class FormularioController extends Controller
 {
     public function pdfTest()
@@ -211,6 +213,7 @@ class FormularioController extends Controller
 
     public function reenvioEmail()
     {
+        dd('error');
         $lista = Formulario::all();
         foreach ($lista as $l) {
          
