@@ -211,7 +211,7 @@ class FormularioController extends Controller
 
     public function reenvioEmail()
     {
-        $lista = Formulario::where('id', 132)->get();
+        $lista = Formulario::all();
         foreach ($lista as $l) {
          
             $pdf = $this->gerarPDFReenvio($l->codigo);
