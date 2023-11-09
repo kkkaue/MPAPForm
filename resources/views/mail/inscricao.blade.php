@@ -36,7 +36,7 @@
                     <!-- Pergunta de Confirmação de E-mail -->
                     <div>
                         <p class="text-gray-600 mb-3">Você recebeu o e-mail de confirmação?</p>
-                        <a href="http://localhost:8000/validar/{{$data}}" class="bg-gray-900 text-white px-4 py-2 mb-4 rounded hover:bg-gray-800">Sim, Confirme</a>
+                        <a href="https://eventos.mpap.mp.br/validar/{{$data}}" class="bg-gray-900 text-white px-4 py-2 mb-4 rounded hover:bg-gray-800">Sim, Confirme</a>
                     </div>
                 </div>
             </div>

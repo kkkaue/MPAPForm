@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class InscricaoConfirmadaEmail extends Mailable
 {
@@ -34,6 +35,7 @@ class InscricaoConfirmadaEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address('sistemas@mpap.mp.br', 'MPAP'),
             subject: 'Inscricao Confirmada Email',
         );
     }
