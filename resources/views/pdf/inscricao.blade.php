@@ -199,15 +199,15 @@
           <p class="info" class="text-base font-semibold text-black">
             {{-- @if($user['cargo_id'] == 1)
                 Estagiário de Direito - CAVINP --}}
-            @if($user['cargo_id'] == 1)
+            @if($user['cargo_id'] == 2)
                 Assistente Administrativo
-            @elseif($user['cargo_id'] == 2)
-                Assessor Jurídico
             @elseif($user['cargo_id'] == 3)
-                Assistente Social
+                Assessor Jurídico
             @elseif($user['cargo_id'] == 4)
-                Pedagogo(a)
+                Assistente Social
             @elseif($user['cargo_id'] == 5)
+                Pedagogo(a)
+            @elseif($user['cargo_id'] == 6)
                 Psicólogo(a)
             @endif
           </p>
