@@ -3,7 +3,9 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ExportacaoController;
 use App\Http\Controllers\FormularioController;
+use App\Models\Formulario;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,11 +31,10 @@ Route::get('/pdf', [FormularioController::class, 'pdfTest']);
 
 /* Route::get('inscricao', Formulario::class); */
 
-
 // Rotas de login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rotas de registro
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -41,7 +42,8 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Rota para o dashboard
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $dados = Formulario::all();
+    return view('dashboard')->with('dados', $dados);
 })->middleware(['auth'])->name('dashboard');
 
 // Rotas para a redefinição de senha
