@@ -136,8 +136,13 @@ class FormularioController extends Controller
     public function store(FormularioRequest $request)
     {
         //dd($request->all());
+        $dataAtual = new DateTime();
+        $dataEncerramento = new DateTime('2023-11-13 23:59:59');
+        if ($dataAtual > $dataEncerramento) {
+            return redirect()->back()->with('error', 'O período de inscrições foi encerrado!');
+        }
+
         $verifica = Formulario::where('cpf', $request->cpf)->first();
-        
 
         if ($verifica != null) {
 
