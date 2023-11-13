@@ -126,6 +126,12 @@ class FormularioController extends Controller
      */
     public function create()
     {
+        $dataAtual = new DateTime();
+        $dataEncerramento = new DateTime('2023-11-13 23:59:59');
+        if ($dataAtual > $dataEncerramento) {
+            //retorna view de inscrições encerradas
+            return view('forms.inscricoes-encerradas');
+        }
         $cargos = Cargo::pluck('nome', 'id')->toArray();
         return view('forms.index', compact('cargos'));
     }
