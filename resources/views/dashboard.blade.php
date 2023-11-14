@@ -111,22 +111,22 @@
                                     @foreach ($dados as $dado)
                                         <tr class="border-b bg-white hover:bg-gray-100">
                                             <td class="font-medium text-gray-900 px-4 py-2">{{ $incremental++ }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">{{ $dado->nome }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">{{ $dado->cpf }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">{{ $dado->genero }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->nome }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->cpf }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->genero }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
                                                 {{ $dado->nome_rua }}, {{ $dado->numero_rua }}
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">{{ $dado->email }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">{{ $dado->telefone_1 }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->email }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->telefone_1 }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
                                                 @if ($dado->telefone_2)
                                                     {{ $dado->telefone_2 }}
                                                 @else
                                                     Não possui
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
                                                 @if (Str::startsWith($dado->curriculo_lattes, 'http://lattes.cnpq.br'))
                                                     <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @elseif (Str::startsWith($dado->curriculo_lattes, 'https://lattes.cnpq.br'))
@@ -139,7 +139,7 @@
                                                     <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
                                                 @if ($dado->{'possui-deficiencia'})
                                                     @if ($dado->{'fisica-motora'})
                                                         Física/Motora @if($dado->auditiva), Auditiva @endif @if($dado->visual), Visual @endif @if($dado->neurodivergencia), Neurodivergência @endif
@@ -148,21 +148,21 @@
                                                     Não
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
                                                 @if ($dado->pontuacao)
                                                     {{ $dado->pontuacao }}
                                                 @else
                                                     Não possui
                                                 @endif
                                         
-                                            <td class="font-medium text-gray-900 px-4 py-2">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
                                                 @if ($dado->codigo_validacao)
                                                     Sim
                                                 @else
                                                     Não
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
                                                 {{-- verificar os arquivos da model Anexo que tem o formulario_id igual ao $dado->id --}}
                                                 @foreach($dado->anexos as $anexo)
                                                     <a href="{{ $anexo->arquivo }}" class="text-blue-500 hover:text-blue-800">{{ $anexo->arquivo }}</a><br>
