@@ -84,6 +84,23 @@
                 <div class="mx-auto max-w-fullxl px-4 pb-12 sm:px-6 lg:px-8">
                     <div class="w-full rounded-lg bg-white px-5 py-6 shadow sm:px-6">
                         <div class="w-full">
+                            <div class="flex items-center mb-2">
+                                <form action="{{ route('dashboard') }}" method="GET">
+                                    <h1 class="mr-2">
+                                        Filtrar:
+                                    </h1>
+                                    <select name="busca" id="">
+                                        <option value="2">Assistente Administrativo - CAVINP</option>
+                                        <option value="3">Assessor Jurídico - CAVINP</option>
+                                        <option value="4">Assistente Social</option>
+                                        <option value="5">Pedagogo(a) - CAVINP</option>
+                                        <option value="6">Psicólogo(a) - CAVINP</option>
+                                    </select>
+                                    <button class="ml-4" type="submit">
+                                        filtrar
+                                    </button>
+                                </form>
+                            </div>
                             <table id="tabela" class="w-full text-sm text-left text-gray-500 shadow-md">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                     <tr>
@@ -110,25 +127,25 @@
                                         $incremental = 1;
                                     @endphp
                                     @foreach ($dados as $dado)
-                                        <tr class="border-b bg-white hover:bg-gray-100">
-                                            <td class="font-medium text-gray-900 px-4 py-2">{{ $incremental++ }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{$dado->cargo->nome}}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->nome }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->cpf }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->genero }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
+                                        <tr class="border-b bg-white hover:bg-gray-100" >
+                                            <td class="font-medium text-gray-900 px-4 py-2" style="vertical-align: top !important;">{{ $incremental++ }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">{{$dado->cargo->nome}}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">{{ $dado->nome }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">{{ $dado->cpf }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">{{ $dado->genero }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">
                                                 {{ $dado->nome_rua }}, {{ $dado->numero_rua }}
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->email }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->telefone_1 }}</td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">{{ $dado->email }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">{{ $dado->telefone_1 }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">
                                                 @if ($dado->telefone_2)
                                                     {{ $dado->telefone_2 }}
                                                 @else
                                                     Não possui
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">
                                                 @if (Str::startsWith($dado->curriculo_lattes, 'http://lattes.cnpq.br'))
                                                     <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @elseif (Str::startsWith($dado->curriculo_lattes, 'https://lattes.cnpq.br'))
@@ -141,7 +158,7 @@
                                                     <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">
                                                 @if ($dado->{'possui-deficiencia'})
                                                     @if ($dado->{'fisica-motora'})
                                                         Física/Motora @if($dado->auditiva), Auditiva @endif @if($dado->visual), Visual @endif @if($dado->neurodivergencia), Neurodivergência @endif
@@ -150,24 +167,26 @@
                                                     Não
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">
                                                 @if ($dado->pontuacao)
                                                     {{ $dado->pontuacao }}
                                                 @else
                                                     Não possui
                                                 @endif
                                         
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap" style="vertical-align: top !important;">
                                                 @if ($dado->codigo_validacao)
                                                     Sim
                                                 @else
                                                     Não
                                                 @endif
                                             </td>
-                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">
+                                            <td style="width: 30% !important;vertical-align: top !important;">
                                                 {{-- verificar os arquivos da model Anexo que tem o formulario_id igual ao $dado->id --}}
                                                 @foreach($dado->anexos as $anexo)
-                                                    <a href="{{ $anexo->arquivo }}" class="text-blue-500 hover:text-blue-800">{{ $anexo->arquivo }}</a><br>
+                                                <div style="display: inline-block;">
+                                                    <a href="{{ $anexo->arquivo }}" class="text-blue-500 hover:text-blue-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></a>
+                                                </div>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -222,21 +241,8 @@
       <script>
         $(document).ready(function () {
             $('#tabela').DataTable({
-                "columns": [
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
+                "columnDefs": [
+                    { "width": "100%", "targets": 13 }
                 ],
                 scrollX: true,
                 responsive: true,

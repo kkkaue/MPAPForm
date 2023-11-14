@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExportacaoController;
 use App\Http\Controllers\FormularioController;
 use App\Models\Anexo;
@@ -42,10 +43,11 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
 // Rota para o dashboard
-Route::get('/dashboard', function () {
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['checar_login'])->name('dashboard');
+/* Route::get('/dashboard', function () {
     $dados = Formulario::with(['anexos', 'cargo'])->get();
     return view('dashboard')->with(['dados' => $dados]);
-})->middleware(['checar_login'])->name('dashboard');
+})->middleware(['checar_login'])->name('dashboard'); */
 
 // Rotas para a redefinição de senha
 Route::get('/redefinir-senha', [PasswordResetController::class, 'index'])->name('password.reset');
