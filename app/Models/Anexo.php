@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Anexo extends Model
 {
     use HasFactory, SoftDeletes;
+    protected $connection = 'pgsql';
     protected $table = 'anexos';
     protected $guarded = [
         'id',

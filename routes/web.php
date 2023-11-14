@@ -43,10 +43,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Rota para o dashboard
 Route::get('/dashboard', function () {
-    $dados = Formulario::all();
-    $anexos = Anexo::all();
-    return view('dashboard')->with(['dados' => $dados, 'anexos' => $anexos]);
-})->middleware(['auth'])->name('dashboard');
+    $dados = Formulario::with('anexos')->get();
+    return view('dashboard')->with(['dados' => $dados]);
+})->middleware(['checar_login'])->name('dashboard');
 
 // Rotas para a redefinição de senha
 Route::get('/redefinir-senha', [PasswordResetController::class, 'index'])->name('password.reset');
