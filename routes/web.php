@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExportacaoController;
 use App\Http\Controllers\FormularioController;
+use App\Models\Anexo;
 use App\Models\Formulario;
 use Illuminate\Support\Facades\Route;
 
@@ -43,7 +44,8 @@ Route::post('/register', [RegisterController::class, 'register']);
 // Rota para o dashboard
 Route::get('/dashboard', function () {
     $dados = Formulario::all();
-    return view('dashboard')->with('dados', $dados);
+    $anexos = Anexo::all();
+    return view('dashboard')->with(['dados' => $dados, 'anexos' => $anexos]);
 })->middleware(['auth'])->name('dashboard');
 
 // Rotas para a redefinição de senha
