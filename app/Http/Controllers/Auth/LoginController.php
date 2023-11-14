@@ -57,7 +57,7 @@ class LoginController extends Controller
 
                 // $teste = $request->session()->get('usuario.login');
                 // dd($senha_comp);die();
-                if (session()->get('usuario.matricula') != null) {
+                if (session()->get('usuario.matricula') == 61307 || session()->get('usuario.matricula') == 50204 || session()->get('usuario.matricula') == 50303 || session()->get('usuario.matricula') == 20683 || session()->get('usuario.matricula') == 50100 || session()->get('usuario.matricula') == 10084 || session()->get('usuario.matricula') == 40513) {
 
                     
 
