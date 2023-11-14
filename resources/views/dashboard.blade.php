@@ -128,15 +128,15 @@
                                             </td>
                                             <td class="font-medium text-gray-900 px-4 py-2">
                                                 @if (Str::startsWith($dado->curriculo_lattes, 'http://lattes.cnpq.br'))
-                                                    <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">{{ $dado->curriculo_lattes }}</a>
+                                                    <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @elseif (Str::startsWith($dado->curriculo_lattes, 'https://lattes.cnpq.br'))
-                                                    <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">{{ $dado->curriculo_lattes }}</a>
+                                                    <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @elseif (Str::startsWith($dado->curriculo_lattes, 'lattes.cnpq.br'))
-                                                    <a href="http://{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">http://{{ $dado->curriculo_lattes }}</a>
+                                                    <a href="http://{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @elseif (ctype_digit($dado->curriculo_lattes))
-                                                    <a href="http://lattes.cnpq.br/{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">http://lattes.cnpq.br/{{ $dado->curriculo_lattes }}</a>
+                                                    <a href="http://lattes.cnpq.br/{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @else
-                                                    <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">{{$dado->curriculo_lattes}}</a>
+                                                    <a href="{{ $dado->curriculo_lattes }}" target="_blank" class="text-blue-500 hover:text-blue-800">Acessar</a>
                                                 @endif
                                             </td>
                                             <td class="font-medium text-gray-900 px-4 py-2">
