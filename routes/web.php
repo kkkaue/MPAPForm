@@ -43,7 +43,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Rota para o dashboard
 Route::get('/dashboard', function () {
-    $dados = Formulario::with('anexos')->get();
+    $dados = Formulario::with(['anexos', 'cargo'])->get();
     return view('dashboard')->with(['dados' => $dados]);
 })->middleware(['checar_login'])->name('dashboard');
 

@@ -19,4 +19,9 @@ class Formulario extends Model
     {
         return $this->hasMany(Anexo::class, 'formulario_id', 'id');
     }
+
+    public function cargo()
+    {
+        return $this->belongsTo(Cargo::class, 'cargo_id', 'id');
+    }
 }

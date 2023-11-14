@@ -88,6 +88,7 @@
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                     <tr>
                                         <th class="px-4 py-3 rounded-tl-lg">ID</th>
+                                        <th class="px-4 py-3">Cargo</th>
                                         <th class="px-4 py-3">Nome</th>
                                         <th class="px-4 py-3">CPF</th>
                                         <th class="px-4 py-3">Genero</th>
@@ -111,6 +112,7 @@
                                     @foreach ($dados as $dado)
                                         <tr class="border-b bg-white hover:bg-gray-100">
                                             <td class="font-medium text-gray-900 px-4 py-2">{{ $incremental++ }}</td>
+                                            <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{$dado->cargo->nome}}</td>
                                             <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->nome }}</td>
                                             <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->cpf }}</td>
                                             <td class="font-medium text-gray-900 px-4 py-2 whitespace-nowrap">{{ $dado->genero }}</td>
@@ -221,6 +223,7 @@
         $(document).ready(function () {
             $('#tabela').DataTable({
                 "columns": [
+                    null,
                     null,
                     null,
                     null,
